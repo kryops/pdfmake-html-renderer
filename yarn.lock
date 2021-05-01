@@ -111,11 +111,6 @@
   resolved "https://registry.npmjs.org/@tsconfig/svelte/-/svelte-1.0.10.tgz#30ec7feeee0bdf38b12a50f0686f8a2e7b6b9dc0"
   integrity sha512-EBrpH2iXXfaf/9z81koiDYkp2mlwW2XzFcAqn6qh7VKyP8zBvHHAQzNhY+W9vH5arAjmGAm5g8ElWq6YmXm3ig==
 
-"@types/colornames@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@types/colornames/-/colornames-1.1.1.tgz#cabb1c9f78658c3d824923d9204308b58319556a"
-  integrity sha512-TnG1ATswTppb+oykL4htovEaB0ibcpZPsBs2Z2qLYgITZgrC2VGX8A+GGjz7ZgMtYdrXbz9lDJJaL+plaKwv7A==
-
 "@types/node@*":
   version "15.0.1"
   resolved "https://registry.npmjs.org/@types/node/-/node-15.0.1.tgz#ef34dea0881028d11398be5bf4e856743e3dc35a"
@@ -133,7 +128,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/pdfmake@^0.1.16":
+"@types/pdfmake@^0.1.17":
   version "0.1.17"
   resolved "https://registry.npmjs.org/@types/pdfmake/-/pdfmake-0.1.17.tgz#4427735be263d3c4826d3f1504f1400b4de9a76c"
   integrity sha512-hMDtR+sSSD1MA6q0KKLr+zZRRCieEcF9HsbYIMhF33DTvHNIPo6qJEQAY3jtY/zglAVtQyzwjsWCjGLa5vcx2A==
@@ -629,11 +624,6 @@ colorette@^1.2.2:
   resolved "https://registry.npmjs.org/colorette/-/colorette-1.2.2.tgz#cbcc79d5e99caea2dbf10eb3a26fd8b3e6acfa94"
   integrity sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==
 
-colornames@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/colornames/-/colornames-1.1.1.tgz#f8889030685c7c4ff9e2a559f5077eb76a816f96"
-  integrity sha1-+IiQMGhcfE/54qVZ9Qd+t2qBb5Y=
-
 combined-stream@^1.0.6, combined-stream@~1.0.6:
   version "1.0.8"
   resolved "https://registry.npmjs.org/combined-stream/-/combined-stream-1.0.8.tgz#c3d45a8b34fd730631a110a8a2520682b31d5a7f"
@@ -713,6 +703,11 @@ crypto-js@^3.3.0:
   version "3.3.0"
   resolved "https://registry.npmjs.org/crypto-js/-/crypto-js-3.3.0.tgz#846dd1cce2f68aacfa156c8578f926a609b7976b"
   integrity sha512-DIT51nX0dCfKltpRiXV+/TVZq+Qq2NgF4644+K7Ttnla7zEzqc+kjJyiB96BHNyUTBxyjzRcZYpUdZa+QAqi6Q==
+
+css-color-names@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/css-color-names/-/css-color-names-1.0.1.tgz#6ff7ee81a823ad46e020fa2fd6ab40a887e2ba67"
+  integrity sha512-/loXYOch1qU1biStIFsHH8SxTmOseh1IJqFvy8IujXOm1h+QjUdDhkzOrR5HG8K8mlxREj0yfi8ewCHx0eMxzA==
 
 d@1, d@^1.0.1:
   version "1.0.1"

@@ -3,8 +3,12 @@
   "compilerOptions": {
     "strict": true,
     "skipLibCheck": true,
+    "resolveJsonModule": true,
     "module": "esnext",
-    "lib": ["dom", "es2017"],
+    "lib": [
+      "dom",
+      "es2017"
+    ],
     "types": [
       "svelte",
       "snowpack-env"

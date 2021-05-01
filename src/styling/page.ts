@@ -84,7 +84,7 @@ export function getPageSize(document: TDocumentDefinitions): ContextPageSize {
 
 export function getPageStyleString(
   document: TDocumentDefinitions,
-  maxWidth: number
+  clientWidth: number
 ): string {
   const style: CssDictionary = {
     padding: getMarginString(document.pageMargins, 40),
@@ -96,10 +96,8 @@ export function getPageStyleString(
 
   style.width = pageWidth + 'pt'
 
-  const maxWidthInPt = (maxWidth * 3) / 4
-  if (pageWidth > maxWidthInPt) {
-    style.zoom = String(maxWidthInPt / pageWidth)
-  }
+  const maxWidthInPt = (clientWidth * 3) / 4
+  style.zoom = String(maxWidthInPt / pageWidth)
 
   Object.assign(style, getStyleDictionary(document.defaultStyle))
 

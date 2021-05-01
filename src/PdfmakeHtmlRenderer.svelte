@@ -7,6 +7,7 @@
   import { flattenNodes } from './logic/content'
 
   export let document: TDocumentDefinitions
+  export let pageShadow = true
 
   const documentStore = writable(document)
   $: documentStore.set(document)
@@ -19,4 +20,4 @@
   })
 </script>
 
-<DocumentRenderer {document} />
+<DocumentRenderer {document} {pageShadow} />

@@ -20,8 +20,8 @@ module.exports = {
     sourcemap: true,
   },
   packageOptions: {
-    polyfillNode: true,
-    knownEntrypoints: ['svelte', 'svelte/store', 'qrcode', 'colornames', 'polished'],
+    polyfillNode: false,
+    knownEntrypoints: ['svelte', 'svelte/store', 'qrcode', 'css-color-names'],
   },
   devOptions: {
     port: 8079,

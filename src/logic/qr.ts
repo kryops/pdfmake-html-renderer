@@ -1,8 +1,8 @@
+import QRCode from 'qrcode/build/qrcode.min';
 import type { ContentQr } from 'pdfmake/interfaces'
 import { colorToHex } from '../styling/utils'
 
 export async function buildQrCode(node: ContentQr): Promise<string | null> {
-  const QRCode = (await import('qrcode')).default
   return new Promise(resolve => {
     QRCode.toString(
       node.mode

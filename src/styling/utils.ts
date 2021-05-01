@@ -1,4 +1,4 @@
-import colornames from 'colornames'
+import cssColorNames from './css-color-names';
 import type { CssDictionary } from './css-dictionary'
 
 export function getStyleString(styles: CssDictionary) {
@@ -10,7 +10,7 @@ export function getStyleString(styles: CssDictionary) {
 export function colorToHex(color: string | undefined): string | undefined {
   if (color === 'transparent') return undefined
   if (!color || color.startsWith('#')) return color
-  return colornames(color) ?? undefined
+  return cssColorNames[color as keyof typeof cssColorNames] ?? undefined
 }
 
 export function colorToRgb(

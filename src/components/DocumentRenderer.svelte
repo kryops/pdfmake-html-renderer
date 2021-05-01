@@ -10,14 +10,14 @@
   export let document: TDocumentDefinitions
   export let pageShadow = true
 
-  let maxWidth: number
+  let clientWidth: number
 </script>
 
-<div bind:clientWidth={maxWidth} class="container">
+<div bind:clientWidth class="container">
   <div
     class="page"
     class:pageShadow
-    style={getPageStyleString(document, maxWidth)}
+    style={getPageStyleString(document, clientWidth)}
   >
     {#if document.background}
       <div class="backgroundLayer">

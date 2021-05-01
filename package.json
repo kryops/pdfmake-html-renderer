@@ -6,8 +6,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "snowpack dev --config demo/snowpack.config.js",
-    "build": "rimraf docs && snowpack build --config demo/snowpack.config.js && mv demo/build docs",
+    "start": "snowpack dev --config playground/snowpack.config.js",
+    "build:playground": "rimraf docs && snowpack build --config playground/snowpack.config.js && mv playground/build docs",
     "lint:tsc": "tsc --noEmit",
     "lint:svelte": "svelte-check",
     "lint": "run-p lint:*",
@@ -18,14 +18,15 @@
     "@snowpack/plugin-svelte": "^3.6.1",
     "@snowpack/plugin-typescript": "^1.2.1",
     "@tsconfig/svelte": "^1.0.10",
-    "@types/colornames": "^1.1.1",
-    "@types/pdfmake": "^0.1.16",
+    "@types/pdfmake": "^0.1.17",
     "@types/qrcode": "^1.4.0",
     "@types/snowpack-env": "^2.3.3",
     "autoprefixer": "^10.2.4",
+    "css-color-names": "^1.0.1",
     "npm-run-all": "^4.1.5",
     "pdfmake": "^0.1.71",
     "prettier": "^2.2.1",
+    "qrcode": "^1.4.4",
     "rimraf": "^3.0.2",
     "snowpack": "^3.3.7",
     "svelte": "^3.38.0",
@@ -33,9 +34,5 @@
     "svelte-preprocess": "^4.7.2",
     "tslib": "^2.2.0",
     "typescript": "^4.2.4"
-  },
-  "dependencies": {
-    "colornames": "^1.1.1",
-    "qrcode": "^1.4.4"
   }
 }
