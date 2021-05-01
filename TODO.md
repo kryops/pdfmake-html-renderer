@@ -11,8 +11,7 @@
 
 ## Playground
 
-* Persist in URL
-* Proper editor
+* Syntax validation
 * TypeScript support
 * Error locations (babel?)
 

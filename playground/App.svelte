@@ -2,11 +2,14 @@
   import type { TDocumentDefinitions } from 'pdfmake/interfaces'
 
   import PdfmakeHtmlRenderer from '../src/PdfmakeHtmlRenderer.svelte'
+  import Editor from './Editor.svelte'
   import PdfmakePreview from './PdfmakePreview.svelte'
 
   let document: TDocumentDefinitions | null = null
 
-  let content = `{
+  let content = window.location.hash
+    ? decodeURIComponent(window.location.hash.slice(1))
+    : `{
   content: [
     'First paragraph',
     'Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines','First paragraph',
@@ -17,6 +20,7 @@
   let errorMessage: string | null = null
 
   $: (() => {
+    window.location.hash = encodeURIComponent(content)
     try {
       document = eval(`(${content});`)
       errorMessage = null
@@ -41,7 +45,7 @@
   </div>
   <div class="content">
     <div class="column">
-      <textarea bind:value={content} />
+      <Editor bind:content />
     </div>
     <div class="column">
       {#if errorMessage}
@@ -108,11 +112,6 @@
     flex: 1 1 0;
     overflow-x: hidden;
     overflow-y: auto;
-  }
-
-  textarea {
-    border: none;
-    flex: 1 1 auto;
   }
 
   .error {

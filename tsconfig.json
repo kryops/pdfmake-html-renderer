@@ -11,7 +11,8 @@
     ],
     "types": [
       "svelte",
-      "snowpack-env"
+      "snowpack-env",
+      "ace-builds"
     ]
   },
   "exclude": [
