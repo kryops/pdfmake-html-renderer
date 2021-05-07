@@ -2,7 +2,7 @@
 
 ## Features
 
-* Static renderer (Svelte SSR / server bundle?)
+* Error Boundary
 
 ## Rendering
 
@@ -18,8 +18,6 @@
 
 ## Build
 
-* Typings
-* .npmignore
 * GitHub Pages deployment
 * GitHub Actions
 
@@ -28,3 +26,7 @@
 * Usage
 * Integration in other frameworks
 * Limitations
+
+## Examples
+
+* React

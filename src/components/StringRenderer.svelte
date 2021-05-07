@@ -2,4 +2,10 @@
   export let node: string
 </script>
 
-{node}
+<span>{node}</span>
+
+<style>
+  span {
+    white-space: pre-line;
+  }
+</style>

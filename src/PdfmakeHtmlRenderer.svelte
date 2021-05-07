@@ -11,8 +11,8 @@
 
   const documentStore = writable(document)
   $: documentStore.set(document)
-  const nodesStore = writable(flattenNodes(document.content))
-  $: nodesStore.set(flattenNodes(document.content))
+  const nodesStore = writable(flattenNodes(document?.content))
+  $: nodesStore.set(flattenNodes(document?.content))
 
   setContext(contextKey, {
     document: documentStore,
@@ -20,4 +20,6 @@
   })
 </script>
 
-<DocumentRenderer {document} {pageShadow} />
+{#if document}
+  <DocumentRenderer {document} {pageShadow} />
+{/if}

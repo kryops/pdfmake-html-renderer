@@ -26,7 +26,7 @@ export function getContentRenderer(node: Content, inLink: boolean) {
       return ContentLinkRenderer
     }
 
-    if (typeof node !== 'object' || !node) return null;
+    if (typeof node !== 'object' || !node) return null
 
     if ('columns' in node) {
       return ContentColumnsRenderer
@@ -60,6 +60,8 @@ export function getContentRenderer(node: Content, inLink: boolean) {
 }
 
 export function flattenNodes(node: Content): Content[] {
+  if (!node) return []
+
   const nodes: Content[] = [node]
 
   if (typeof node === 'string') {
@@ -68,7 +70,7 @@ export function flattenNodes(node: Content): Content[] {
     node.forEach(child => nodes.push(...flattenNodes(child)))
   }
 
-  if (typeof node !== 'object' || !node) return nodes;
+  if (typeof node !== 'object' || !node) return nodes
 
   const childKeys = ['columns', 'stack', 'ul', 'ol'] as const
   for (const childKey of childKeys) {

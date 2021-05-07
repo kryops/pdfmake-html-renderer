@@ -50,7 +50,6 @@
     margin: auto;
     box-sizing: border-box;
     background: #fff;
-    white-space: pre-line;
     font-family: Roboto, Helvetica, sans-serif;
     overflow: hidden;
   }

@@ -6,19 +6,22 @@ import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 import preprocess from 'svelte-preprocess';
 
-function config(format, name) {
+function config(format, name, ssr = false) {
 	return {
 		input: 'src/index.ts',
 		output: {
 			sourcemap: true,
 			format,
-			file: `dist/${name}.js`
+			file: `dist/${name}.js`,
+			name: 'pdfmakeHtmlRenderer',
 		},
+		external: format === 'iife' ? [] : ['qrcode'],
 		plugins: [
 			svelte({
 				include: '**/*.svelte',
 				compilerOptions: {
-					dev: false
+					dev: false,
+					generate: ssr ? 'ssr' : undefined,
 				},
 				preprocess: preprocess({
 					typescript: true
@@ -26,9 +29,10 @@ function config(format, name) {
 			}),
 			css({ output: 'index.css' }),
 			resolve({
-				browser: true,
+				browser: !ssr,
 				dedupe: ['svelte'],
-				extensions: ['.ts', '.mjs', '.js', '.json', '.node' ]
+				extensions: ['.ts', '.mjs', '.js', '.json', '.node' ],
+				preferBuiltins: ssr
 			}),
 			commonjs(),
 			babel({
@@ -42,5 +46,7 @@ function config(format, name) {
 
 export default [
 	config('esm', 'index.esm'),
-	config('cjs', 'index')
+	config('cjs', 'index'),
+	config('cjs', 'server', true),
+	config('iife', 'global')
 ];

@@ -22,7 +22,11 @@
   $: (() => {
     window.location.hash = encodeURIComponent(content)
     try {
-      document = eval(`(${content});`)
+      if (content.trim().startsWith('{')) {
+        document = new Function(`return (${content});`)()
+      } else {
+        document = new Function(`${content}\nreturn dd;`)()
+      }
       errorMessage = null
     } catch (error) {
       console.error

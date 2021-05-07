@@ -17,6 +17,7 @@
       value: content,
       wrap: true,
       useWorker: false,
+      fontSize: 16,
     })
 
     editor.on('change', () => (content = editor.getValue()))
