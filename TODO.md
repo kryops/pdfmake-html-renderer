@@ -2,11 +2,12 @@
 
 ## Features
 
-* Static renderer (Svelte SSR)
+* Static renderer (Svelte SSR / server bundle?)
 
 ## Rendering
 
 * Force natural size
+* Shrink, but not grow
 * Fluid layout
 
 ## Playground
@@ -17,7 +18,8 @@
 
 ## Build
 
-* Rollup build + npm publishing
+* Typings
+* .npmignore
 * GitHub Pages deployment
 * GitHub Actions
 
