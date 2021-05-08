@@ -14,7 +14,7 @@ export function getStyleProperty<T extends keyof Style>(
       if (documentStyle?.[property] !== undefined)
         return documentStyle[property]
     }
-  } else if (typeof style === 'object') {
+  } else if (typeof style === 'object' && style) {
     if (style[property] !== undefined) return style[property]
   }
 

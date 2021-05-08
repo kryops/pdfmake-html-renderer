@@ -8,6 +8,7 @@ function isListNode(node: Content) {
   return (
     typeof node === 'object' &&
     !Array.isArray(node) &&
+    node &&
     ('ul' in node || 'ol' in node)
   )
 }

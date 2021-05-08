@@ -15,6 +15,20 @@ export interface PdfmakeHtmlRendererProps {
    * Defaults to `true`
    */
   pageShadow?: boolean
+
+  /**
+   * Rendering / sizing mode
+   *
+   * - `shrinkToFit` _(default)_: Shrinks the document to fit in its container,
+   *   but does not grow larger than the document's natural size
+   * - `zoomToFit`: Shrinks or grows the document to fit in its container
+   * - `natural`: Renders the document in its exact natural size
+   * - `fluid`: Ignores the document's `pageSize` and uses the space available in the container
+   *
+   * When the `document` definition does not specify a `pageSize` property,
+   * the standard size `'A4'` is assumed.
+   */
+  mode?: 'shrinkToFit' | 'zoomToFit' | 'natural' | 'fluid'
 }
 
 /**

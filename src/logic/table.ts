@@ -21,7 +21,7 @@ export function isActualTableCell(cell: TableCell): cell is ActualTableCell {
 export function getTableCellsCoveredBySpans(node: ContentTable): Set<string> {
   const coveredCells = new Set<string>()
 
-  node.table.body.forEach((row, rowIndex) => {
+  node.table?.body?.forEach((row, rowIndex) => {
     row.forEach((column, columnIndex) => {
       if (isActualTableCell(column)) {
         if (

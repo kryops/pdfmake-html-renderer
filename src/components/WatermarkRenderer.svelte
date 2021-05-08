@@ -4,7 +4,7 @@
   import { getWatermarkStyleString } from '../styling/watermark'
 
   export let node: string | Watermark
-  $: text = typeof node === 'object' ? node.text : node
+  $: text = typeof node === 'object' && node ? node.text : node
   const document = getDocument()
 </script>
 

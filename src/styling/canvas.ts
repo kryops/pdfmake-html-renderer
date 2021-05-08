@@ -15,32 +15,35 @@ export function getCanvasProperties(node: ContentCanvas): Properties {
   let width = 0
   let height = 0
 
-  node.canvas.forEach(element => {
-    if ('w' in element) {
-      const w = element.x + element.w
-      if (w > width) width = w
+  if (Array.isArray(node.canvas)) {
+    node.canvas.forEach(element => {
+      if ('w' in element) {
+        const w = element.x + element.w
+        if (w > width) width = w
 
-      const h = element.y + element.h
-      if (h > height) height = h
-    } else if ('r1' in element) {
-      const w = element.x + element.r1
-      if (w > width) width = w
+        const h = element.y + element.h
+        if (h > height) height = h
+      } else if ('r1' in element) {
+        const w = element.x + element.r1
+        if (w > width) width = w
 
-      const h = element.y + (element.r2 ?? 0)
-      if (h > height) height = h
-    } else if ('x1' in element) {
-      const w = Math.max(element.x1, element.x2)
-      if (w > width) width = w
+        const h = element.y + (element.r2 ?? 0)
+        if (h > height) height = h
+      } else if ('x1' in element) {
+        const w = Math.max(element.x1, element.x2)
+        if (w > width) width = w
 
-      const h = Math.max(element.y1, element.y2)
-      if (h > height) height = h
-    } else if ('points' in element) {
-      element.points.forEach(point => {
-        if (point.x > width) width = point.x
-        if (point.y > height) height = point.y
-      })
-    }
-  })
+        const h = Math.max(element.y1, element.y2)
+        if (h > height) height = h
+      } else if ('points' in element && Array.isArray(element.points)) {
+        element.points.forEach(point => {
+          if (!point) return
+          if (point.x > width) width = point.x
+          if (point.y > height) height = point.y
+        })
+      }
+    })
+  }
 
   return {
     width: width + 'pt',

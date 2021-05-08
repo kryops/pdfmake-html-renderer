@@ -3,7 +3,7 @@ import { flattenNodes } from './content'
 
 export function getTocItemNodes(content: Content) {
   return flattenNodes(content).filter(
-    node => typeof node === 'object' && 'tocItem' in node
+    node => typeof node === 'object' && node && 'tocItem' in node
   ) as ContentTocItem[]
 }
 

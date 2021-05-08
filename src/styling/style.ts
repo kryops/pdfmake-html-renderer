@@ -40,6 +40,7 @@ export function getStyleDictionary(style: Style | undefined) {
   }
   if (style.preserveLeadingSpaces) {
     obj['white-space'] = 'pre-wrap'
+    obj['--whitespace'] = 'pre-wrap'
   }
   if (style.opacity) obj.opacity = String(style.opacity)
   if (style.characterSpacing)

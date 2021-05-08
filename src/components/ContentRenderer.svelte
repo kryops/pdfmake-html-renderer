@@ -18,7 +18,7 @@
   $: style = overrideStyle ?? getContentStyleString(node, $document, inline)
   $: component = getContentRenderer(node, inLink)
   $: id =
-    typeof node === 'object' && !inToc
+    typeof node === 'object' && node && !inToc
       ? 'tocItem' in node
         ? getTocTarget(node, $nodes)
         : 'id' in node
@@ -27,7 +27,7 @@
       : undefined
 </script>
 
-{#if !inToc && typeof node === 'object' && 'pageBreak' in node && node.pageBreak === 'before'}
+{#if !inToc && typeof node === 'object' && node && 'pageBreak' in node && node.pageBreak === 'before'}
   <hr />
 {/if}
 
@@ -43,7 +43,7 @@
   <span class="unknown">Unknown: {JSON.stringify(node)}</span>
 {/if}
 
-{#if !inToc && typeof node === 'object' && 'pageBreak' in node && node.pageBreak === 'after'}
+{#if !inToc && typeof node === 'object' && node && 'pageBreak' in node && node.pageBreak === 'after'}
   <hr />
 {/if}
 

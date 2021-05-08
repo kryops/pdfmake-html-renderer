@@ -9,7 +9,8 @@ function getNodeText(node: Content): string {
 
 export function getReferenceText(reference: string, nodes: Content[]): string {
   const node = nodes.find(
-    node => typeof node === 'object' && 'id' in node && node.id === reference
+    node =>
+      typeof node === 'object' && node && 'id' in node && node.id === reference
   )
   if (!node) return ''
   return getNodeText(node)

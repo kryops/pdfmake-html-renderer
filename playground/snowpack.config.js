@@ -20,7 +20,7 @@ module.exports = {
     sourcemap: true,
   },
   packageOptions: {
-    polyfillNode: false,
+    polyfillNode: true,
     knownEntrypoints: ['svelte', 'svelte/store', 'qrcode', 'css-color-names'],
   },
   devOptions: {

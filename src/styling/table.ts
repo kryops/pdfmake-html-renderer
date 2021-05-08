@@ -57,7 +57,7 @@ export function getTableCellStyleString(
     if (height != null && height !== 'auto') style.height = height + 'pt'
   }
 
-  if (typeof table.layout === 'object') {
+  if (typeof table.layout === 'object' && table.layout) {
     // pdfmake seems to expect the widths to always be defined in the layout callbacks
     const normalizedTable = {
       ...table,
@@ -188,7 +188,7 @@ export function getTableCellStyleString(
     }
   }
 
-  if (typeof node === 'object') {
+  if (typeof node === 'object' && node) {
     if ('noWrap' in node && node.noWrap) {
       style['white-space'] = 'nowrap'
     }

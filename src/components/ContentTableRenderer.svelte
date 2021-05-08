@@ -25,7 +25,7 @@
     node.layout === 'headerLineOnly' ||
     node.layout === 'lightHorizontalLines'}
 >
-  {#each node.table.body as tr, rowIndex}
+  {#each node.table?.body ?? [] as tr, rowIndex}
     <tr class:header={(node.table.headerRows ?? -1) === rowIndex + 1}>
       {#each tr as td, columnIndex}
         {#if shouldRenderCell(td, rowIndex, columnIndex, coveredCells)}

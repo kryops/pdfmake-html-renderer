@@ -15,7 +15,6 @@ const { html, css } = PdfmakeHtmlRenderer.render({
       },
       '\n',
       'Hello, world!',
-      { qr: 'sdfdsf' }
     ]
   }
 });

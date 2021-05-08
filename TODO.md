@@ -4,11 +4,10 @@
 
 * Error Boundary
 
-## Rendering
+## Robustness
 
-* Force natural size
-* Shrink, but not grow
-* Fluid layout
+* Unit tests
+* Visual regression tests
 
 ## Playground
 
@@ -18,15 +17,9 @@
 
 ## Build
 
-* GitHub Pages deployment
 * GitHub Actions
 
-## Docs
+## Tooling
 
-* Usage
-* Integration in other frameworks
-* Limitations
+* ESLint
 
-## Examples
-
-* React

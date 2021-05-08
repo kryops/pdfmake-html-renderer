@@ -24,11 +24,12 @@ function getContentStyleDictionary(
   // - nested lists for proper layouting
   if (
     typeof node === 'object' &&
+    node &&
     ('columns' in node || 'ul' in node || 'ol' in node)
   )
     styles.display = 'block'
 
-  if (typeof node !== 'object' || Array.isArray(node)) {
+  if (typeof node !== 'object' || !node || Array.isArray(node)) {
     return styles
   }
 

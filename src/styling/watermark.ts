@@ -19,7 +19,7 @@ export function getWatermarkStyleString(
     typeof node === 'string' ? node.length : node.text.length
 
   const angle =
-    typeof node === 'object' && node.angle !== undefined
+    typeof node === 'object' && node && node.angle !== undefined
       ? ((360 - node.angle) * Math.PI) / 180
       : defaultAngle
   const diagonal = Math.min(Math.abs(width / Math.cos(angle)), defaultDiagonal)
@@ -32,7 +32,7 @@ export function getWatermarkStyleString(
     transform: `rotate(-${angle}rad)`,
   }
 
-  if (typeof node === 'object') {
+  if (typeof node === 'object' && node) {
     if (node.fontSize) style['font-size'] = node.fontSize + 'pt'
     if (node.font) style['font-family'] = node.font
     if (node.bold) style['font-weight'] = 'bold'

@@ -6,6 +6,6 @@
 
 <style>
   span {
-    white-space: pre-line;
+    white-space: var(--whitespace, pre-line);
   }
 </style>

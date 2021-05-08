@@ -4,6 +4,8 @@ import { getMarginString } from './margin'
 import { getStyleDictionary } from './style'
 import { getStyleString } from './utils'
 
+export type PageSizeMode = 'shrinkToFit' | 'zoomToFit' | 'natural' | 'fluid'
+
 const pageSizes = {
   // via https://github.com/reb2020/5no-paper-sizes
   '4A0': [4768, 6741],
@@ -68,7 +70,7 @@ export function getPageSize(document: TDocumentDefinitions): ContextPageSize {
       width = pageSizes[document.pageSize][0]
       height = pageSizes[document.pageSize][0]
     }
-  } else if (typeof document.pageSize === 'object') {
+  } else if (typeof document.pageSize === 'object' && document.pageSize) {
     width = document.pageSize.width
     if (document.pageSize.height !== 'auto') {
       height = document.pageSize.height
@@ -84,22 +86,33 @@ export function getPageSize(document: TDocumentDefinitions): ContextPageSize {
 
 export function getPageStyleString(
   document: TDocumentDefinitions,
-  clientWidth: number
+  clientWidth: number,
+  mode: PageSizeMode
 ): string {
   const style: CssDictionary = {
     padding: getMarginString(document.pageMargins, 40),
   }
 
-  const { width, height } = getPageSize(document)
+  if (mode !== 'fluid') {
+    const { width, height } = getPageSize(document)
 
-  const pageWidth = document.pageOrientation === 'landscape' ? height : width
+    const pageWidth = document.pageOrientation === 'landscape' ? height : width
+    const pageHeight = document.pageOrientation === 'landscape' ? width : height
 
-  style.width = pageWidth + 'pt'
+    style.width = pageWidth + 'pt'
+    style['min-height'] = pageHeight + 'pt'
 
-  const maxWidthInPt = (clientWidth * 3) / 4
-  style.zoom = String(maxWidthInPt / pageWidth)
+    if (mode !== 'natural') {
+      const clientWidthInPt = (clientWidth * 3) / 4
+      const zoom = clientWidthInPt / pageWidth
 
-  Object.assign(style, getStyleDictionary(document.defaultStyle))
+      if (mode === 'zoomToFit' || zoom < 1) {
+        style.zoom = String(clientWidthInPt / pageWidth)
+      }
+    }
+
+    Object.assign(style, getStyleDictionary(document.defaultStyle))
+  }
 
   return getStyleString(style)
 }

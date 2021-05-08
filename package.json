@@ -1,19 +1,32 @@
 {
   "name": "pdfmake-html-renderer",
-  "version": "0.0.1",
-  "repository": "https://github.com/kryops/pdfmake-html-renderer",
+  "version": "0.1.0",
   "author": "Michael Strobel <michael@kryops.de>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kryops/pdfmake-html-renderer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kryops/pdfmake-html-renderer/issues"
+  },
+  "homepage": "https://github.com/kryops/pdfmake-html-renderer#readme",
+  "keywords": [
+    "pdfmake",
+    "pdf"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "index.d.ts",
   "scripts": {
+    "clean": "rimraf dist",
     "start": "snowpack dev --config playground/snowpack.config.js",
     "build": "rollup -c",
-    "build:playground": "rimraf docs && snowpack build --config playground/snowpack.config.js && mv playground/build docs",
+    "docs": "rimraf docs && snowpack build --config playground/snowpack.config.js && mv playground/build docs",
     "lint:tsc": "tsc --noEmit",
     "lint:svelte": "svelte-check",
     "lint": "run-p lint:*",
+    "prepublish": "yarn lint && yarn build",
     "test": "echo \"This template does not include a test runner by default.\" && exit 1"
   },
   "dependencies": {
@@ -21,6 +34,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.13.8",
+    "@babel/plugin-proposal-optional-chaining": "^7.13.12",
     "@babel/preset-env": "^7.14.1",
     "@babel/preset-typescript": "^7.13.0",
     "@rollup/plugin-babel": "^5.3.0",

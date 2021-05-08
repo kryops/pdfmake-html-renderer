@@ -18,7 +18,7 @@ export function getColumnStyleString(node: Content, columnGap: number) {
   const styles: CssDictionary = {
     'flex-grow': '0',
     'flex-shrink': '1',
-    margin: `12pt ${columnGap / 2}pt`,
+    margin: `0 ${columnGap / 2}pt`,
   }
 
   if (typeof node !== 'object' || Array.isArray(node)) {

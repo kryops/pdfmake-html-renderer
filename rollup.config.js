@@ -37,7 +37,7 @@ function config(format, name, ssr = false) {
 			commonjs(),
 			babel({
 				babelHelpers: 'bundled',
-				extensions: ['.ts']
+				extensions: ['.ts', '.svelte']
 			}),
 			terser()
 		],

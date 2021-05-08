@@ -1,6 +1,5 @@
 <script type="ts">
   import type { ContentUnorderedList } from 'pdfmake/interfaces'
-  import { tick } from 'svelte'
   import { getListItemsToRender } from '../logic/list'
   import {
     getUnorderedListEntryStyleString,

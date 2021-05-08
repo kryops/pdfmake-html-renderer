@@ -17,28 +17,34 @@ import ContentPageReferenceRenderer from '../components/ContentPageReferenceRend
 import ContentTextReferenceRenderer from '../components/ContentTextReferenceRenderer.svelte'
 
 export function getContentRenderer(node: Content, inLink: boolean) {
+  if (!node) return null
+
   if (typeof node === 'string') {
     return StringRenderer
   } else if (Array.isArray(node)) {
     return ContentArrayRenderer
-  } else if (typeof node === 'object' && !Array.isArray(node)) {
+  } else if (typeof node === 'object' && node && !Array.isArray(node)) {
     if (!inLink && ('link' in node || 'linkToDestination' in node)) {
       return ContentLinkRenderer
     }
 
     if (typeof node !== 'object' || !node) return null
 
-    if ('columns' in node) {
+    if ('columns' in node && Array.isArray(node.columns)) {
       return ContentColumnsRenderer
-    } else if ('stack' in node) {
+    } else if ('stack' in node && Array.isArray(node.stack)) {
       return ContentStackRenderer
-    } else if ('ul' in node) {
+    } else if ('ul' in node && Array.isArray(node.ul)) {
       return ContentUnorderedListRenderer
-    } else if ('ol' in node) {
+    } else if ('ol' in node && Array.isArray(node.ol)) {
       return ContentOrderedListRenderer
-    } else if ('table' in node) {
+    } else if (
+      'table' in node &&
+      node.table &&
+      typeof node.table === 'object'
+    ) {
       return ContentTableRenderer
-    } else if ('image' in node) {
+    } else if ('image' in node && node.image) {
       return ContentImageRenderer
     } else if ('pageReference' in node) {
       return ContentPageReferenceRenderer
@@ -46,13 +52,13 @@ export function getContentRenderer(node: Content, inLink: boolean) {
       return ContentTextReferenceRenderer
     } else if ('text' in node) {
       return ContentTextRenderer
-    } else if ('toc' in node) {
+    } else if ('toc' in node && node.toc && typeof node.toc === 'object') {
       return ContentTocRenderer
     } else if ('svg' in node) {
       return ContentSvgRenderer
     } else if ('qr' in node) {
       return ContentQrRenderer
-    } else if ('canvas' in node) {
+    } else if ('canvas' in node && Array.isArray(node.canvas)) {
       return ContentCanvasRenderer
     }
   }
@@ -83,8 +89,8 @@ export function flattenNodes(node: Content): Content[] {
     }
   }
 
-  if ('table' in node) {
-    node.table.body.forEach(tr =>
+  if ('table' in node && node.table && typeof node.table === 'object') {
+    node.table.body?.forEach(tr =>
       tr.forEach(td => nodes.push(...flattenNodes(td as Content)))
     )
   } else if ('text' in node && Array.isArray(node.text)) {

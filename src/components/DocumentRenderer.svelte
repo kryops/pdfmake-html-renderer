@@ -2,13 +2,15 @@
   import type { TDocumentDefinitions } from 'pdfmake/interfaces'
   import ContentRenderer from './ContentRenderer.svelte'
   import { getPageStyleString } from '../styling/page'
+  import type { PageSizeMode } from '../styling/page'
   import HeaderFooterRenderer from './HeaderFooterRenderer.svelte'
   import { getFooterHeight, getHeaderHeight } from '../styling/header'
   import BackgroundRenderer from './BackgroundRenderer.svelte'
   import WatermarkRenderer from './WatermarkRenderer.svelte'
 
   export let document: TDocumentDefinitions
-  export let pageShadow = true
+  export let pageShadow: boolean
+  export let mode: PageSizeMode
 
   let clientWidth: number
 </script>
@@ -17,7 +19,7 @@
   <div
     class="page"
     class:pageShadow
-    style={getPageStyleString(document, clientWidth)}
+    style={getPageStyleString(document, clientWidth, mode)}
   >
     {#if document.background}
       <div class="backgroundLayer">
@@ -29,7 +31,9 @@
         <HeaderFooterRenderer node={document.header} />
       </div>
     {/if}
-    <ContentRenderer node={document.content} />
+    {#if document.content}
+      <ContentRenderer node={document.content} />
+    {/if}
     {#if document.footer}
       <div class="footer" style="height: {getFooterHeight(document)}">
         <HeaderFooterRenderer node={document.footer} />

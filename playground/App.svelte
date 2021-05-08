@@ -7,9 +7,11 @@
 
   let document: TDocumentDefinitions | null = null
 
-  let content = window.location.hash
-    ? decodeURIComponent(window.location.hash.slice(1))
-    : `{
+  const sessionKey = 'pdfmakeHtmlRendererPlaygroundContent'
+
+  let content =
+    sessionStorage.getItem(sessionKey) ??
+    `{
   content: [
     'First paragraph',
     'Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines','First paragraph',
@@ -19,8 +21,11 @@
   let pdfmakeEnabled = false
   let errorMessage: string | null = null
 
-  $: (() => {
-    window.location.hash = encodeURIComponent(content)
+  /**
+   * We could do this on every keypress, but this would lead to errors
+   * very often when typing JavaScript syntax
+   */
+  function updateDocument() {
     try {
       if (content.trim().startsWith('{')) {
         document = new Function(`return (${content});`)()
@@ -32,6 +37,14 @@
       console.error
       errorMessage = error.message ?? String(error)
     }
+  }
+
+  let timer: any
+
+  $: (() => {
+    sessionStorage.setItem(sessionKey, content)
+    clearTimeout(timer)
+    timer = setTimeout(updateDocument, 250)
   })()
 </script>
 
