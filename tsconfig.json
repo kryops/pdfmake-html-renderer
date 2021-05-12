@@ -12,7 +12,12 @@
     "types": [
       "svelte",
       "snowpack-env",
-      "ace-builds"
+      "ace-builds",
+      "jest",
+      "jest-image-snapshot",
+      "puppeteer",
+      "jest-environment-puppeteer",
+      "expect-puppeteer"
     ]
   },
   "exclude": [
