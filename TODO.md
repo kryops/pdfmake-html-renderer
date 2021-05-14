@@ -1,5 +1,9 @@
 # TODO
 
+## Render Bugs
+
+* background is in front of content
+
 ## Features
 
 * Error Boundary

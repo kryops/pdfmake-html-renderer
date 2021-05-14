@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces'
-import { imageSnapshot, serverImageSnapshot } from '../image-snapshot'
+import { performDocumentSnapshotTests } from '../image-snapshot'
 
 // https://github.com/bpampuch/pdfmake/blob/master/examples/basics.js
 const document: TDocumentDefinitions = {
@@ -9,10 +9,4 @@ const document: TDocumentDefinitions = {
   ],
 }
 
-it('matches snapshot', async () => {
-  await imageSnapshot(document)
-})
-
-it('matches server snapshot', async () => {
-  await serverImageSnapshot(document)
-})
+performDocumentSnapshotTests(document)

@@ -23,8 +23,9 @@ Playground: https://kryops.github.io/pdfmake-html-renderer/
   * The table of contents does not render page numbers
   * Manual page breaks specified through `pageBreak: 'before'` or `pageBreak: 'after'` are rendered as a horizontal line
   * For short content, we enforce the height of a single page (unless `mode: 'fluid'` is set)
-* **Style Inheritance** may not work the same way as in `pdfmake` for every property
+* **Style inheritance** may not work the same way as in `pdfmake` for every property
   * We apply backgrounds to the container, while `pdfmake` may pass them to the children in some cases (e.g. within lists)
+* **Column widths** behave slightly differently, especially when combining `*` and `auto` widths
 * **List markers** in ordered lists are right-aligned, while `pdfmake` aligns them to the left
 * **QR Codes** look slightly different to the ones created by `pdfmake`
 
@@ -55,6 +56,15 @@ import 'pdfmake-html-renderer/dist/index.css';
 3. _(Optional)_ Import fonts:
 
 Any fonts used in your PDF document definitions, including the default [Roboto](https://fonts.google.com/specimen/Roboto) font, should be imported  using CSS [`@font-face`](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) rules.
+
+To use the version provided by [https://fonts.google.com/](Google Fonts), add the following HTML to your `<head>`:
+
+```html
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+```
+
+
 Otherwise, the renderer may use a fallback font depending on the fonts installed on the machine.
 
 4. If you have a Content Security Policy, you might need to extend it:
