@@ -3,6 +3,7 @@
 ## Render Bugs
 
 * background is in front of content
+* additional whitespace in inline array
 
 ## Features
 
