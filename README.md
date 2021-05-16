@@ -26,7 +26,11 @@ Playground: https://kryops.github.io/pdfmake-html-renderer/
 * **Style inheritance** may not work the same way as in `pdfmake` for every property
   * We apply backgrounds to the container, while `pdfmake` may pass them to the children in some cases (e.g. within lists)
 * **Column widths** behave slightly differently, especially when combining `*` and `auto` widths
+* **Relative positioning** ignores the `alignment` property
 * **List markers** in ordered lists are right-aligned, while `pdfmake` aligns them to the left
+* **Background** may overlap with the content
+* **Text arrays** may render additional whitespace between array elements
+* **Paragraphs containing only spaces** are not be rendered
 * **QR Codes** look slightly different to the ones created by `pdfmake`
 
 ### Supported browsers
@@ -116,6 +120,7 @@ Rendering on the server comes with some additional limitations:
 
 * QR codes are not supported
 * Zooming / shrinking the page does not work
+* Relative positioning may not always be placed correctly
 
 
 ## Options / Props
