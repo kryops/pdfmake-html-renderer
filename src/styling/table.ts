@@ -181,7 +181,7 @@ export function getTableCellStyleString(
         style['--fill-opacity'] = '1'
       }
     }
-    if (fillOpacity) style['--fill-opacity'] = String(fillOpacity)
+    if (fillOpacity != null) style['--fill-opacity'] = String(fillOpacity)
 
     if (table.layout.defaultBorder === false) {
       style['border-style'] = 'none'
@@ -191,6 +191,7 @@ export function getTableCellStyleString(
   if (typeof node === 'object' && node) {
     if ('noWrap' in node && node.noWrap) {
       style['white-space'] = 'nowrap'
+      style['--whitespace'] = 'nowrap'
     }
     if ('fillColor' in node && node.fillColor) {
       const fillColorRgb = colorToRgb(node.fillColor)
