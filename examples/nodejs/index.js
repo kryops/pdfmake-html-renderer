@@ -1,6 +1,6 @@
 const http = require('http');
 
-const { PdfmakeHtmlRenderer } = require('../../dist/server')
+const { PdfmakeHtmlRenderer } = require('../../server')
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -16,7 +16,7 @@ const { html, css } = PdfmakeHtmlRenderer.render({
       '\n',
       'Hello, world!',
     ]
-  }
+  },
 });
 
 const server = http.createServer((req, res) => {
