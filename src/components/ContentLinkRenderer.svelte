@@ -4,6 +4,7 @@
 
   // cannot use ContentLink as it is only a sub-type that ContentRenderer won't accept
   export let node: ContentText
+
 </script>
 
 <a
@@ -18,4 +19,5 @@
     color: inherit;
     text-decoration: none;
   }
+
 </style>

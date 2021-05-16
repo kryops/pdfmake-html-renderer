@@ -5,6 +5,7 @@
   import { getTocTarget } from '../logic/toc'
   import { getContentStyleString } from '../styling/content'
   import ContentArrayRenderer from './ContentArrayRenderer.svelte'
+  import ContentLinkRenderer from './ContentLinkRenderer.svelte'
   import StringRenderer from './StringRenderer.svelte'
 
   export let node: Content
@@ -25,6 +26,7 @@
         ? node.id
         : undefined
       : undefined
+
 </script>
 
 {#if !inToc && typeof node === 'object' && node && 'pageBreak' in node && node.pageBreak === 'before'}
@@ -35,6 +37,8 @@
   <StringRenderer {node} />
 {:else if Array.isArray(node)}
   <ContentArrayRenderer {node} />
+{:else if component === ContentLinkRenderer}
+  <svelte:component this={component} {node} />
 {:else if component}
   <span {style} {id}>
     <svelte:component this={component} {node} />
@@ -55,4 +59,5 @@
   .unknown {
     color: red;
   }
+
 </style>
