@@ -13,12 +13,12 @@
 
 <div>
   {#if node.toc.title}
-    <div class="title">
+    <div class="phr-title">
       <ContentRenderer node={node.toc.title} />
     </div>
   {/if}
   {#each getTocItemNodes($document.content) as tocItem}
-    <a class="tocItem" href="#{getTocTarget(tocItem, $nodes)}">
+    <a class="phr-tocItem" href="#{getTocTarget(tocItem, $nodes)}">
       <ContentRenderer
         node={tocItem}
         inToc
@@ -29,10 +29,10 @@
 </div>
 
 <style>
-  .title {
+  .phr-title {
     margin-bottom: 12pt;
   }
-  .tocItem {
+  .phr-tocItem {
     display: block;
     margin: 6pt 0;
     text-decoration: unset;

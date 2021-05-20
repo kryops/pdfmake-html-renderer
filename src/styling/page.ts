@@ -89,9 +89,7 @@ export function getPageStyleString(
   clientWidth: number,
   mode: PageSizeMode
 ): string {
-  const style: CssDictionary = {
-    padding: getMarginString(document.pageMargins, 40),
-  }
+  const style: CssDictionary = {}
 
   if (mode !== 'fluid') {
     const { width, height } = getPageSize(document)
@@ -112,6 +110,16 @@ export function getPageStyleString(
     }
 
     Object.assign(style, getStyleDictionary(document.defaultStyle))
+  }
+
+  return getStyleString(style)
+}
+
+export function getPageContentStyleString(
+  document: TDocumentDefinitions
+): string {
+  const style: CssDictionary = {
+    padding: getMarginString(document.pageMargins, 40),
   }
 
   return getStyleString(style)

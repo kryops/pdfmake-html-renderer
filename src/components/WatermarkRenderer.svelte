@@ -8,18 +8,19 @@
   const document = getDocument()
 </script>
 
-<span class="watermark" style={getWatermarkStyleString(node, $document)}>
+<span class="phr-watermark" style={getWatermarkStyleString(node, $document)}>
   {text}
 </span>
 
 <style>
-  .watermark {
+  .phr-watermark {
     position: absolute;
     left: 0;
     right: 0;
     text-align: center;
     color: #444;
     white-space: nowrap;
+    z-index: 2;
     /* click through */
     pointer-events: none;
   }

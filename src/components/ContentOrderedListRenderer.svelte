@@ -14,12 +14,12 @@
 
 <ol
   start={node.start}
-  class:reversed={node.reversed}
+  class:phr-reversed={node.reversed}
   style={getOrderedListStyleString(node)}
 >
   {#each entriesToRender as [entry, nextEntry]}
     <li
-      class:customCounter={entry.counter}
+      class:phr-customCounter={entry.counter}
       style={getOrderedListEntryStyleString(entry)}
     >
       <ContentRenderer node={entry} />
@@ -40,7 +40,7 @@
     counter-increment: item;
   }
 
-  ol.reversed li {
+  ol.phr-reversed li {
     counter-increment: item -1;
   }
 
@@ -50,7 +50,7 @@
       var(--separator2);
   }
 
-  .customCounter::marker {
+  .phr-customCounter::marker {
     content: var(--separator1) var(--marker-number) var(--separator2);
   }
 </style>

@@ -10,7 +10,7 @@
   $: gap = getColumnGap(node, $document)
 </script>
 
-<div class="container" style="margin: 0 -{gap / 2}pt">
+<div class="phr-container" style="margin: 0 -{gap / 2}pt">
   {#each node.columns as column}
     <div style={getColumnStyleString(column, gap)}>
       <ContentRenderer node={column} />
@@ -19,7 +19,7 @@
 </div>
 
 <style>
-  .container {
+  .phr-container {
     display: flex;
   }
 </style>

@@ -18,15 +18,15 @@
 
 <table
   style={getTableStyleString(node)}
-  class:noBorders={node.layout === 'noBorders'}
-  class:headerLineOnly={node.layout === 'headerLineOnly'}
-  class:lightHorizontalLines={node.layout === 'lightHorizontalLines'}
-  class:noSidePadding={node.layout === 'noBorders' ||
+  class:phr-noBorders={node.layout === 'noBorders'}
+  class:phr-headerLineOnly={node.layout === 'headerLineOnly'}
+  class:phr-lightHorizontalLines={node.layout === 'lightHorizontalLines'}
+  class:phr-noSidePadding={node.layout === 'noBorders' ||
     node.layout === 'headerLineOnly' ||
     node.layout === 'lightHorizontalLines'}
 >
   {#each node.table?.body ?? [] as tr, rowIndex}
-    <tr class:header={(node.table.headerRows ?? -1) === rowIndex + 1}>
+    <tr class:phr-header={(node.table.headerRows ?? -1) === rowIndex + 1}>
       {#each tr as td, columnIndex}
         {#if shouldRenderCell(td, rowIndex, columnIndex, coveredCells)}
           <td
@@ -57,32 +57,32 @@
 
   /* table layouts */
 
-  .noSidePadding > tr > td:first-child {
+  .phr-noSidePadding > tr > td:first-child {
     padding-left: 0;
   }
-  .noSidePadding > tr > td:last-child {
+  .phr-noSidePadding > tr > td:last-child {
     padding-right: 0;
   }
 
-  .noBorders > tr > td {
+  .phr-noBorders > tr > td {
     border: none;
   }
 
-  .headerLineOnly > .header {
+  .phr-headerLineOnly > .phr-header {
     border-bottom: 2pt solid #000;
   }
 
-  .headerLineOnly > tr > td {
+  .phr-headerLineOnly > tr > td {
     border: none;
     padding-left: 8pt;
     padding-right: 8pt;
   }
 
-  .lightHorizontalLines > .header > td {
+  .phr-lightHorizontalLines > .phr-header > td {
     border-bottom-width: 2pt;
   }
 
-  .lightHorizontalLines > tr > td {
+  .phr-lightHorizontalLines > tr > td {
     border-left: none;
     border-right: none;
     border-top: none;
@@ -91,11 +91,11 @@
     padding-right: 8pt;
   }
 
-  .lightHorizontalLines > tr:first-child > td {
+  .phr-lightHorizontalLines > tr:first-child > td {
     border-bottom-color: #000;
   }
 
-  .lightHorizontalLines > tr:last-child > td {
+  .phr-lightHorizontalLines > tr:last-child > td {
     border-bottom: none;
   }
 </style>

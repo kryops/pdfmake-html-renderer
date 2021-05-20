@@ -12,6 +12,8 @@ Bug Fixes
 * Fixed `noWrap` not being applied correctly
 * Fixed `fillOpacity: 0` not being applied correctly
 * Fixed rendering of primitive numbers as content
+* Fixed page background being rendered in front of the content
+* Fixed using unscoped CSS class names
 
 Internal
 

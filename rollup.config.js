@@ -21,7 +21,8 @@ function config(format, name, ssr = false) {
 				include: '**/*.svelte',
 				compilerOptions: {
 					dev: false,
-					generate: ssr ? 'ssr' : undefined,
+					generate: ssr ? 'ssr' : 'dom',
+					cssHash: ({ hash, css }) => `phr-${hash(css)}`,
 				},
 				preprocess: preprocess({
 					typescript: true

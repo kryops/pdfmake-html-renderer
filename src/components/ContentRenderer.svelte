@@ -44,7 +44,7 @@
     <svelte:component this={component} {node} />
   </span>
 {:else}
-  <span class="unknown">Unknown: {JSON.stringify(node)}</span>
+  <span class="phr-unknown">Unknown: {JSON.stringify(node)}</span>
 {/if}
 
 {#if !inToc && typeof node === 'object' && node && 'pageBreak' in node && node.pageBreak === 'after'}
@@ -56,7 +56,7 @@
     margin: 24pt 0;
   }
 
-  .unknown {
+  .phr-unknown {
     color: red;
   }
 
