@@ -60,7 +60,7 @@ import 'pdfmake-html-renderer/dist/index.css';
 
 Any fonts used in your PDF document definitions, including the default [Roboto](https://fonts.google.com/specimen/Roboto) font, should be imported  using CSS [`@font-face`](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) rules.
 
-To use the version provided by [https://fonts.google.com/](Google Fonts), add the following HTML to your `<head>`:
+To use the version provided by [Google Fonts](https://fonts.google.com/), add the following HTML to your `<head>`:
 
 ```html
 <link rel="preconnect" href="https://fonts.gstatic.com">
