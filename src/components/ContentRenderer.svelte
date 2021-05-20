@@ -33,7 +33,7 @@
   <hr />
 {/if}
 
-{#if typeof node === 'string'}
+{#if typeof node === 'string' || typeof node === 'number'}
   <StringRenderer {node} />
 {:else if Array.isArray(node)}
   <ContentArrayRenderer {node} />

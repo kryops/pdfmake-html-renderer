@@ -16,7 +16,7 @@ export function getWatermarkStyleString(
   const defaultDiagonal = Math.sqrt(width * width + height * height)
 
   const numCharacters =
-    typeof node === 'string' ? node.length : node.text.length
+    typeof node === 'string' ? node.length : node.text?.length ?? 0
 
   const angle =
     typeof node === 'object' && node && node.angle !== undefined

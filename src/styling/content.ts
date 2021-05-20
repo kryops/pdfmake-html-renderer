@@ -85,7 +85,7 @@ export function getContentStyleString(
   document: TDocumentDefinitions,
   inline = false
 ) {
-  if (typeof node === 'string') return undefined
+  if (typeof node === 'string' || typeof node === 'number') return undefined
   const styles = getContentStyleDictionary(node, document, inline)
   return getStyleString(styles)
 }

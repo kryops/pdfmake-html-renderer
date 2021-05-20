@@ -1,7 +1,7 @@
 import type { Content } from 'pdfmake/interfaces'
 
 function getNodeText(node: Content): string {
-  if (typeof node === 'string') return node
+  if (typeof node === 'string' || typeof node === 'number') return String(node)
   if (Array.isArray(node)) return node.map(getNodeText).join('')
   if ('text' in node) return getNodeText(node.text)
   return ''

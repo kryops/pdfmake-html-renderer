@@ -19,7 +19,7 @@ import ContentTextReferenceRenderer from '../components/ContentTextReferenceRend
 export function getContentRenderer(node: Content, inLink: boolean) {
   if (!node) return null
 
-  if (typeof node === 'string') {
+  if (typeof node === 'string' || typeof node === 'string') {
     return StringRenderer
   } else if (Array.isArray(node)) {
     return ContentArrayRenderer
@@ -70,7 +70,7 @@ export function flattenNodes(node: Content): Content[] {
 
   const nodes: Content[] = [node]
 
-  if (typeof node === 'string') {
+  if (typeof node === 'string' || typeof node === 'number') {
     return []
   } else if (Array.isArray(node)) {
     node.forEach(child => nodes.push(...flattenNodes(child)))

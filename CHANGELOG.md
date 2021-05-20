@@ -11,6 +11,7 @@ Bug Fixes
 * Fixed link node styles being applied twice, leading to an additional space after the link
 * Fixed `noWrap` not being applied correctly
 * Fixed `fillOpacity: 0` not being applied correctly
+* Fixed rendering of primitive numbers as content
 
 Internal
 
