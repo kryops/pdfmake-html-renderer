@@ -191,7 +191,7 @@ export function getTableCellStyleString(
   if (typeof node === 'object' && node) {
     if ('noWrap' in node && node.noWrap) {
       style['white-space'] = 'nowrap'
-      style['--whitespace'] = 'nowrap'
+      style['--white-space'] = 'nowrap'
     }
     if ('fillColor' in node && node.fillColor) {
       const fillColorRgb = colorToRgb(node.fillColor)

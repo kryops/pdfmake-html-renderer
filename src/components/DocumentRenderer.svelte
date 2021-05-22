@@ -59,6 +59,11 @@
     box-sizing: border-box;
     background: #fff;
     font-family: Roboto, Helvetica, sans-serif;
+    font-size: 12pt;
+    --font-size: 12pt;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
     overflow: hidden;
   }
   .phr-pageShadow {

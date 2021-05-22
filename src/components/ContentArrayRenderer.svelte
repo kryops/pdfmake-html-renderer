@@ -6,17 +6,29 @@
   export let inline = false
 </script>
 
-{#each node as entry}
-  {#if inline}
-    <ContentRenderer node={entry} inline />
-  {:else}
+{#if inline}
+  <span>
+    {#each node as entry}
+      <ContentRenderer node={entry} inline />
+    {/each}
+  </span>
+{:else}
+  {#each node as entry}
     <p>
       <ContentRenderer node={entry} />
     </p>
-  {/if}
-{/each}
+  {/each}
+{/if}
 
 <style>
+  span {
+    /* Prevent whitespace between inline nodes */
+    font-size: 0;
+  }
+  span > :global(*) {
+    font-size: var(--font-size);
+  }
+
   p {
     margin: 0;
   }

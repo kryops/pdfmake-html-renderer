@@ -10,7 +10,9 @@
 {#if Array.isArray(node.text)}
   <ContentArrayRenderer node={node.text} inline />
 {:else if typeof node.text === 'string' || typeof node.text === 'number'}
-  <StringRenderer node={node.text} />
+  {#if node.text !== ''}
+    <StringRenderer node={node.text} />
+  {/if}
 {:else}
   <ContentRenderer node={node.text} />
 {/if}

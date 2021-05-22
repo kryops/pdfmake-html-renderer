@@ -10,7 +10,10 @@ export function getStyleDictionary(style: Style | undefined) {
 
   if (style.font)
     obj['font-family'] = style.font + ', Roboto, Helvetica, sans-serif'
-  if (style.fontSize) obj['font-size'] = style.fontSize + 'pt'
+  if (style.fontSize) {
+    obj['font-size'] = style.fontSize + 'pt'
+    obj['--font-size'] = style.fontSize + 'pt'
+  }
   if (style.lineHeight) obj['line-height'] = String(style.lineHeight)
   if (style.bold !== undefined)
     obj['font-weight'] = style.bold ? 'bold' : 'normal'
@@ -40,15 +43,19 @@ export function getStyleDictionary(style: Style | undefined) {
   }
   if (style.preserveLeadingSpaces) {
     obj['white-space'] = 'pre-wrap'
-    obj['--whitespace'] = 'pre-wrap'
+    obj['--white-space'] = 'pre-wrap'
   }
   if (style.opacity) obj.opacity = String(style.opacity)
   if (style.characterSpacing)
     obj['letter-spacing'] = style.characterSpacing + 'pt'
   if (style.leadingIndent) obj['text-indent'] = style.leadingIndent + 'pt'
   if (style.sub || style.sup) {
-    obj['vertical-align'] = style.sub ? 'sub' : 'super'
-    if (!style.fontSize) obj['font-size'] = '0.58em'
+    // cannot use super as font-size: 0 within array will move the baseline
+    obj['vertical-align'] = style.sub ? 'sub' : 'top'
+    if (!style.fontSize) {
+      obj['font-size'] = 'calc(var(--font-size) * 0.58)'
+      // cannot redeclare --font-size variable as it would try to use it for the element itself
+    }
   }
 
   // inherit to table cells below

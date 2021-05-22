@@ -6,6 +6,7 @@
   import { getContentStyleString } from '../styling/content'
   import ContentArrayRenderer from './ContentArrayRenderer.svelte'
   import ContentLinkRenderer from './ContentLinkRenderer.svelte'
+  import ContentTextRenderer from './ContentTextRenderer.svelte'
   import StringRenderer from './StringRenderer.svelte'
 
   export let node: Content
@@ -40,9 +41,11 @@
 {:else if component === ContentLinkRenderer}
   <svelte:component this={component} {node} />
 {:else if component}
-  <span {style} {id}>
-    <svelte:component this={component} {node} />
-  </span>
+  {#if component !== ContentTextRenderer || !('text' in node) || node.text !== ''}
+    <span {style} {id}>
+      <svelte:component this={component} {node} />
+    </span>
+  {/if}
 {:else}
   <span class="phr-unknown">Unknown: {JSON.stringify(node)}</span>
 {/if}

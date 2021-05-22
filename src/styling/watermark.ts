@@ -33,7 +33,10 @@ export function getWatermarkStyleString(
   }
 
   if (typeof node === 'object' && node) {
-    if (node.fontSize) style['font-size'] = node.fontSize + 'pt'
+    if (node.fontSize) {
+      style['font-size'] = node.fontSize + 'pt'
+      style['--font-size'] = node.fontSize + 'pt'
+    }
     if (node.font) style['font-family'] = node.font
     if (node.bold) style['font-weight'] = 'bold'
     if (node.italics) style['font-style'] = 'italic'

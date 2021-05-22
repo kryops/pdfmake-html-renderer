@@ -28,8 +28,7 @@ Playground: https://kryops.github.io/pdfmake-html-renderer/
 * **Column widths** behave slightly differently, especially when combining `*` and `auto` widths
 * **Relative positioning** ignores the `alignment` property
 * **List markers** in ordered lists are right-aligned, while `pdfmake` aligns them to the left
-* **Text arrays** may render additional whitespace between array elements
-* **Paragraphs containing only spaces** are not rendered
+* **Empty elements** or elements containing only spaces may be rendered differently in some cases
 * **QR Codes** look slightly different to the ones created by `pdfmake`
 
 ### Supported browsers

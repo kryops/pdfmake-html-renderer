@@ -13,6 +13,8 @@ Bug Fixes
 * Fixed `fillOpacity: 0` not being applied correctly
 * Fixed rendering of primitive numbers as content
 * Fixed page background being rendered in front of the content
+* Fixed spaces between text array elements
+* Fixed some cases for empty elements and elements containing only spaces
 * Fixed using unscoped CSS class names
 
 Internal
