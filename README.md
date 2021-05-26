@@ -102,7 +102,7 @@ npm install -D svelte @types/pdfmake
 This library also provides an **experimental** server build that renders static HTML and CSS:
 
 ```js
-const { PdfmakeHtmlRenderer } = require('pdfmake-html-renderer/dist/server')
+const { PdfmakeHtmlRenderer } = require('pdfmake-html-renderer/server')
 
 const { html, css } = PdfmakeHtmlRenderer.render({
 	document: { content: ['Hello, world!'] }

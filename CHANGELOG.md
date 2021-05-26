@@ -1,10 +1,10 @@
 # Changelog
 
-## Unreleased
+## v0.1.1 - 2021-05-26
 
 Features
 
-* Added TypeScript typings for server-side rendering. To use it, switch from `pdfmake-html-renderer/dist/server` to `pdfmake-html-renderer/server`
+* Added TypeScript typings for server-side rendering. To use them, switch from `pdfmake-html-renderer/dist/server` to `pdfmake-html-renderer/server`
 
 Bug Fixes
 
