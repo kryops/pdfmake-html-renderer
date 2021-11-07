@@ -18,7 +18,8 @@
     left: 0;
     right: 0;
     text-align: center;
-    color: #444;
+    color: #000;
+    opacity: 0.6;
     white-space: nowrap;
     z-index: 2;
     /* click through */

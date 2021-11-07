@@ -6,6 +6,10 @@ Features
 
 * Handle tiling pattern syntax (tiling patterns are ignored)
 
+Bug Fixes
+
+* Fixed default watermark color and opacity
+
 ## v0.1.1 - 2021-05-26
 
 Features
