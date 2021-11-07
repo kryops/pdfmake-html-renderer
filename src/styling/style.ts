@@ -26,7 +26,9 @@ export function getStyleDictionary(style: Style | undefined) {
   if (style.color) obj.color = style.color
   // TODO some elements only inherit the background down to their children
   // instead of applying it to the container itself (e.g. lists)
-  if (style.background) obj.background = style.background
+  // We ignore tiling patterns (arrays)
+  if (style.background && !Array.isArray(style.background))
+    obj.background = style.background
   if (style.margin) {
     obj.display = 'block'
     obj['margin'] = getMarginString(style.margin)

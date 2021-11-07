@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+Features
+
+* Handle tiling pattern syntax (tiling patterns are ignored)
+
 ## v0.1.1 - 2021-05-26
 
 Features

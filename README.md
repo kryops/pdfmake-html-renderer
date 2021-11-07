@@ -23,6 +23,7 @@ Playground: https://kryops.github.io/pdfmake-html-renderer/
   * The table of contents does not render page numbers
   * Manual page breaks specified through `pageBreak: 'before'` or `pageBreak: 'after'` are rendered as a horizontal line
   * For short content, we enforce the height of a single page (unless `mode: 'fluid'` is set)
+* **Tiling patterns** are not supported
 * **Style inheritance** may not work the same way as in `pdfmake` for every property
   * We apply backgrounds to the container, while `pdfmake` may pass them to the children in some cases (e.g. within lists)
 * **Column widths** behave slightly differently, especially when combining `*` and `auto` widths
