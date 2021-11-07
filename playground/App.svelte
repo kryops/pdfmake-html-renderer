@@ -1,22 +1,18 @@
 <script type="ts">
   import type { TDocumentDefinitions } from 'pdfmake/interfaces'
+  import type { Example } from './examples'
 
   import PdfmakeHtmlRenderer from '../src/PdfmakeHtmlRenderer.svelte'
   import Editor from './Editor.svelte'
+  import { examples } from './examples'
   import PdfmakePreview from './PdfmakePreview.svelte'
 
+  let activeExample: Example | null = examples[0]
   let document: TDocumentDefinitions | null = null
 
   const sessionKey = 'pdfmakeHtmlRendererPlaygroundContent'
 
-  let content =
-    sessionStorage.getItem(sessionKey) ??
-    `{
-  content: [
-    'First paragraph',
-    'Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines',
-  ]
-}`
+  let content = sessionStorage.getItem(sessionKey) ?? activeExample.code
 
   let pdfmakeEnabled = false
   let errorMessage: string | null = null
@@ -34,24 +30,39 @@
       }
       errorMessage = null
     } catch (error) {
-      console.error
-      errorMessage = error.message ?? String(error)
+      errorMessage = (error as any).message ?? String(error)
+      console.error(errorMessage)
     }
   }
 
   let timer: any
 
   $: (() => {
+    if (content !== activeExample?.code) activeExample = null
     sessionStorage.setItem(sessionKey, content)
     clearTimeout(timer)
     timer = setTimeout(updateDocument, 250)
   })()
-
 </script>
 
 <div class="container">
   <div class="header">
     <h1>pdfmake-html-renderer</h1>
+    <span>
+      <select
+        bind:value={activeExample}
+        on:change={() => {
+          if (activeExample) content = activeExample.code
+        }}
+      >
+        <option value={null} />
+        {#each examples as example}
+          <option value={example}>
+            {example.name}
+          </option>
+        {/each}
+      </select>
+    </span>
     <span class="link" on:click={() => (pdfmakeEnabled = !pdfmakeEnabled)}
       >{pdfmakeEnabled ? 'Hide' : 'Show'} pdfmake preview</span
     >
@@ -136,5 +147,4 @@
     background: #ffaaaa;
     padding: 1rem;
   }
-
 </style>

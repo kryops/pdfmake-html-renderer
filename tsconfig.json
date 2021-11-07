@@ -24,6 +24,7 @@
     "node_modules/*",
     "__sapper__/*",
     "public/*",
+    "dist/*",
     "docs/*",
     "playground/build/*"
   ],

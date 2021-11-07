@@ -23,6 +23,8 @@
     editor.on('change', () => (content = editor.getValue()))
   })
 
+  $: if (editor && editor.getValue() !== content) editor.setValue(content)
+
   onDestroy(() => editor.destroy())
 </script>
 
