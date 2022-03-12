@@ -6,7 +6,8 @@
   "search.exclude": {
     "**/node_modules": true,
     "dist": true,
-    "docs": true
+    "docs": true,
+    "**/.yarn": true
   },
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"
