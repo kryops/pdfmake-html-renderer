@@ -7,12 +7,12 @@
   import { examples } from './examples'
   import PdfmakePreview from './PdfmakePreview.svelte'
 
-  let activeExample: Example | null = examples[0]
+  let activeExample: Example | null = null
   let document: TDocumentDefinitions | null = null
 
   const sessionKey = 'pdfmakeHtmlRendererPlaygroundContent'
 
-  let content = sessionStorage.getItem(sessionKey) ?? activeExample.code
+  let content = sessionStorage.getItem(sessionKey) ?? examples[0].code
 
   let pdfmakeEnabled = false
   let errorMessage: string | null = null
@@ -38,7 +38,6 @@
   let timer: any
 
   $: (() => {
-    if (content !== activeExample?.code) activeExample = null
     sessionStorage.setItem(sessionKey, content)
     clearTimeout(timer)
     timer = setTimeout(updateDocument, 250)
