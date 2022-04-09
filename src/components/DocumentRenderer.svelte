@@ -1,7 +1,10 @@
 <script type="ts">
   import type { TDocumentDefinitions } from 'pdfmake/interfaces'
   import ContentRenderer from './ContentRenderer.svelte'
-  import { getPageStyleString, getPageContentStyleString } from '../styling/page'
+  import {
+    getPageStyleString,
+    getPageContentStyleString,
+  } from '../styling/page'
   import type { PageSizeMode } from '../styling/page'
   import HeaderFooterRenderer from './HeaderFooterRenderer.svelte'
   import { getFooterHeight, getHeaderHeight } from '../styling/header'
@@ -63,6 +66,8 @@
     --font-size: 12pt;
     font-weight: normal;
     font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
     text-decoration: none;
     overflow: hidden;
   }
