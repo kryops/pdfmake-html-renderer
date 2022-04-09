@@ -19,7 +19,7 @@ import ContentTextReferenceRenderer from '../components/ContentTextReferenceRend
 export function getContentRenderer(node: Content, inLink: boolean) {
   if (!node) return null
 
-  if (typeof node === 'string' || typeof node === 'string') {
+  if (typeof node === 'string' || typeof node === 'number') {
     return StringRenderer
   } else if (Array.isArray(node)) {
     return ContentArrayRenderer
