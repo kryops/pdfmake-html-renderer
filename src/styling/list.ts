@@ -11,11 +11,10 @@ import { getStyleString } from './utils'
 export function getUnorderedListStyleString(
   node: ContentUnorderedList
 ): string | undefined {
-  if (!node.type && !node.markerColor) return undefined
+  const style: CssDictionary = {
+    'list-style-type': node.type ?? 'disc',
+  }
 
-  const style: CssDictionary = {}
-
-  if (node.type) style['list-style-type'] = node.type
   if (node.markerColor) style['--marker-color'] = node.markerColor
 
   return getStyleString(style)
@@ -114,15 +113,15 @@ export function getOrderedListStyleString(node: ContentOrderedList): string {
     '--separator2': JSON.stringify(separator2 + ' '),
   }
 
-  if (node.type) {
-    style['list-style-type'] = node.type
-    style['--list-type'] = node.type
+  const listType = node.type ?? 'decimal'
+  style['list-style-type'] = listType
+  style['--list-type'] = listType
 
-    if (node.type === 'none') {
-      style['--separator1'] = ''
-      style['--separator2'] = ''
-    }
+  if (listType === 'none') {
+    style['--separator1'] = "''"
+    style['--separator2'] = "''"
   }
+
   if (node.markerColor) style['--marker-color'] = node.markerColor
 
   const startPosition = node.reversed
@@ -149,8 +148,8 @@ export function getOrderedListEntryStyleString(
     style['--list-type'] = entry.listType
 
     if (entry.listType === 'none') {
-      style['--separator1'] = ''
-      style['--separator2'] = ''
+      style['--separator1'] = "''"
+      style['--separator2'] = "''"
     }
   }
 
