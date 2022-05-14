@@ -12,6 +12,7 @@ Bug Fixes
 * Fixed `counter: 0` for ordered list items not being applied
 * Fixed `type: 'none'` for ordered lists wrongly rendering a separator
 * Fixed resetting the type when nesting lists
+* Fixed collapsing margins
 
 ## v0.1.1 - 2021-05-26
 

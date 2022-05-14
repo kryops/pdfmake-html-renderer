@@ -55,7 +55,7 @@ function getContentStyleDictionary(
   if (inline) {
     Object.assign(styles, {
       display: 'inline',
-      margin: '0',
+      padding: '0',
     })
   } else {
     if (node.absolutePosition) {

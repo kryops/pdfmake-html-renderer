@@ -31,7 +31,8 @@ export function getStyleDictionary(style: Style | undefined) {
     obj.background = style.background
   if (style.margin) {
     obj.display = 'block'
-    obj['margin'] = getMarginString(style.margin)
+    // we set padding instead of margin because pdfmake does not collapse margins
+    obj.padding = getMarginString(style.margin)
   }
   if (style.decoration) {
     obj['text-decoration'] =

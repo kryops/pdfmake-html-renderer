@@ -19,7 +19,7 @@ export function getTocItemStyleString(
 
   const style: CssDictionary = {
     display: 'block',
-    margin: getMarginString(margin),
+    padding: getMarginString(margin),
   }
 
   const applyBaseStyle = (name: string) => {
