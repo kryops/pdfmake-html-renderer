@@ -26,7 +26,10 @@
     node.layout === 'lightHorizontalLines'}
 >
   {#each node.table?.body ?? [] as tr, rowIndex}
-    <tr class:phr-header={(node.table.headerRows ?? -1) === rowIndex + 1}>
+    <tr
+      class:phr-header={(node.table.headerRows ?? -1) === rowIndex + 1 &&
+        rowIndex < (node.table?.body.length ?? 0) - 1}
+    >
       {#each tr as td, columnIndex}
         {#if shouldRenderCell(td, rowIndex, columnIndex, coveredCells)}
           <td

@@ -13,6 +13,7 @@ Bug Fixes
 * Fixed `type: 'none'` for ordered lists wrongly rendering a separator
 * Fixed resetting the type when nesting lists
 * Fixed collapsing margins
+* Fixed ToC width
 
 ## v0.1.1 - 2021-05-26
 

@@ -22,10 +22,11 @@ function getContentStyleDictionary(
   // some elements need display: block
   // - columns to grow properly
   // - nested lists for proper layouting
+  // - the table of contents
   if (
     typeof node === 'object' &&
     node &&
-    ('columns' in node || 'ul' in node || 'ol' in node)
+    ('columns' in node || 'ul' in node || 'ol' in node || 'toc' in node)
   )
     styles.display = 'block'
 
