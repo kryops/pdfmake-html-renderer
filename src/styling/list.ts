@@ -87,6 +87,7 @@ function getMaxCharacters(node: ContentOrderedList): number {
       return getRomanChars(largestNumber).length
     case 'none':
       return 1
+    case 'decimal':
     default:
       return Math.ceil(Math.log10(largestNumber))
   }

@@ -1,4 +1,4 @@
-import type { Content, TDocumentDefinitions } from 'pdfmake/interfaces'
+import type { Content, Style, TDocumentDefinitions } from 'pdfmake/interfaces'
 import type { CssDictionary } from './css-dictionary'
 import { getPageSize } from './page'
 import { getStyleDictionary } from './style'
@@ -34,8 +34,13 @@ function getContentStyleDictionary(
     return styles
   }
 
-  const applyBaseStyle = (name: string) => {
-    const baseStyle = document.styles?.[name]
+  const applyBaseStyle = (nameOrStyle: string | Style) => {
+    if (typeof nameOrStyle === 'object') {
+      Object.assign(styles, nameOrStyle)
+      return
+    }
+
+    const baseStyle = document.styles?.[nameOrStyle]
     if (baseStyle) {
       Object.assign(styles, getStyleDictionary(baseStyle))
     }

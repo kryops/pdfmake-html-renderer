@@ -1,6 +1,7 @@
 import type {
   ContentToc,
   ContentTocItem,
+  Style,
   TDocumentDefinitions,
 } from 'pdfmake/interfaces'
 import type { CssDictionary } from './css-dictionary'
@@ -22,8 +23,13 @@ export function getTocItemStyleString(
     padding: getMarginString(margin),
   }
 
-  const applyBaseStyle = (name: string) => {
-    const baseStyle = document.styles?.[name]
+  const applyBaseStyle = (nameOrStyle: string | Style) => {
+    if (typeof nameOrStyle === 'object') {
+      Object.assign(style, nameOrStyle)
+      return
+    }
+
+    const baseStyle = document.styles?.[nameOrStyle]
     if (baseStyle) {
       Object.assign(style, getStyleDictionary(baseStyle))
     }

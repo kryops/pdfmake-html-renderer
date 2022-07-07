@@ -6,7 +6,8 @@
   export let node: ContentImage
 
   const document = getDocument()
-  $: src = $document.images?.[node.image] ?? node.image
+  $: image = $document.images?.[node.image]
+  $: src = (typeof image === 'object' ? image.url : image) ?? node.image
 </script>
 
 <img {src} alt="" style={getImageStyleString(node)} />
