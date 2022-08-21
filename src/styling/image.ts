@@ -8,7 +8,7 @@ export function getImageStyleString(node: ContentImage | ContentSvg) {
   if (node.width) style.width = node.width + 'pt'
   if (node.height) style.height = node.height + 'pt'
 
-  if (node.fit) {
+  if (node.fit && Array.isArray(node.fit)) {
     const [maxWidth, maxHeight] = node.fit
     style['width'] = maxWidth + 'pt'
     style['max-height'] = maxHeight + 'pt'

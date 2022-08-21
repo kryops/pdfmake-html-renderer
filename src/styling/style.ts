@@ -6,7 +6,7 @@ import { colorToRgb } from './utils'
 export function getStyleDictionary(style: Style | undefined) {
   const obj: CssDictionary = {}
 
-  if (!style) return obj
+  if (!style || typeof style !== 'object') return obj
 
   if (style.font)
     obj['font-family'] = style.font + ', Roboto, Helvetica, sans-serif'

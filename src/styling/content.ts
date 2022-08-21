@@ -64,14 +64,14 @@ function getContentStyleDictionary(
       padding: '0',
     })
   } else {
-    if (node.absolutePosition) {
+    if (node.absolutePosition && typeof node.absolutePosition === 'object') {
       Object.assign(styles, {
         position: 'absolute',
         left: `${node.absolutePosition.x ?? 0}pt`,
         top: `${node.absolutePosition.y ?? 0}pt`,
       })
     }
-    if (node.relativePosition) {
+    if (node.relativePosition && typeof node.relativePosition === 'object') {
       // relative positioning removes the space taken.
       // it can be combined with absolute positioning
       Object.assign(styles, {

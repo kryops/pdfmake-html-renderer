@@ -67,13 +67,10 @@ export function getTableCellStyleString(
     }
 
     if (!Array.isArray(table.table.widths)) {
-      normalizedTable.table.widths = table.table.body[0].map(() => 'auto')
+      normalizedTable.table.widths = Array.isArray(table.table.body)
+        ? table.table.body[0].map(() => 'auto')
+        : 'auto'
     }
-
-    // NOTE: The TypeScript definitions do not seem to be right. Actual implementation:
-    // horizontal: (rowIndex, node)
-    // vertical: (columnIndex, node)
-    // fillColor: (rowIndex, node, columnIndex)
 
     const lineLayoutProperty = (
       key: keyof CustomTableLayout,

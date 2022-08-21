@@ -46,17 +46,17 @@ export function getContentRenderer(node: Content, inLink: boolean) {
       return ContentTableRenderer
     } else if ('image' in node && node.image) {
       return ContentImageRenderer
-    } else if ('pageReference' in node) {
+    } else if ('pageReference' in node && node.pageReference != null) {
       return ContentPageReferenceRenderer
-    } else if ('textReference' in node) {
+    } else if ('textReference' in node && node.textReference != null) {
       return ContentTextReferenceRenderer
-    } else if ('text' in node) {
+    } else if ('text' in node && node.text != null) {
       return ContentTextRenderer
     } else if ('toc' in node && node.toc && typeof node.toc === 'object') {
       return ContentTocRenderer
-    } else if ('svg' in node) {
+    } else if ('svg' in node && node.svg) {
       return ContentSvgRenderer
-    } else if ('qr' in node) {
+    } else if ('qr' in node && node.qr) {
       return ContentQrRenderer
     } else if ('canvas' in node && Array.isArray(node.canvas)) {
       return ContentCanvasRenderer
@@ -90,9 +90,10 @@ export function flattenNodes(node: Content): Content[] {
   }
 
   if ('table' in node && node.table && typeof node.table === 'object') {
-    node.table.body?.forEach(tr =>
-      tr.forEach(td => nodes.push(...flattenNodes(td as Content)))
-    )
+    node.table.body?.forEach(tr => {
+      if (!Array.isArray(tr)) return
+      return tr.forEach(td => nodes.push(...flattenNodes(td as Content)))
+    })
   } else if ('text' in node && Array.isArray(node.text)) {
     nodes.push(...flattenNodes(node.text))
   }

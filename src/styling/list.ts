@@ -72,6 +72,8 @@ function getRomanChars(num: number, start = 1000): string {
 }
 
 function getMaxCharacters(node: ContentOrderedList): number {
+  if (!Array.isArray(node.ol)) return 1
+
   let largestNumber = (node.start ?? 1) + node.ol.length
   const counters = node.ol.filter(it => it.counter).map(it => it.counter!)
   if (counters.length) {

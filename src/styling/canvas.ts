@@ -84,7 +84,7 @@ function getCanvasLineElementProperties(
     'stroke-width': (element.lineWidth ?? 1) + 'pt',
   }
 
-  if (element.dash) {
+  if (element.dash && typeof element.dash === 'object') {
     const { space, length } = element.dash
     properties['stroke-dasharray'] = `${length}pt,${space ?? length}pt`
   }
@@ -150,13 +150,18 @@ export function getCanvasPolylineProperties(
   line: CanvasPolyline,
   index: number
 ): Properties {
+  if (!Array.isArray(line.points)) return {}
+
   const points = line.closePath ? [...line.points, line.points[0]] : line.points
 
   const properties: Properties = {
     stroke: '#000',
     ...getCanvasFilledElementProperties(line, index),
     ...getCanvasLineElementProperties(line),
-    points: points.map(({ x, y }) => `${(x * 4) / 3},${(y * 4) / 3}`).join(' '),
+    points: points
+      .filter(point => typeof point === 'object' && !!point)
+      .map(({ x, y }) => `${(x * 4) / 3},${(y * 4) / 3}`)
+      .join(' '),
   }
 
   if (line.lineCap) {

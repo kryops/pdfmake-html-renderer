@@ -71,8 +71,8 @@ export function getPageSize(document: TDocumentDefinitions): ContextPageSize {
       height = pageSizes[document.pageSize][0]
     }
   } else if (typeof document.pageSize === 'object' && document.pageSize) {
-    width = document.pageSize.width
-    if (document.pageSize.height !== 'auto') {
+    if (document.pageSize.width) width = document.pageSize.width
+    if (document.pageSize.height && document.pageSize.height !== 'auto') {
       height = document.pageSize.height
     }
   }
