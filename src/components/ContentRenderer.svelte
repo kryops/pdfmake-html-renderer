@@ -4,12 +4,10 @@
   import { getContentRenderer } from '../logic/content'
   import { getTocTarget } from '../logic/toc'
   import { getContentStyleString } from '../styling/content'
-  import ContentArrayRenderer from './ContentArrayRenderer.svelte'
   import ContentLinkRenderer from './ContentLinkRenderer.svelte'
   import ContentTextRenderer from './ContentTextRenderer.svelte'
-  import StringRenderer from './StringRenderer.svelte'
 
-  export let node: Content
+  export let node: Content | any
   export let inline = false
   export let inToc = false
   export let inLink = false
@@ -27,18 +25,13 @@
         ? node.id
         : undefined
       : undefined
-
 </script>
 
 {#if !inToc && typeof node === 'object' && node && 'pageBreak' in node && node.pageBreak === 'before'}
   <hr />
 {/if}
 
-{#if typeof node === 'string' || typeof node === 'number'}
-  <StringRenderer {node} />
-{:else if Array.isArray(node)}
-  <ContentArrayRenderer {node} />
-{:else if component === ContentLinkRenderer}
+{#if component === ContentLinkRenderer}
   <svelte:component this={component} {node} />
 {:else if component}
   {#if component !== ContentTextRenderer || !('text' in node) || node.text !== ''}
@@ -62,5 +55,4 @@
   .phr-unknown {
     color: red;
   }
-
 </style>

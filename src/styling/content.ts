@@ -15,20 +15,33 @@ function getContentStyleDictionary(
 
   const styles: CssDictionary = {
     'max-width': maxWidth + 'pt',
-    // cannot be block because then the background would span the whole page
-    display: inline ? 'inline' : 'inline-block',
   }
 
   // some elements need display: block
   // - columns to grow properly
   // - nested lists for proper layouting
   // - the table of contents
+  // - stacks and non-inline arrays
   if (
-    typeof node === 'object' &&
-    node &&
-    ('columns' in node || 'ul' in node || 'ol' in node || 'toc' in node)
+    (Array.isArray(node) && !inline) ||
+    (typeof node === 'object' &&
+      node &&
+      ('columns' in node ||
+        'ul' in node ||
+        'ol' in node ||
+        'toc' in node ||
+        'stack' in node))
   )
     styles.display = 'block'
+  else if (inline) styles.display = 'inline'
+  // required for fontSize as otherwise the line-height would be wrong.
+  // We cannot always assign inline-block because it messes up the vertical align of list markers
+  else if (
+    typeof node === 'object' &&
+    node &&
+    ('fontSize' in node || 'lineHeight' in node)
+  )
+    styles.display = 'inline-block'
 
   if (typeof node !== 'object' || !node || Array.isArray(node)) {
     return styles
@@ -91,7 +104,12 @@ export function getContentStyleString(
   document: TDocumentDefinitions,
   inline = false
 ) {
-  if (typeof node === 'string' || typeof node === 'number') return undefined
-  const styles = getContentStyleDictionary(node, document, inline)
+  const styles = getContentStyleDictionary(
+    typeof node === 'string' || typeof node === 'number'
+      ? { text: node }
+      : node,
+    document,
+    inline
+  )
   return getStyleString(styles)
 }
