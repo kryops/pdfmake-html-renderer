@@ -11,7 +11,7 @@
     ],
     "types": [
       "svelte",
-      "snowpack-env",
+      "vite/client",
       "ace-builds",
       "jest",
       "jest-image-snapshot",
@@ -21,11 +21,12 @@
     ]
   },
   "exclude": [
+    ".yarn/**",
     "node_modules/**",
     "__sapper__/**",
     "public/**",
     "dist/**",
     "docs/**",
-    "playground/build/**"
+    "examples/**"
   ],
 }
