@@ -24,11 +24,12 @@ export function getStyleDictionary(style: Style | undefined) {
     obj.display = 'block'
   }
   if (style.color) obj.color = style.color
-  // TODO some elements only inherit the background down to their children
-  // instead of applying it to the container itself (e.g. lists)
   // We ignore tiling patterns (arrays)
-  if (style.background && !Array.isArray(style.background))
+  if (style.background && !Array.isArray(style.background)) {
     obj.background = style.background
+    // text would probably be better, but browser support is still bad
+    obj['background-clip'] = 'content-box'
+  }
   if (style.margin) {
     obj.display = 'block'
     // we set padding instead of margin because pdfmake does not collapse margins

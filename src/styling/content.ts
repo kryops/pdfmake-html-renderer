@@ -94,6 +94,19 @@ function getContentStyleDictionary(
         }pt)`,
       })
     }
+
+    // for negative margin, we cannot use padding
+    if (styles.padding?.includes('-')) {
+      styles.margin = styles.padding
+      delete styles.padding
+    }
+
+    // For lists, we put their background into a CSS variable
+    // and apply it to their children instead
+    if ((node.ul || node.ol) && styles.background) {
+      styles['--list-background'] = styles.background
+      delete styles.background
+    }
   }
 
   return styles

@@ -30,6 +30,10 @@
     padding-left: 1em;
   }
 
+  li > :global(*) {
+    background: var(--list-background);
+  }
+
   li::marker {
     color: var(--marker-color);
   }

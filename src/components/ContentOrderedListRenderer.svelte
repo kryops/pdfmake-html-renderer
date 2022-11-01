@@ -40,6 +40,10 @@
     counter-increment: item;
   }
 
+  li > :global(*) {
+    background: var(--list-background);
+  }
+
   ol.phr-reversed li {
     counter-increment: item -1;
   }
