@@ -69,10 +69,30 @@ const document: TDocumentDefinitions = {
       ol: ['List', 'with', 'background'],
     },
     'Lorem ipsum dolor sit amet.',
+    {
+      text: 'marginLeft',
+      marginLeft: 100,
+    },
+    {
+      text: 'margin beats marginLeft',
+      marginLeft: 100,
+      margin: [10, 10, 10, 10],
+    },
+    {
+      text: 'marginLeft beats margin from style',
+      marginLeft: 100,
+      style: 'margin',
+    },
   ],
   styles: {
     red: {
       background: 'red',
+    },
+    margin: {
+      margin: [10, 10, 10, 10],
+    },
+    marginLeft: {
+      marginLeft: 100,
     },
   },
 }

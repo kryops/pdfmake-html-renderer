@@ -69,7 +69,7 @@ function getContentStyleDictionary(
     }
   }
 
-  Object.assign(styles, getStyleDictionary(node))
+  Object.assign(styles, getStyleDictionary(node, true))
 
   if (inline) {
     Object.assign(styles, {
@@ -96,9 +96,11 @@ function getContentStyleDictionary(
     }
 
     // for negative margin, we cannot use padding
-    if (styles.padding?.includes('-')) {
-      styles.margin = styles.padding
-      delete styles.padding
+    for (const suffix of ['', '-left', '-top', '-right', '-bottom'] as const) {
+      if (styles[`padding${suffix}`]?.includes('-')) {
+        styles[`margin${suffix}`] = styles[`padding${suffix}`]
+        delete styles[`padding${suffix}`]
+      }
     }
 
     // For lists, we put their background into a CSS variable

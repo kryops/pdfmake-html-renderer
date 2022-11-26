@@ -1,4 +1,4 @@
-import type { Margins } from 'pdfmake/interfaces'
+import type { Margins, Style } from 'pdfmake/interfaces'
 
 export function getMarginString(
   margins: Margins | undefined,
@@ -15,4 +15,21 @@ export function getMarginString(
     }
   }
   return margins + 'pt'
+}
+
+export function getMarginStringFromStyle(style: Style): string | undefined {
+  if (style.margin !== undefined) {
+    return getMarginString(style.margin)
+  }
+  const margins: Margins = [
+    style.marginLeft ?? 0,
+    style.marginTop ?? 0,
+    style.marginRight ?? 0,
+    style.marginBottom ?? 0,
+  ]
+  if (margins.some(it => it !== 0)) {
+    return getMarginString(margins)
+  }
+
+  return undefined
 }

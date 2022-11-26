@@ -1,9 +1,9 @@
 import type { Style } from 'pdfmake/interfaces'
 import type { CssDictionary } from './css-dictionary'
-import { getMarginString } from './margin'
+import { getMarginString, getMarginStringFromStyle } from './margin'
 import { colorToRgb } from './utils'
 
-export function getStyleDictionary(style: Style | undefined) {
+export function getStyleDictionary(style: Style | undefined, isNode = false) {
   const obj: CssDictionary = {}
 
   if (!style || typeof style !== 'object') return obj
@@ -30,10 +30,22 @@ export function getStyleDictionary(style: Style | undefined) {
     // text would probably be better, but browser support is still bad
     obj['background-clip'] = 'content-box'
   }
-  if (style.margin) {
+  const marginStyle = getMarginStringFromStyle(style)
+  if (marginStyle !== undefined) {
     obj.display = 'block'
     // we set padding instead of margin because pdfmake does not collapse margins
-    obj.padding = getMarginString(style.margin)
+    if (!isNode || style.margin !== undefined) {
+      obj.padding = marginStyle
+    } else {
+      if (style.marginLeft !== undefined)
+        obj['padding-left'] = style.marginLeft + 'pt'
+      if (style.marginTop !== undefined)
+        obj['padding-top'] = style.marginTop + 'pt'
+      if (style.marginRight !== undefined)
+        obj['padding-right'] = style.marginRight + 'pt'
+      if (style.marginBottom !== undefined)
+        obj['padding-bottom'] = style.marginBottom + 'pt'
+    }
   }
   if (style.decoration) {
     obj['text-decoration'] =
