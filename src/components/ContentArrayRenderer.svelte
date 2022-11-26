@@ -4,12 +4,19 @@
 
   export let node: Content[]
   export let inline = false
+  export let first = true
+  export let last = true
 </script>
 
 {#if inline}
   <span>
-    {#each node as entry}
-      <ContentRenderer node={entry} inline />
+    {#each node as entry, i}
+      <ContentRenderer
+        node={entry}
+        inline
+        first={first && i === 0}
+        last={last && i === node.length - 1}
+      />
     {/each}
   </span>
 {:else}

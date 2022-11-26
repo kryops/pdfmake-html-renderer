@@ -7,6 +7,7 @@ Features
 * Added support inline style objects in style reference arrays
 * Added support for complex image definition objects
 * Added support for single-side margins (e.g. `marginLeft`)
+* Added support for `preserveTrailingSpaces`
 * Made renderer more resilient to avoid crashes for invalid content
 
 Bug Fixes
@@ -15,6 +16,7 @@ Bug Fixes
 * Fixed negative margins
 * Fixed positive margin affecting the background
 * Fixed background for lists
+* Fixed behaviour around spaces and `preserveLeadingSpaces`
 
 Internal
 

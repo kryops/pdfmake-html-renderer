@@ -1,24 +1,28 @@
 <script type="ts">
   export let node: string | number
+  export let first = true
+  export let last = true
 
-  /**
-   * - don't render empty strings
-   * - force a space when string starts with space
-   * - if string contains only spaces, only render a single forced space
-   */
-  function convertNode(n: string | number) {
-    if (typeof n !== 'string') return n;
+  function trimText() {
+    if (typeof node !== 'string') return node
+    if (!first && !last) return node
 
-    if (!n.startsWith(' ')) return n;
-    if (/^ +$/.test(n)) return '';
-    return n.slice(1);
+    let text = node
+    // we cannot just trim(), as we need to preserve newlines
+    if (first) text = text.replace(/^(\n*) +/, '$1')
+    if (last) text = text.replace(/ +$/, '')
+
+    // spaces can be used to create empty lines
+    if (node !== '' && text === '') return ' '
+
+    return text
   }
 </script>
 
-<span>{#if typeof node === 'string' && node.startsWith(' ')}&nbsp;{/if}{convertNode(node)}</span>
+<span>{trimText()}</span>
 
 <style>
   span {
-    white-space: var(--white-space, pre-line);
+    white-space: var(--white-space, pre-wrap);
   }
 </style>

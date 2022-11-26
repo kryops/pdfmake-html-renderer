@@ -12,6 +12,8 @@
   export let inToc = false
   export let inLink = false
   export let overrideStyle: string | undefined = undefined
+  export let first: boolean | undefined = undefined
+  export let last: boolean | undefined = undefined
 
   const document = getDocument()
   const nodes = getDocumentNodes()
@@ -36,7 +38,7 @@
 {:else if component}
   {#if component !== ContentTextRenderer || !('text' in node) || node.text !== ''}
     <span {style} {id}>
-      <svelte:component this={component} {node} />
+      <svelte:component this={component} {node} {inline} {first} {last} />
     </span>
   {/if}
 {:else}

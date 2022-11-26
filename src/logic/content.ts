@@ -17,8 +17,6 @@ import ContentPageReferenceRenderer from '../components/ContentPageReferenceRend
 import ContentTextReferenceRenderer from '../components/ContentTextReferenceRenderer.svelte'
 
 export function getContentRenderer(node: Content, inLink: boolean) {
-  if (!node) return null
-
   if (typeof node === 'string' || typeof node === 'number') {
     return StringRenderer
   } else if (Array.isArray(node)) {

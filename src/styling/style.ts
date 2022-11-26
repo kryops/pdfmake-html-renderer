@@ -57,10 +57,6 @@ export function getStyleDictionary(style: Style | undefined, isNode = false) {
   if (style.decorationStyle) {
     obj['text-decoration-style'] = style.decorationStyle
   }
-  if (style.preserveLeadingSpaces) {
-    obj['white-space'] = 'pre-wrap'
-    obj['--white-space'] = 'pre-wrap'
-  }
   if (style.opacity) obj.opacity = String(style.opacity)
   if (style.characterSpacing)
     obj['letter-spacing'] = style.characterSpacing + 'pt'
