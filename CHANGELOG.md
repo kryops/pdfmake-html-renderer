@@ -1,5 +1,25 @@
 # Changelog
 
+## Unreleased
+
+Features
+
+* Added support inline style objects in style reference arrays
+* Added support for complex image definition objects
+* Added support for single-side margins (e.g. `marginLeft`)
+* Made renderer more resilient to avoid crashes for invalid content
+
+Bug Fixes
+
+* Fixed rendering differences between strings/array and text/stack nodes
+* Fixed negative margins
+* Fixed positive margin affecting the background
+* Fixed background for lists
+
+Internal
+
+* Switched build tooling to Vite
+
 ## v0.1.2 - 2022-05-22
 
 Features
