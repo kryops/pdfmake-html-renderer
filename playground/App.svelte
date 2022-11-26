@@ -68,7 +68,8 @@
     <a
       class="link"
       href="https://github.com/kryops/pdfmake-html-renderer"
-      target="_blank">GitHub</a
+      target="_blank"
+      rel="noreferrer">GitHub</a
     >
   </div>
   <div class="content">
