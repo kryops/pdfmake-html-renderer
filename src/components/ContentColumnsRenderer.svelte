@@ -1,18 +1,17 @@
 <script type="ts">
   import type { ContentColumns } from 'pdfmake/interfaces'
   import ContentRenderer from './ContentRenderer.svelte'
-  import { getColumnGap, getColumnStyleString } from '../styling/column'
+  import { getColumnStyleString } from '../styling/column'
   import { getDocument } from '../context'
 
   export let node: ContentColumns
 
   const document = getDocument()
-  $: gap = getColumnGap(node, $document)
 </script>
 
-<div class="phr-container" style="margin: 0 -{gap / 2}pt">
+<div class="phr-container">
   {#each node.columns as column}
-    <div style={getColumnStyleString(column, gap)}>
+    <div style={getColumnStyleString(column)}>
       <ContentRenderer node={column} />
     </div>
   {/each}
@@ -21,5 +20,6 @@
 <style>
   .phr-container {
     display: flex;
+    margin: 0 calc(-1 * var(--column-gap));
   }
 </style>

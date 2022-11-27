@@ -17,6 +17,7 @@ Bug Fixes
 * Fixed positive margin affecting the background
 * Fixed background for lists
 * Fixed behaviour around spaces and `preserveLeadingSpaces`
+* Fixed inheritance for `leadingIndent`, `fillColor`/`fillOpacity`, `columnGap`, and `noWrap`
 
 Internal
 

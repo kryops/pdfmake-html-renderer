@@ -60,7 +60,10 @@ export function getStyleDictionary(style: Style | undefined, isNode = false) {
   if (style.opacity) obj.opacity = String(style.opacity)
   if (style.characterSpacing)
     obj['letter-spacing'] = style.characterSpacing + 'pt'
-  if (style.leadingIndent) obj['text-indent'] = style.leadingIndent + 'pt'
+  if (style.leadingIndent) {
+    obj['text-indent'] = style.leadingIndent + 'pt'
+    obj.display = 'block'
+  }
   if (style.sub || style.sup) {
     // cannot use super as font-size: 0 within array will move the baseline
     obj['vertical-align'] = style.sub ? 'sub' : 'top'
@@ -73,10 +76,22 @@ export function getStyleDictionary(style: Style | undefined, isNode = false) {
   // inherit to table cells below
   if (style.fillColor) {
     const fillColorRgb = colorToRgb(style.fillColor)
-    if (fillColorRgb) obj['--fill-color'] = fillColorRgb.join(', ')
+    if (fillColorRgb) {
+      obj['--fill-color'] = fillColorRgb.join(', ')
+      obj['--fill-opacity'] = '1'
+    }
   }
   if (style.fillOpacity !== undefined)
     obj['--fill-opacity'] = String(style.fillOpacity)
+
+  if (style.noWrap) {
+    obj['white-space'] = 'nowrap'
+    obj['--white-space'] = 'nowrap'
+  }
+
+  if (style.columnGap !== undefined) {
+    obj['--column-gap'] = String(Number(style.columnGap) / 2) + 'pt'
+  }
 
   return obj
 }

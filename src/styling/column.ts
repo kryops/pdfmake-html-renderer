@@ -9,7 +9,7 @@ import { getStyleProperty } from './inheritance'
 import { getSize } from './size'
 import { getStyleString } from './utils'
 
-export function getColumnStyleString(node: Content, columnGap: number) {
+export function getColumnStyleString(node: Content) {
   const starWidthStyle = {
     'flex-basis': 0,
     'flex-grow': 1,
@@ -18,7 +18,7 @@ export function getColumnStyleString(node: Content, columnGap: number) {
   const styles: CssDictionary = {
     'flex-grow': '0',
     'flex-shrink': '1',
-    margin: `0 ${columnGap / 2}pt`,
+    margin: `0 var(--column-gap, '0')`,
   }
 
   if (typeof node !== 'object' || Array.isArray(node)) {
@@ -35,15 +35,4 @@ export function getColumnStyleString(node: Content, columnGap: number) {
   }
 
   return getStyleString(styles)
-}
-
-export function getColumnGap(
-  node: ContentColumns,
-  document: TDocumentDefinitions
-): number {
-  // pdfmake only seems to support numbers here, despite different type definitions
-  if (node.columnGap !== undefined) return parseFloat(node.columnGap as any)
-  return parseFloat(
-    (getStyleProperty('columnGap', node.style, document) as any) ?? 0
-  )
 }

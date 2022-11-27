@@ -26,8 +26,8 @@
     "lint:tsc": "tsc --noEmit",
     "lint:svelte": "svelte-check --ignore examples",
     "lint": "run-p 'lint:*'",
-    "prepublish": "yarn lint && yarn build && yarn test",
-    "test": "jest"
+    "prepublish": "yarn lint && yarn build && jest",
+    "test": "yarn build && jest"
   },
   "dependencies": {
     "qrcode": "^1.5.1"

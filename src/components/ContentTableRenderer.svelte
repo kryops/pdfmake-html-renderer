@@ -56,6 +56,7 @@
   }
   table {
     border-collapse: collapse;
+    text-indent: inherit;
   }
 
   /* table layouts */
