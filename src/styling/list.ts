@@ -144,8 +144,10 @@ export function getOrderedListEntryStyleString(
 
   const style: CssDictionary = {}
 
-  if (entry.counter !== undefined)
-    style['--marker-number'] = JSON.stringify(String(entry.counter))
+  if (entry.counter !== undefined) {
+    style['counter-set'] = 'custom ' + entry.counter
+  }
+
   if (entry.listType) {
     style['list-style-type'] = entry.listType
     style['--list-type'] = entry.listType

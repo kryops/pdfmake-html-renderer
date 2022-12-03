@@ -51,6 +51,7 @@
   }
 
   .phr-customCounter::marker {
-    content: var(--separator1) var(--marker-number) var(--separator2);
+    content: var(--separator1) counter(custom, var(--list-type, decimal))
+      var(--separator2);
   }
 </style>

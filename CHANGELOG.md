@@ -24,6 +24,7 @@ Bug Fixes
 * Fixed edge cases around table borders
 * Fixed `pageOrientation` if the page width is larger than its height
 * Fixed printing `undefined` as watermark text
+* Fixed custom ordered list item counter with non-decimal list type
 
 Internal
 
