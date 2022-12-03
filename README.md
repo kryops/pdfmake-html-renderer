@@ -77,11 +77,12 @@ Otherwise, the renderer may use a fallback font depending on the fonts installed
 5. Integrate the component:
 
 ```js
-import { PdfmakeHtmlRenderer } from 'pdfmake-html-renderer'
+import PdfmakeHtmlRenderer from 'pdfmake-html-renderer'
 ```
 
 This library was built using the [Svelte](https://svelte.dev/) framework, which should allow integrating it into pretty much any web application:
 
+* To consume it from a [Svelte](https://svelte.dev/) application, you may have to add build tooling to support TypeScript into your pipeline, as Svelte needs to compile the components from source
 * For a [React](https://reactjs.org/) or [Vue.js](https://vuejs.org/) application, you can use an adapter like [`svelte-adapter`](https://github.com/pngwn/svelte-adapter)
 * For other frameworks or VanillaJS, have a look at the [Svelte Component API](https://svelte.dev/docs#Client-side_component_API)
 

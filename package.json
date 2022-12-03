@@ -17,6 +17,7 @@
   ],
   "main": "dist/index.js",
   "module": "dist/index.mjs",
+  "svelte": "src/PdfmakeHtmlRenderer.svelte",
   "types": "index.d.ts",
   "scripts": {
     "clean": "rimraf dist",

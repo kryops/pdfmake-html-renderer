@@ -42,3 +42,5 @@ export class PdfmakeHtmlRenderer extends SvelteComponentTyped<
   {},
   {}
 > {}
+
+export default PdfmakeHtmlRenderer

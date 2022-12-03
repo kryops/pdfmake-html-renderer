@@ -1,1 +1,4 @@
-export { default as PdfmakeHtmlRenderer } from './PdfmakeHtmlRenderer.svelte'
+import PdfmakeHtmlRenderer from './PdfmakeHtmlRenderer.svelte'
+
+export { PdfmakeHtmlRenderer }
+export default PdfmakeHtmlRenderer

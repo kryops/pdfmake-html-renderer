@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.4 - 2022-12-03
+
+* Fixed publishing of the Node.js bundle
+* Fixed usage within Svelte projects by including the sources into the published package
+
 ## v0.1.3 - 2022-12-03
 
 Features

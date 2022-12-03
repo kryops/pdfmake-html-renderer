@@ -1,5 +1,7 @@
 *
-!dist/*
+!dist/**
+# Svelte needs to compile the component from source
+!src/**
 !index.d.ts
 !server.js
 !server.d.ts
