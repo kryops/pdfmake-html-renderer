@@ -10,6 +10,7 @@ Features
 * Added support for `preserveTrailingSpaces`
 * Added support for new `pageBreak` values `...Odd` / `...Even`
 * Added support for multiple ToCs
+* Added support for `lineJoin` and `strokeOpacity` on canvas elements
 * Made renderer more resilient to avoid crashes for invalid content
 
 Bug Fixes
@@ -26,6 +27,8 @@ Bug Fixes
 * Fixed `pageOrientation` if the page width is larger than its height
 * Fixed printing `undefined` as watermark text
 * Fixed custom ordered list item counter with non-decimal list type
+* Fixed rendering a stroke for a filled canvas polyline
+* Fixed computing the height of a canvas ellipse without `r2` set
 
 Internal
 

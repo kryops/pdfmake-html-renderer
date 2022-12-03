@@ -27,7 +27,7 @@ export function getCanvasProperties(node: ContentCanvas): Properties {
         const w = element.x + element.r1
         if (w > width) width = w
 
-        const h = element.y + (element.r2 ?? 0)
+        const h = element.y + (element.r2 ?? element.r1)
         if (h > height) height = h
       } else if ('x1' in element) {
         const w = Math.max(element.x1, element.x2)
@@ -84,6 +84,14 @@ function getCanvasLineElementProperties(
     'stroke-width': (element.lineWidth ?? 1) + 'pt',
   }
 
+  if (element.strokeOpacity !== undefined) {
+    properties['stroke-opacity'] = String(element.strokeOpacity)
+  }
+
+  if (element.lineJoin) {
+    properties['stroke-linejoin'] = element.lineJoin
+  }
+
   if (element.dash && typeof element.dash === 'object') {
     const { space, length } = element.dash
     properties['stroke-dasharray'] = `${length}pt,${space ?? length}pt`
@@ -131,7 +139,6 @@ export function getCanvasEllipseProperties(
 
 export function getCanvasLineProperties(line: CanvasLine): Properties {
   const properties: Properties = {
-    stroke: '#000',
     ...getCanvasLineElementProperties(line),
     x1: line.x1 + 'pt',
     x2: line.x2 + 'pt',
@@ -155,7 +162,6 @@ export function getCanvasPolylineProperties(
   const points = line.closePath ? [...line.points, line.points[0]] : line.points
 
   const properties: Properties = {
-    stroke: '#000',
     ...getCanvasFilledElementProperties(line, index),
     ...getCanvasLineElementProperties(line),
     points: points
