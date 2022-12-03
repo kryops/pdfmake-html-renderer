@@ -41,7 +41,10 @@ export function getTableCellStyleString(
       columnWidth !== 'auto' &&
       columnWidth !== '*'
     ) {
-      style.width = getSize(columnWidth)
+      const width = getSize(columnWidth)
+      style.width = width
+      // overflow longer text
+      style['max-width'] = width
     }
   }
 
@@ -92,9 +95,7 @@ export function getTableCellStyleString(
             normalizedTable,
             horizontal ? columnIndex : rowIndex
           )
-          if (val1 != null || val2 !== null) {
-            callback(val1, val2)
-          }
+          callback(val1, val2)
         } catch {
           // do nothing
         }
@@ -102,8 +103,9 @@ export function getTableCellStyleString(
     }
 
     lineLayoutProperty('hLineWidth', true, (top, bottom) => {
-      if (top != null) style['border-top-width'] = top + 'pt'
-      if (bottom != null) style['border-bottom-width'] = bottom + 'pt'
+      // other than vLineWidth, hLineWidth treats null as 0
+      style['border-top-width'] = (top ?? 0) + 'pt'
+      style['border-bottom-width'] = (bottom ?? 0) + 'pt'
     })
     lineLayoutProperty('hLineColor', true, (top, bottom) => {
       if (top != null) style['border-top-color'] = top
@@ -141,9 +143,7 @@ export function getTableCellStyleString(
             normalizedTable,
             horizontal ? columnIndex : rowIndex
           )
-          if (value != null) {
-            callback(value)
-          }
+          callback(value)
         } catch {
           // do nothing
         }
@@ -151,16 +151,16 @@ export function getTableCellStyleString(
     }
 
     cellLayoutProperty('paddingLeft', false, value => {
-      if (value != null) style['padding-left'] = value + 'pt'
+      style['padding-left'] = (value ?? 0) + 'pt'
     })
     cellLayoutProperty('paddingRight', false, value => {
-      if (value != null) style['padding-right'] = value + 'pt'
+      style['padding-right'] = (value ?? 0) + 'pt'
     })
     cellLayoutProperty('paddingTop', true, value => {
-      if (value != null) style['padding-top'] = value + 'pt'
+      style['padding-top'] = (value ?? 0) + 'pt'
     })
     cellLayoutProperty('paddingBottom', true, value => {
-      if (value != null) style['padding-bottom'] = value + 'pt'
+      style['padding-bottom'] = (value ?? 0) + 'pt'
     })
 
     let fillColor: string | null = null
@@ -209,10 +209,10 @@ export function getTableCellStyleString(
     }
     if ('borderColor' in node && node.borderColor) {
       const [left, top, right, bottom] = node.borderColor
-      style['border-left-color'] = left
-      style['border-top-color'] = top
-      style['border-bottom-color'] = bottom
-      style['border-right-color'] = right
+      if (left) style['border-left-color'] = left
+      if (top) style['border-top-color'] = top
+      if (bottom) style['border-bottom-color'] = bottom
+      if (right) style['border-right-color'] = right
     }
   }
 

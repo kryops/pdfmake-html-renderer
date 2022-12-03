@@ -19,6 +19,8 @@ Bug Fixes
 * Fixed behaviour around spaces and `preserveLeadingSpaces`
 * Fixed inheritance for `leadingIndent`, `fillColor`/`fillOpacity`, `columnGap`, and `noWrap`
 * Fixed applying anchor styles in text references
+* Fixed `noWrap` in table cell with fixed width
+* Fixed edge cases around table borders
 
 Internal
 
