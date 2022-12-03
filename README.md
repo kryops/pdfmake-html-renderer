@@ -25,12 +25,9 @@ Playground: https://kryops.github.io/pdfmake-html-renderer/
   * `pageBreakBefore` is not implemented
   * For short content, we enforce the height of a single page (unless `mode: 'fluid'` is set)
 * **Tiling patterns** are not supported
-* **Style inheritance** may not work the same way as in `pdfmake` for every property
-  * We apply backgrounds to the container, while `pdfmake` may pass them to the children in some cases (e.g. within lists)
 * **Column widths** behave slightly differently, especially when combining `*` and `auto` widths
 * **Relative positioning** ignores the `alignment` property
 * **List markers** in ordered lists are right-aligned, while `pdfmake` aligns them to the left
-* **Empty elements** or elements containing only spaces may be rendered differently in some cases
 * **QR Codes** look slightly different to the ones created by `pdfmake`
 * **Attachments** are not displayed
 
