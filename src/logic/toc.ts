@@ -1,9 +1,14 @@
-import type { Content, ContentTocItem } from 'pdfmake/interfaces'
+import type { Content, ContentToc, ContentTocItem } from 'pdfmake/interfaces'
+import { toArray } from '../logic/utils'
 import { flattenNodes } from './content'
 
-export function getTocItemNodes(content: Content) {
+export function getTocItemNodes(tocNode: ContentToc, content: Content) {
   return flattenNodes(content).filter(
-    node => typeof node === 'object' && node && 'tocItem' in node
+    node =>
+      typeof node === 'object' &&
+      node &&
+      'tocItem' in node &&
+      toArray(node.tocItem).includes(tocNode.toc.id ?? true)
   ) as ContentTocItem[]
 }
 

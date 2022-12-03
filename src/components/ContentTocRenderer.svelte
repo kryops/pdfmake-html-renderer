@@ -17,7 +17,7 @@
       <ContentRenderer node={node.toc.title} />
     </div>
   {/if}
-  {#each getTocItemNodes($document.content) as tocItem}
+  {#each getTocItemNodes(node, $document.content) as tocItem}
     <a class="phr-tocItem" href="#{getTocTarget(tocItem, $nodes)}">
       <ContentRenderer
         node={tocItem}
