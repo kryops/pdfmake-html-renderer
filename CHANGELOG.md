@@ -18,6 +18,7 @@ Bug Fixes
 * Fixed background for lists, columns, and in `defaultStyle`
 * Fixed behaviour around spaces and `preserveLeadingSpaces`
 * Fixed inheritance for `leadingIndent`, `fillColor`/`fillOpacity`, `columnGap`, and `noWrap`
+* Fixed applying anchor styles in text references
 
 Internal
 
