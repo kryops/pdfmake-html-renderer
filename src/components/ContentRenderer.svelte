@@ -41,6 +41,8 @@
       <svelte:component this={component} {node} {inline} {first} {last} />
     </span>
   {/if}
+{:else if typeof node === 'object' && node && 'attachment' in node}
+  <!-- render nothing -->
 {:else}
   <span class="phr-unknown">Unknown: {JSON.stringify(node)}</span>
 {/if}

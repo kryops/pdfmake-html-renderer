@@ -32,6 +32,7 @@ Playground: https://kryops.github.io/pdfmake-html-renderer/
 * **List markers** in ordered lists are right-aligned, while `pdfmake` aligns them to the left
 * **Empty elements** or elements containing only spaces may be rendered differently in some cases
 * **QR Codes** look slightly different to the ones created by `pdfmake`
+* **Attachments** are not displayed
 
 ### Supported browsers
 
