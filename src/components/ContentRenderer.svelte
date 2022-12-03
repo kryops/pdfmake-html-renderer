@@ -29,7 +29,7 @@
       : undefined
 </script>
 
-{#if !inToc && typeof node === 'object' && node && 'pageBreak' in node && node.pageBreak === 'before'}
+{#if !inToc && typeof node === 'object' && node && 'pageBreak' in node && (node.pageBreak === 'before' || node.pageBreak === 'beforeEven' || node.pageBreak === 'beforeOdd')}
   <hr />
 {/if}
 
@@ -45,7 +45,7 @@
   <span class="phr-unknown">Unknown: {JSON.stringify(node)}</span>
 {/if}
 
-{#if !inToc && typeof node === 'object' && node && 'pageBreak' in node && node.pageBreak === 'after'}
+{#if !inToc && typeof node === 'object' && node && 'pageBreak' in node && (node.pageBreak === 'after' || node.pageBreak === 'afterEven' || node.pageBreak === 'afterOdd')}
   <hr />
 {/if}
 

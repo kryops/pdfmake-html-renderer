@@ -21,7 +21,8 @@ Playground: https://kryops.github.io/pdfmake-html-renderer/
   * Page references are rendered as `X`
   * `linkToPage` properties are ignored
   * The table of contents does not render page numbers
-  * Manual page breaks specified through `pageBreak: 'before'` or `pageBreak: 'after'` are rendered as a horizontal line
+  * Manual page breaks specified through `pageBreak` are rendered as a horizontal line
+  * `pageBreakBefore` is not implemented
   * For short content, we enforce the height of a single page (unless `mode: 'fluid'` is set)
 * **Tiling patterns** are not supported
 * **Style inheritance** may not work the same way as in `pdfmake` for every property

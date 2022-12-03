@@ -8,6 +8,7 @@ Features
 * Added support for complex image definition objects
 * Added support for single-side margins (e.g. `marginLeft`)
 * Added support for `preserveTrailingSpaces`
+* Added support for new `pageBreak` values `...Odd` / `...Even`,
 * Made renderer more resilient to avoid crashes for invalid content
 
 Bug Fixes
