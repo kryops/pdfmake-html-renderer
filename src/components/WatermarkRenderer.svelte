@@ -9,7 +9,7 @@
 </script>
 
 <span class="phr-watermark" style={getWatermarkStyleString(node, $document)}>
-  {text}
+  {text ?? ''}
 </span>
 
 <style>
