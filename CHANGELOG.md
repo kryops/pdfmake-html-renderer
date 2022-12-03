@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.1.3 - 2022-12-03
 
 Features
 
