@@ -10,4 +10,5 @@ export default defineConfig({
     sourcemap: true,
   },
   root: 'playground',
+  base: './',
 })
