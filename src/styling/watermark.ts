@@ -7,11 +7,7 @@ export function getWatermarkStyleString(
   node: string | Watermark,
   document: TDocumentDefinitions
 ) {
-  const pageSize = getPageSize(document)
-  const width =
-    pageSize.orientation === 'landscape' ? pageSize.height : pageSize.width
-  const height =
-    pageSize.orientation === 'landscape' ? pageSize.width : pageSize.height
+  const { width, height } = getPageSize(document)
   const defaultAngle = Math.atan(height / width)
   const defaultDiagonal = Math.sqrt(width * width + height * height)
 

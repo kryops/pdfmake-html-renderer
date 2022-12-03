@@ -77,6 +77,13 @@ export function getPageSize(document: TDocumentDefinitions): ContextPageSize {
     }
   }
 
+  if (
+    (document.pageOrientation === 'portrait' && width > height) ||
+    (document.pageOrientation === 'landscape' && width < height)
+  ) {
+    ;[width, height] = [height, width]
+  }
+
   return {
     width,
     height,
@@ -94,18 +101,15 @@ export function getPageStyleString(
   if (mode !== 'fluid') {
     const { width, height } = getPageSize(document)
 
-    const pageWidth = document.pageOrientation === 'landscape' ? height : width
-    const pageHeight = document.pageOrientation === 'landscape' ? width : height
-
-    style.width = pageWidth + 'pt'
-    style['min-height'] = pageHeight + 'pt'
+    style.width = width + 'pt'
+    style['min-height'] = height + 'pt'
 
     if (mode !== 'natural') {
       const clientWidthInPt = (clientWidth * 3) / 4
-      const zoom = clientWidthInPt / pageWidth
+      const zoom = clientWidthInPt / width
 
       if (mode === 'zoomToFit' || zoom < 1) {
-        style.zoom = String(clientWidthInPt / pageWidth)
+        style.zoom = String(clientWidthInPt / width)
       }
     }
 

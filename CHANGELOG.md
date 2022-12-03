@@ -22,6 +22,7 @@ Bug Fixes
 * Fixed applying anchor styles in text references
 * Fixed `noWrap` in table cell with fixed width
 * Fixed edge cases around table borders
+* Fixed `pageOrientation` if the page width is larger than its height
 
 Internal
 
