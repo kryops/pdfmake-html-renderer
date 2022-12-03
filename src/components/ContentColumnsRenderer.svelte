@@ -2,11 +2,8 @@
   import type { ContentColumns } from 'pdfmake/interfaces'
   import ContentRenderer from './ContentRenderer.svelte'
   import { getColumnStyleString } from '../styling/column'
-  import { getDocument } from '../context'
 
   export let node: ContentColumns
-
-  const document = getDocument()
 </script>
 
 <div class="phr-container">

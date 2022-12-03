@@ -43,6 +43,15 @@ function getContentStyleDictionary(
   )
     styles.display = 'inline-block'
 
+  // some elmeents do not apply backgrounds, only their children do
+  if (
+    Array.isArray(node) ||
+    (typeof node === 'object' &&
+      (node.stack || node.ul || node.ol || node.columns || node.qr))
+  ) {
+    styles.background = 'transparent'
+  }
+
   if (typeof node !== 'object' || !node || Array.isArray(node)) {
     return styles
   }
@@ -101,13 +110,6 @@ function getContentStyleDictionary(
         styles[`margin${suffix}`] = styles[`padding${suffix}`]
         delete styles[`padding${suffix}`]
       }
-    }
-
-    // For lists, we put their background into a CSS variable
-    // and apply it to their children instead
-    if ((node.ul || node.ol) && styles.background) {
-      styles['--list-background'] = styles.background
-      delete styles.background
     }
   }
 

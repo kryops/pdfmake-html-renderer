@@ -1,6 +1,6 @@
 import type { Style } from 'pdfmake/interfaces'
 import type { CssDictionary } from './css-dictionary'
-import { getMarginString, getMarginStringFromStyle } from './margin'
+import { getMarginStringFromStyle } from './margin'
 import { colorToRgb } from './utils'
 
 export function getStyleDictionary(style: Style | undefined, isNode = false) {
@@ -26,9 +26,7 @@ export function getStyleDictionary(style: Style | undefined, isNode = false) {
   if (style.color) obj.color = style.color
   // We ignore tiling patterns (arrays)
   if (style.background && !Array.isArray(style.background)) {
-    obj.background = style.background
-    // text would probably be better, but browser support is still bad
-    obj['background-clip'] = 'content-box'
+    obj['--background'] = style.background
   }
   const marginStyle = getMarginStringFromStyle(style)
   if (marginStyle !== undefined) {

@@ -15,7 +15,7 @@ Bug Fixes
 * Fixed rendering differences between strings/array and text/stack nodes
 * Fixed negative margins
 * Fixed positive margin affecting the background
-* Fixed background for lists
+* Fixed background for lists, columns, and in `defaultStyle`
 * Fixed behaviour around spaces and `preserveLeadingSpaces`
 * Fixed inheritance for `leadingIndent`, `fillColor`/`fillOpacity`, `columnGap`, and `noWrap`
 
