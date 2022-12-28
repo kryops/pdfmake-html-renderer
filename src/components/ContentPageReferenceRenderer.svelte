@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import type { ContentPageReference } from 'pdfmake/interfaces'
   import { getDocumentNodes } from '../context'
   import { getReferenceText } from '../logic/reference'

@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import type { ContentToc } from 'pdfmake/interfaces'
   import { getDocument, getDocumentNodes } from '../context'
   import { getTocItemNodes, getTocTarget } from '../logic/toc'

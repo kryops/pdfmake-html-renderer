@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import type { ContentQr } from 'pdfmake/interfaces'
   import { buildQrCode } from '../logic/qr'
   import { getQrStyleString } from '../styling/qr'

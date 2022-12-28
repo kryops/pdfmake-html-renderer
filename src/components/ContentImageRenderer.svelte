@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import type { ContentImage } from 'pdfmake/interfaces'
   import { getDocument } from '../context'
   import { getImageStyleString } from '../styling/image'

@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   export let node: string | number
   export let first = true
   export let last = true

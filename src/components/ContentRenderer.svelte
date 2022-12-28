@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import type { Content } from 'pdfmake/interfaces'
   import { getDocument, getDocumentNodes } from '../context'
   import { getContentRenderer } from '../logic/content'

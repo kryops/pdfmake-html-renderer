@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import type { ContentTextReference } from 'pdfmake/interfaces'
   import { getDocumentNodes } from '../context'
   import { getReferencedNode, getReferenceText } from '../logic/reference'

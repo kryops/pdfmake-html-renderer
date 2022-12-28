@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import type { ContentUnorderedList } from 'pdfmake/interfaces'
   import { getListItemsToRender } from '../logic/list'
   import {

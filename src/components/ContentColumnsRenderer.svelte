@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import type { ContentColumns } from 'pdfmake/interfaces'
   import ContentRenderer from './ContentRenderer.svelte'
   import { getColumnStyleString } from '../styling/column'

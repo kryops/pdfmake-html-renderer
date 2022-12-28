@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import pdfmake from 'pdfmake/build/pdfmake.min'
   import type { TDocumentDefinitions } from 'pdfmake/interfaces'
   import { vfs } from './pdfmake/vfs_fonts'

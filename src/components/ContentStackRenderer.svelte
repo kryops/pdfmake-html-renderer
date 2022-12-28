@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import type { ContentStack } from 'pdfmake/interfaces'
   import ContentArrayRenderer from './ContentArrayRenderer.svelte'
 

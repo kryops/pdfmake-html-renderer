@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import type { Watermark } from 'pdfmake/interfaces'
   import { getDocument } from '../context'
   import { getWatermarkStyleString } from '../styling/watermark'

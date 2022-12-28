@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import type { ContentCanvas } from 'pdfmake/interfaces'
   import {
     getCanvasEllipseProperties,

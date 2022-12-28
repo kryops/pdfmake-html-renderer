@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import type { Content, DynamicContent } from 'pdfmake/interfaces'
   import { getDocument } from '../context'
   import { getPageSize } from '../styling/page'

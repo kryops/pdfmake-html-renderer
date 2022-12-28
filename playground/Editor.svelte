@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   import type { Ace } from 'ace-builds'
 
   import 'ace-builds/src-min-noconflict/ace'
