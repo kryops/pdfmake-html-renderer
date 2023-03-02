@@ -23,7 +23,7 @@ export function getTableStyleString(node: ContentTable): string | undefined {
       style['font-size'] = '8px'
     } else
     {
-      style['table-layout'] = 'auto'
+      style['table-layout'] = 'fixed'
       style['width'] = '100%'
       style['word-wrap'] = 'break-word'
       style['font-size'] = '8px'
