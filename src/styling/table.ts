@@ -10,6 +10,7 @@ export function getTableStyleString(node: ContentTable): string | undefined {
   const style: CssDictionary = {}
 
   if (node.table.widths) {
+    console.log(node.table)
     if (node.table.widths === '*') {
       style['table-layout'] = 'fixed'
       style['width'] = '100%'
@@ -18,6 +19,14 @@ export function getTableStyleString(node: ContentTable): string | undefined {
       node.table.widths.includes('*')
     ) {
       style['width'] = '100%'
+      style['word-wrap'] = 'break-word'
+      style['font-size'] = '8px'
+    } else
+    {
+      style['table-layout'] = 'auto'
+      style['width'] = '100%'
+      style['word-wrap'] = 'break-word'
+      style['font-size'] = '8px'
     }
   }
 
@@ -174,7 +183,7 @@ export function getTableCellStyleString(
     if (fillColor) {
       const fillColorRgb = colorToRgb(fillColor)
       if (fillColorRgb) {
-        style['--fill-color'] = fillColorRgb.join(', ')
+        style['background'] = fillColorRgb.join(', ')
         style['--fill-opacity'] = '1'
       }
     }
@@ -193,7 +202,7 @@ export function getTableCellStyleString(
     if ('fillColor' in node && node.fillColor) {
       const fillColorRgb = colorToRgb(node.fillColor)
       if (fillColorRgb) {
-        style['--fill-color'] = fillColorRgb.join(', ')
+        style['background'] = fillColorRgb.join(', ')
         style['--fill-opacity'] = '1'
       }
     }

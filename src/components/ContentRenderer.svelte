@@ -44,7 +44,7 @@
 {:else if typeof node === 'object' && node && 'attachment' in node}
   <!-- render nothing -->
 {:else}
-  <span class="phr-unknown">Unknown: {JSON.stringify(node)}</span>
+  <!-- <span class="phr-unknown">Unknown: {JSON.stringify(node)}</span> -->
 {/if}
 
 {#if !inToc && typeof node === 'object' && node && 'pageBreak' in node && (node.pageBreak === 'after' || node.pageBreak === 'afterEven' || node.pageBreak === 'afterOdd')}
@@ -61,8 +61,5 @@
   hr {
     margin: 24pt 0;
   }
-
-  .phr-unknown {
-    color: red;
-  }
+  
 </style>

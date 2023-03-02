@@ -9,10 +9,12 @@ export function getImageStyleString(node: ContentImage | ContentSvg) {
   if (node.height) style.height = node.height + 'pt'
 
   if (node.fit && Array.isArray(node.fit)) {
+    console.log('nodes here', node);
     const [maxWidth, maxHeight] = node.fit
-    style['width'] = maxWidth + 'pt'
-    style['max-height'] = maxHeight + 'pt'
-    style['object-fit'] = 'contain'
+    // style['width'] = maxWidth + 'pt'
+    style['max-width'] = '100%'
+    // style['max-height'] = maxHeight + 'pt'
+    style['object-fit'] = 'cover'
     style['object-position'] = 'left top'
   } else if ('cover' in node && node.cover) {
     const { width, height, align, valign } = node.cover
@@ -21,6 +23,9 @@ export function getImageStyleString(node: ContentImage | ContentSvg) {
     if (height) style['height'] = height + 'pt'
     style['object-fit'] = 'cover'
     style['object-position'] = `${align ?? 'center'} ${valign ?? 'center'}`
+  } else
+  {
+    style['max-width'] = '100%'
   }
 
   return getStyleString(style)
