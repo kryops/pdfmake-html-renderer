@@ -6,4 +6,4 @@ const config: Config.InitialOptions = {
   transformIgnorePatterns: ['/node_modules/(?!(get-port)/)'],
 }
 
-export default config
+module.exports = config

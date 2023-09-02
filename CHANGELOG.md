@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+* **[MAYBE BREAKING]** Updated to Svelte 4
+
 ## v0.1.4 - 2022-12-03
 
 * Fixed publishing of the Node.js bundle

@@ -84,7 +84,7 @@ This library was built using the [Svelte](https://svelte.dev/) framework, which 
 
 * To consume it from a [Svelte](https://svelte.dev/) application, you may have to add build tooling to support TypeScript into your pipeline, as Svelte needs to compile the components from source
 * For a [React](https://reactjs.org/) or [Vue.js](https://vuejs.org/) application, you can use an adapter like [`svelte-adapter`](https://github.com/pngwn/svelte-adapter)
-* For other frameworks or VanillaJS, have a look at the [Svelte Component API](https://svelte.dev/docs#Client-side_component_API)
+* For other frameworks or VanillaJS, have a look at the [Svelte Component API](https://svelte.dev/docs/client-side-component-api)
 
 Check out the `/examples` folder for some example projects.
 

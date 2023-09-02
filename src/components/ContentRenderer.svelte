@@ -27,6 +27,8 @@
         ? node.id
         : undefined
       : undefined
+
+  $: neverNode = node as never
 </script>
 
 {#if !inToc && typeof node === 'object' && node && 'pageBreak' in node && (node.pageBreak === 'before' || node.pageBreak === 'beforeEven' || node.pageBreak === 'beforeOdd')}
@@ -38,7 +40,13 @@
 {:else if component}
   {#if component !== ContentTextRenderer || !('text' in node) || node.text !== ''}
     <span {style} {id}>
-      <svelte:component this={component} {node} {inline} {first} {last} />
+      <svelte:component
+        this={component}
+        node={neverNode}
+        {inline}
+        {first}
+        {last}
+      />
     </span>
   {/if}
 {:else if typeof node === 'object' && node && 'attachment' in node}

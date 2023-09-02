@@ -8,7 +8,11 @@ export async function buildQrCode(node: ContentQr): Promise<string | null> {
   return new Promise(resolve => {
     QRCode.toString(
       node.mode
-        ? [{ data: node.qr, mode: node.mode === 'octet' ? 'byte' : node.mode }]
+        ? [
+            node.mode === 'octet'
+              ? { data: new TextEncoder().encode(node.qr), mode: 'byte' }
+              : { data: node.qr, mode: node.mode },
+          ]
         : node.qr,
       {
         version: node.version,
