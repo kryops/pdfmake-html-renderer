@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.2.0 - 2023-10-04
 
 * **[MAYBE BREAKING]** Updated to Svelte 4
 
