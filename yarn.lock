@@ -2304,13 +2304,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/pdfmake@npm:^0.2.2":
-  version: 0.2.2
-  resolution: "@types/pdfmake@npm:0.2.2"
+"@types/pdfmake@npm:^0.2.5":
+  version: 0.2.5
+  resolution: "@types/pdfmake@npm:0.2.5"
   dependencies:
     "@types/node": "*"
     "@types/pdfkit": "*"
-  checksum: 155ce45c0ef36c92ed5780e0ca47225252e6d403a31031fc5e1ad2dad8c6179bc2699f07866bfe25d530b02437b34a4696b70c52888cd1e13299edea8a501484
+  checksum: 67b954c33667b6f1ae014b60e0c32bfeb0e80257d0ed95bf05c2989f66779d0b29ab4a99f3b0cbe822953873788c2ba15b62a3854759d60d38e323af162e48f5
   languageName: node
   linkType: hard
 
@@ -6626,7 +6626,7 @@ __metadata:
     "@types/jest": ^29.5.4
     "@types/jest-environment-puppeteer": ^5.0.3
     "@types/jest-image-snapshot": ^6.2.0
-    "@types/pdfmake": ^0.2.2
+    "@types/pdfmake": ^0.2.5
     "@types/qrcode": ^1.5.2
     ace-builds: ^1.24.1
     css-color-names: ^1.0.1

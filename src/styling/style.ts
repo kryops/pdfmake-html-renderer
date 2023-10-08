@@ -46,8 +46,11 @@ export function getStyleDictionary(style: Style | undefined, isNode = false) {
     }
   }
   if (style.decoration) {
-    obj['text-decoration'] =
-      style.decoration === 'lineThrough' ? 'line-through' : style.decoration
+    obj['text-decoration'] = (
+      Array.isArray(style.decoration) ? style.decoration : [style.decoration]
+    )
+      .map(it => (it === 'lineThrough' ? 'line-through' : it))
+      .join(' ')
   }
   if (style.decorationColor) {
     obj['text-decoration-color'] = style.decorationColor

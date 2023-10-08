@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+* Added support for `decoration` arrays
+
 ## v0.2.0 - 2023-10-04
 
 * **[MAYBE BREAKING]** Updated to Svelte 4
