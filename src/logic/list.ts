@@ -14,7 +14,7 @@ function isListNode(node: Content) {
 }
 
 export function getListItemsToRender<
-  T extends OrderedListElement | UnorderedListElement
+  T extends OrderedListElement | UnorderedListElement,
 >(list: T[]): Array<[T, Content | null, number]> {
   if (!Array.isArray(list)) return []
 

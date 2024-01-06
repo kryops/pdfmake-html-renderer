@@ -4,32 +4,30 @@ JavaScript/HTML renderer for [pdfmake](http://pdfmake.org) PDF document definiti
 
 Playground: https://kryops.github.io/pdfmake-html-renderer/
 
-
 ## What this library is for
 
-* **Seamlessly embedding** [pdfmake](http://pdfmake.org) document previews into web applications
-* **Fast preview** generation and incremental updates, e.g. for editor scenarios or frequent changes
-* **Lightweight** alternative to the full [pdfmake](http://pdfmake.org) when rendering document previews on the client (50-110KB minified compared to 2MB)
-
+- **Seamlessly embedding** [pdfmake](http://pdfmake.org) document previews into web applications
+- **Fast preview** generation and incremental updates, e.g. for editor scenarios or frequent changes
+- **Lightweight** alternative to the full [pdfmake](http://pdfmake.org) when rendering document previews on the client (50-110KB minified compared to 2MB)
 
 ## Limitations
 
-* **Paging** is not implemented: The document is rendered as a single page
-  * Header and footer are rendered at the very top and the very bottom
-  * Watermark and background are rendered only once at the top
-  * Elements positioned through `absolutePosition` are positioned in reference to the top
-  * Page references are rendered as `X`
-  * `linkToPage` properties are ignored
-  * The table of contents does not render page numbers
-  * Manual page breaks specified through `pageBreak` are rendered as a horizontal line
-  * `pageBreakBefore` is not implemented
-  * For short content, we enforce the height of a single page (unless `mode: 'fluid'` is set)
-* **Tiling patterns** are not supported
-* **Column widths** behave slightly differently, especially when combining `*` and `auto` widths
-* **Relative positioning** ignores the `alignment` property
-* **List markers** in ordered lists are right-aligned, while `pdfmake` aligns them to the left
-* **QR Codes** look slightly different to the ones created by `pdfmake`, and may be larger for some values of `fit`
-* **Attachments** are not displayed
+- **Paging** is not implemented: The document is rendered as a single page
+  - Header and footer are rendered at the very top and the very bottom
+  - Watermark and background are rendered only once at the top
+  - Elements positioned through `absolutePosition` are positioned in reference to the top
+  - Page references are rendered as `X`
+  - `linkToPage` properties are ignored
+  - The table of contents does not render page numbers
+  - Manual page breaks specified through `pageBreak` are rendered as a horizontal line
+  - `pageBreakBefore` is not implemented
+  - For short content, we enforce the height of a single page (unless `mode: 'fluid'` is set)
+- **Tiling patterns** are not supported
+- **Column widths** behave slightly differently, especially when combining `*` and `auto` widths
+- **Relative positioning** ignores the `alignment` property
+- **List markers** in ordered lists are right-aligned, while `pdfmake` aligns them to the left
+- **QR Codes** look slightly different to the ones created by `pdfmake`, and may be larger for some values of `fit`
+- **Attachments** are not displayed
 
 ### Supported browsers
 
@@ -50,29 +48,31 @@ npm install pdfmake-html-renderer
 2. Add the CSS file:
 
 ```js
-import 'pdfmake-html-renderer/dist/index.css';
+import 'pdfmake-html-renderer/dist/index.css'
 ```
 
 > **NOTE**: For this to work, make sure your tooling/bundler supports importing CSS files. Otherwise, you can always use a `<link rel="stylesheet">` in your HTML file.
 
 3. _(Optional)_ Import fonts:
 
-Any fonts used in your PDF document definitions, including the default [Roboto](https://fonts.google.com/specimen/Roboto) font, should be imported  using CSS [`@font-face`](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) rules.
+Any fonts used in your PDF document definitions, including the default [Roboto](https://fonts.google.com/specimen/Roboto) font, should be imported using CSS [`@font-face`](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) rules.
 
 To use the version provided by [Google Fonts](https://fonts.google.com/), add the following HTML to your `<head>`:
 
 ```html
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+  rel="stylesheet"
+/>
 ```
-
 
 Otherwise, the renderer may use a fallback font depending on the fonts installed on the machine.
 
 4. If you have a Content Security Policy, you might need to extend it:
 
-* `style-src 'unsafe-inline'` as computed styles are set inline
-* `image-src data:` for images passed as data URL
+- `style-src 'unsafe-inline'` as computed styles are set inline
+- `image-src data:` for images passed as data URL
 
 5. Integrate the component:
 
@@ -82,9 +82,9 @@ import PdfmakeHtmlRenderer from 'pdfmake-html-renderer'
 
 This library was built using the [Svelte](https://svelte.dev/) framework, which should allow integrating it into pretty much any web application:
 
-* To consume it from a [Svelte](https://svelte.dev/) application, you may have to add build tooling to support TypeScript into your pipeline, as Svelte needs to compile the components from source
-* For a [React](https://reactjs.org/) or [Vue.js](https://vuejs.org/) application, you can use an adapter like [`svelte-adapter`](https://github.com/pngwn/svelte-adapter)
-* For other frameworks or VanillaJS, have a look at the [Svelte Component API](https://svelte.dev/docs/client-side-component-api)
+- To consume it from a [Svelte](https://svelte.dev/) application, you may have to add build tooling to support TypeScript into your pipeline, as Svelte needs to compile the components from source
+- For a [React](https://reactjs.org/) or [Vue.js](https://vuejs.org/) application, you can use an adapter like [`svelte-adapter`](https://github.com/pngwn/svelte-adapter)
+- For other frameworks or VanillaJS, have a look at the [Svelte Component API](https://svelte.dev/docs/client-side-component-api)
 
 Check out the `/examples` folder for some example projects.
 
@@ -106,8 +106,8 @@ This library also provides an **experimental** server build that renders static 
 const { PdfmakeHtmlRenderer } = require('pdfmake-html-renderer/server')
 
 const { html, css } = PdfmakeHtmlRenderer.render({
-	document: { content: ['Hello, world!'] }
-});
+  document: { content: ['Hello, world!'] },
+})
 
 // html contains the HTML code
 // css.code contains the CSS code
@@ -117,10 +117,9 @@ Check out `/examples/nodejs` for an exmaple.
 
 Rendering on the server comes with some additional limitations:
 
-* QR codes are not supported
-* Zooming / shrinking the page does not work
-* Relative positioning may not always be placed correctly
-
+- QR codes are not supported
+- Zooming / shrinking the page does not work
+- Relative positioning may not always be placed correctly
 
 ## Options / Props
 

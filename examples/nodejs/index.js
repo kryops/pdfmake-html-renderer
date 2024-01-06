@@ -1,27 +1,27 @@
-const http = require('http');
+const http = require('http')
 
 const { PdfmakeHtmlRenderer } = require('../../server')
 
-const hostname = '127.0.0.1';
-const port = 3000;
+const hostname = '127.0.0.1'
+const port = 3000
 
 const { html, css } = PdfmakeHtmlRenderer.render({
-	document: {
+  document: {
     content: [
       {
         text: 'pdfmake-html-renderer NodeJS Example',
         fontSize: 18,
-        bold: true
+        bold: true,
       },
       '\n',
       'Hello, world!',
-    ]
+    ],
   },
-});
+})
 
 const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/html');
+  res.statusCode = 200
+  res.setHeader('Content-Type', 'text/html')
   res.end(`<!DOCTYPE html>
   <html lang="en">
   
@@ -35,9 +35,9 @@ const server = http.createServer((req, res) => {
   <body>
     <div>${html}</div>
   </body>
-  </html>`);
-});
+  </html>`)
+})
 
 server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+  console.log(`Server running at http://${hostname}:${port}/`)
+})

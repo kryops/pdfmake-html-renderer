@@ -1,3 +1,6 @@
 package.json
+.svelte-kit
+.yarn
 dist
-/config
+node_modules
+docs

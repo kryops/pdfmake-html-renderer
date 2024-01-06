@@ -1,9 +1,9 @@
-import toReact from 'svelte-adapter/react';
+import toReact from 'svelte-adapter/react'
 import { PdfmakeHtmlRenderer } from 'pdfmake-html-renderer'
 
-import 'pdfmake-html-renderer/dist/index.css';
+import 'pdfmake-html-renderer/dist/index.css'
 
-const Renderer = toReact(PdfmakeHtmlRenderer) 
+const Renderer = toReact(PdfmakeHtmlRenderer)
 
 function App() {
   return (
@@ -14,15 +14,15 @@ function App() {
             {
               text: 'pdfmake-html-renderer React Example',
               fontSize: 18,
-              bold: true
+              bold: true,
             },
             '\n',
             'Hello, world!',
-          ]
+          ],
         }}
       />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

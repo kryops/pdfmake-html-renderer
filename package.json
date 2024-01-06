@@ -26,7 +26,9 @@
     "docs": "vite build --config playground.vite.config.ts",
     "lint:tsc": "tsc --noEmit",
     "lint:svelte": "svelte-check --ignore examples",
+    "lint:prettier": "prettier --check --cache '**/*.{js,ts,md}'",
     "lint": "run-p 'lint:*'",
+    "prettify": "prettier --write --cache '**/*.{js,ts,md}'",
     "prepublish": "yarn lint && yarn build && jest",
     "test": "yarn build && jest"
   },
