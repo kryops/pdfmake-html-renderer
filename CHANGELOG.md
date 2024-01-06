@@ -3,6 +3,7 @@
 ## Unreleased
 
 * Added support for `decoration` arrays
+* Added support for QR code `padding`
 
 ## v0.2.0 - 2023-10-04
 
