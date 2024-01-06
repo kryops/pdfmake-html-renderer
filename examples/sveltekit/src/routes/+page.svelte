@@ -6,7 +6,7 @@
   document={{
     content: [
       {
-        text: 'pdfmake-html-renderer React Example',
+        text: 'pdfmake-html-renderer SvelteKit Example',
         fontSize: 18,
         bold: true,
       },
