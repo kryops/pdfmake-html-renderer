@@ -36,8 +36,8 @@ beforeAll(async () => {
   )
 })
 
-afterAll(async () => {
-  await new Promise(resolve => server.close(resolve))
+afterAll(() => {
+  server.close()
 })
 
 async function takeScreenshot() {

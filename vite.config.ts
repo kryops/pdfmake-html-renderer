@@ -1,12 +1,12 @@
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig, loadEnv, type UserConfig } from 'vite'
 
 // https://vitejs.dev/config/
-export default defineConfig(async ({ ssrBuild, mode }) => {
+export default defineConfig(async ({ isSsrBuild, mode }) => {
   const { svelte } = await import('@sveltejs/vite-plugin-svelte')
   const env = loadEnv(mode, process.cwd(), '')
   const isGlobal = !!env.BUILD_GLOBAL
 
-  return {
+  const config: UserConfig = {
     plugins: [
       svelte({
         compilerOptions: {
@@ -16,12 +16,12 @@ export default defineConfig(async ({ ssrBuild, mode }) => {
     ],
     build: {
       target: 'es2015',
-      outDir: ssrBuild ? 'dist/server' : 'dist',
+      outDir: isSsrBuild ? 'dist/server' : 'dist',
       emptyOutDir: !isGlobal,
       lib: {
         entry: 'src/index.ts',
         name: 'pdfmakeHtmlRenderer',
-        formats: ssrBuild ? ['cjs'] : isGlobal ? ['iife'] : ['es', 'cjs'],
+        formats: isSsrBuild ? ['cjs'] : isGlobal ? ['iife'] : ['es', 'cjs'],
         fileName(format) {
           if (format === 'iife') return 'global.js'
           if (format === 'umd') return 'umd.js'
@@ -34,4 +34,6 @@ export default defineConfig(async ({ ssrBuild, mode }) => {
       },
     },
   }
+
+  return config
 })
