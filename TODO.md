@@ -22,9 +22,8 @@
 
 ## Build
 
-- An export condition (the `svelte` property is deprecated)
-  - Evaluate using SvelteKit for packaging: https://kit.svelte.dev/docs/packaging
 - GitHub Actions
+- Evaluate switching to SvelteKit
 
 ## Tooling
 

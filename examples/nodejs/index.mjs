@@ -1,6 +1,5 @@
-const http = require('http')
-
-const { PdfmakeHtmlRenderer } = require('../../server')
+import { createServer } from 'node:http'
+import PdfmakeHtmlRenderer from 'pdfmake-html-renderer/server'
 
 const hostname = '127.0.0.1'
 const port = 3000
@@ -19,7 +18,7 @@ const { html, css } = PdfmakeHtmlRenderer.render({
   },
 })
 
-const server = http.createServer((req, res) => {
+const server = createServer((req, res) => {
   res.statusCode = 200
   res.setHeader('Content-Type', 'text/html')
   res.end(`<!DOCTYPE html>

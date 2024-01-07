@@ -1,4 +1,6 @@
 <script lang="ts">
+  import 'pdfmake-html-renderer/dist/index.css'
+
   import PdfmakeHtmlRenderer from 'pdfmake-html-renderer'
 </script>
 

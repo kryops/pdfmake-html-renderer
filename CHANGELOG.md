@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- **[MAYBE BREAKING]** Switched to `@sveltejs/package` and conditional package exports
 - Added support for `decoration` arrays
 - Added support for QR code `padding`
 

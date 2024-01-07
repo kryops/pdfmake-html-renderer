@@ -21,16 +21,20 @@ export default defineConfig(async ({ isSsrBuild, mode }) => {
       lib: {
         entry: 'src/index.ts',
         name: 'pdfmakeHtmlRenderer',
-        formats: isSsrBuild ? ['cjs'] : isGlobal ? ['iife'] : ['es', 'cjs'],
+        formats: isGlobal ? ['iife'] : ['es', 'cjs'],
         fileName(format) {
           if (format === 'iife') return 'global.js'
           if (format === 'umd') return 'umd.js'
-          if (format === 'cjs') return 'index.js'
+          if (format === 'cjs') return 'index.cjs'
           return 'index.mjs'
         },
       },
       rollupOptions: {
         external: isGlobal ? [] : ['qrcode'],
+        output: {
+          // This suppresses the warning about having both a default and a named export
+          exports: 'named',
+        },
       },
     },
   }

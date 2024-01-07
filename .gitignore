@@ -179,3 +179,4 @@ $RECYCLE.BIN/
 dist
 .snowpack
 build
+.svelte-kit
