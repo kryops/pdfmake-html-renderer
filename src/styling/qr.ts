@@ -6,7 +6,7 @@ export function getQrStyleString(node: ContentQr, src: string) {
   const style: CssDictionary = {}
 
   // we roughly try to match pdfmake's sizing
-  const defaultZoom = 4.5
+  const defaultZoom = 5
   const naturalWidth =
     parseInt(decodeURIComponent(src).match(/viewBox="0 0 (\d+) (\d+)"/i)![1]) *
     defaultZoom
