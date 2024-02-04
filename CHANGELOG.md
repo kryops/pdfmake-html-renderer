@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.3.0 - 2024-02-04
 
 - **[MAYBE BREAKING]** Switched to `@sveltejs/package` and conditional package exports
 - Added support for `decoration` arrays
