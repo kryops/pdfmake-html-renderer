@@ -1,10 +1,5 @@
 # TODO
 
-## pdfmake type definitions
-
-- DocumentDefinition language (0.2.9)
-- QRCode padding (0.2.9)
-
 ## Features
 
 - Error Boundary
