@@ -114,10 +114,16 @@
     flex-grow: 1;
   }
 
+  select {
+    font-size: 1rem;
+    padding: 0.25rem;
+  }
+
   .link {
     padding: 1rem;
     color: inherit;
     text-decoration: none;
+    cursor: pointer;
   }
 
   .link:hover {
