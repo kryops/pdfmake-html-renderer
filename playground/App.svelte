@@ -7,6 +7,8 @@
   import { examples } from './examples'
   import PdfmakePreview from './PdfmakePreview.svelte'
 
+  import { version } from '../package.json'
+
   let activeExample: Example | null = null
   let document: TDocumentDefinitions | null = null
 
@@ -46,7 +48,10 @@
 
 <div class="container">
   <div class="header">
-    <h1>pdfmake-html-renderer</h1>
+    <h1>
+      pdfmake-html-renderer &nbsp;
+      <small>v{version}</small>
+    </h1>
     <span>
       <select
         bind:value={activeExample}
