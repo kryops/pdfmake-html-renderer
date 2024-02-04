@@ -1,7 +1,7 @@
 {
   "name": "pdfmake-html-renderer",
   "version": "0.3.0",
-  "author": "Michael Strobel <michael@kryops.de>",
+  "author": "Michael Manzinger <michael@kryops.de>",
   "license": "MIT",
   "repository": {
     "type": "git",
