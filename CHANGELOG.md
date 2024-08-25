@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.1 - 2024-08-25
+
+- Fixed canvas element not displayed if its height or width is based on the line width only (#5)
+
 ## v0.3.0 - 2024-02-04
 
 - **[MAYBE BREAKING]** Switched to `@sveltejs/package` and conditional package exports

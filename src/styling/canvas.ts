@@ -12,8 +12,8 @@ import { opacityColor } from './utils'
 type Properties = Record<string, string>
 
 export function getCanvasProperties(node: ContentCanvas): Properties {
-  let width = 0
-  let height = 0
+  let width = 1
+  let height = 1
 
   if (Array.isArray(node.canvas)) {
     node.canvas.forEach(element => {
@@ -109,8 +109,8 @@ export function getCanvasRectProperties(
     ...getCanvasLineElementProperties(rect),
     x: rect.x + 'pt',
     y: rect.y + 'pt',
-    width: rect.w + 'pt',
-    height: rect.h + 'pt',
+    width: Math.max(rect.w, rect.h ? 1 : 0) + 'pt',
+    height: Math.max(rect.h, rect.w ? 1 : 0) + 'pt',
   }
 
   if (rect.r) {
