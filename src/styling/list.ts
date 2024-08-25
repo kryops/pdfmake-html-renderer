@@ -104,7 +104,7 @@ export function getOrderedListStyleString(node: ContentOrderedList): string {
   let separator2 = '.'
   if (node.separator) {
     separator2 = Array.isArray(node.separator)
-      ? node.separator[1] ?? ''
+      ? (node.separator[1] ?? '')
       : node.separator
   }
 

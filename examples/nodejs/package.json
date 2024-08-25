@@ -1,7 +1,7 @@
 {
   "name": "nodejs",
   "version": "0.0.1",
-	"private": true,
+  "private": true,
   "main": "index.cjs",
   "dependencies": {
     "pdfmake-html-renderer": "link:../.."
