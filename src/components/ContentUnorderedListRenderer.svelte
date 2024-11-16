@@ -7,9 +7,13 @@
   } from '../styling/list'
   import ContentRenderer from './ContentRenderer.svelte'
 
-  export let node: ContentUnorderedList
+  interface Props {
+    node: ContentUnorderedList;
+  }
 
-  $: entriesToRender = getListItemsToRender(node.ul)
+  let { node }: Props = $props();
+
+  let entriesToRender = $derived(getListItemsToRender(node.ul))
 </script>
 
 <ul style={getUnorderedListStyleString(node)}>

@@ -1,5 +1,10 @@
 # TODO
 
+- README
+- SSR CSS missing
+- Vanilla example
+- React example
+
 ## Features
 
 - Error Boundary

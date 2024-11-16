@@ -8,7 +8,11 @@
     getCanvasRectProperties,
   } from '../styling/canvas'
 
-  export let node: ContentCanvas
+  interface Props {
+    node: ContentCanvas;
+  }
+
+  let { node }: Props = $props();
 </script>
 
 <svg {...getCanvasProperties(node)}>
