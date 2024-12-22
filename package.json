@@ -39,7 +39,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "start": "vite --config playground.vite.config.ts",
-    "build": "vite build && vite build --ssr && BUILD_GLOBAL=true vite build && mv dist/style.css dist/index.css && rimraf dist/server/style.css && svelte-package -i src -o dist/svelte",
+    "build": "vite build && vite build --ssr && BUILD_GLOBAL=true vite build && mv dist/pdfmake-html-renderer.css dist/index.css && rimraf dist/server/pdfmake-html-renderer.css && svelte-package -i src -o dist/svelte",
     "docs": "vite build --config playground.vite.config.ts",
     "lint:tsc": "tsc --noEmit",
     "lint:svelte": "svelte-check",
@@ -60,7 +60,7 @@
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-typescript": "^7.24.7",
     "@sveltejs/package": "^2.3.7",
-    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@tsconfig/svelte": "^5.0.4",
     "@types/expect-puppeteer": "^5.0.6",
     "@types/jest": "^29.5.12",
@@ -80,13 +80,13 @@
     "publint": "^0.2.10",
     "puppeteer": "^21.7.0",
     "rimraf": "^6.0.1",
-    "svelte": "^5.0.0",
-    "svelte-check": "^4.0.0",
-    "svelte-preprocess": "^6.0.2",
+    "svelte": "^5.15.0",
+    "svelte-check": "^4.1.1",
+    "svelte-preprocess": "^6.0.3",
     "ts-node": "^10.9.2",
     "tslib": "^2.7.0",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.4"
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
   },
   "packageManager": "yarn@4.4.1"
 }
