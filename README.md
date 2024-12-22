@@ -105,12 +105,9 @@ This library also provides an **experimental** server build that renders static 
 ```js
 const { PdfmakeHtmlRenderer } = require('pdfmake-html-renderer/server')
 
-const { html, css } = PdfmakeHtmlRenderer.render({
+const { body, head } = PdfmakeHtmlRenderer.render({
   document: { content: ['Hello, world!'] },
 })
-
-// html contains the HTML code
-// css.code contains the CSS code
 ```
 
 Check out `/examples/nodejs` for an exmaple.
