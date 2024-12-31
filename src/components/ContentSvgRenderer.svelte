@@ -2,9 +2,13 @@
   import type { ContentSvg } from 'pdfmake/interfaces'
   import { getImageStyleString } from '../styling/image'
 
-  export let node: ContentSvg
+  interface Props {
+    node: ContentSvg;
+  }
 
-  $: src = 'data:image/svg+xml,' + encodeURIComponent(node.svg)
+  let { node }: Props = $props();
+
+  let src = $derived('data:image/svg+xml,' + encodeURIComponent(node.svg))
 </script>
 
 <img {src} alt="" style={getImageStyleString(node)} />

@@ -2,10 +2,19 @@
   import type { Content } from 'pdfmake/interfaces'
   import ContentRenderer from './ContentRenderer.svelte'
 
-  export let node: Content[]
-  export let inline = false
-  export let first = true
-  export let last = true
+  interface Props {
+    node: Content[];
+    inline?: boolean;
+    first?: boolean;
+    last?: boolean;
+  }
+
+  let {
+    node,
+    inline = false,
+    first = true,
+    last = true
+  }: Props = $props();
 </script>
 
 {#if inline}

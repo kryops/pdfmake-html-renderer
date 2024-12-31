@@ -2,11 +2,16 @@
   import pdfmake from 'pdfmake/build/pdfmake.min'
   import type { TDocumentDefinitions } from 'pdfmake/interfaces'
   import { vfs } from './pdfmake/vfs_fonts'
-  import { onDestroy, onMount } from 'svelte'
+  import { onDestroy } from 'svelte'
 
-  export let document: TDocumentDefinitions
+  interface Props {
+    document: TDocumentDefinitions
+  }
+
+  let { document }: Props = $props()
   let renderedDocument: TDocumentDefinitions
-  let blobUrl: string | undefined = undefined
+  let blobUrl: string | undefined = $state(undefined)
+
   let timer: any
 
   async function createPdfBlob() {
@@ -26,20 +31,18 @@
     blobUrl = URL.createObjectURL(blob)
   }
 
-  onMount(createPdfBlob)
-
-  $: (() => {
+  $effect(() => {
     document // we access the document to ensure that changes will call this function
     clearTimeout(timer)
     timer = setTimeout(createPdfBlob, 1000)
-  })()
+  })
 
   onDestroy(() => {
     if (blobUrl) URL.revokeObjectURL(blobUrl)
   })
 </script>
 
-<iframe src={blobUrl} title="pdfmake preview" />
+<iframe src={blobUrl} title="pdfmake preview"></iframe>
 
 <style>
   iframe {

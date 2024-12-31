@@ -7,9 +7,13 @@
   } from '../styling/list'
   import ContentRenderer from './ContentRenderer.svelte'
 
-  export let node: ContentOrderedList
+  interface Props {
+    node: ContentOrderedList;
+  }
 
-  $: entriesToRender = getListItemsToRender(node.ol)
+  let { node }: Props = $props();
+
+  let entriesToRender = $derived(getListItemsToRender(node.ol))
 </script>
 
 <ol

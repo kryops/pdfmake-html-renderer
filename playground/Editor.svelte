@@ -6,12 +6,18 @@
 
   import { onDestroy, onMount } from 'svelte'
 
-  export let content: string
+  interface Props {
+    content: string
+  }
 
-  let div: HTMLDivElement
-  let editor: Ace.Editor
+  let { content = $bindable() }: Props = $props()
+
+  let div: HTMLDivElement | undefined = $state()
+  let editor: Ace.Editor | undefined = $state()
 
   onMount(() => {
+    if (!div) throw new Error('Editor container not bound.')
+
     editor = ace.edit(div, {
       mode: 'ace/mode/javascript',
       value: content,
@@ -20,15 +26,17 @@
       fontSize: 16,
     })
 
-    editor.on('change', () => (content = editor.getValue()))
+    editor.on('change', () => (content = editor!.getValue()))
   })
 
-  $: if (editor && editor.getValue() !== content) editor.setValue(content)
+  $effect(() => {
+    if (editor && editor.getValue() !== content) editor.setValue(content)
+  })
 
-  onDestroy(() => editor.destroy())
+  onDestroy(() => editor?.destroy())
 </script>
 
-<div class="editor" bind:this={div} />
+<div class="editor" bind:this={div}></div>
 
 <style>
   .editor {

@@ -3,9 +3,13 @@
   import { buildQrCode } from '../logic/qr'
   import { getQrStyleString } from '../styling/qr'
 
-  export let node: ContentQr
+  interface Props {
+    node: ContentQr;
+  }
 
-  $: qrCode = buildQrCode(node)
+  let { node }: Props = $props();
+
+  let qrCode = $derived(buildQrCode(node))
 </script>
 
 {#await qrCode then src}

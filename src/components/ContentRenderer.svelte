@@ -7,28 +7,40 @@
   import ContentLinkRenderer from './ContentLinkRenderer.svelte'
   import ContentTextRenderer from './ContentTextRenderer.svelte'
 
-  export let node: Content | any
-  export let inline = false
-  export let inToc = false
-  export let inLink = false
-  export let overrideStyle: string | undefined = undefined
-  export let first: boolean | undefined = undefined
-  export let last: boolean | undefined = undefined
+  interface Props {
+    node: Content | any;
+    inline?: boolean;
+    inToc?: boolean;
+    inLink?: boolean;
+    overrideStyle?: string | undefined;
+    first?: boolean | undefined;
+    last?: boolean | undefined;
+  }
+
+  let {
+    node,
+    inline = false,
+    inToc = false,
+    inLink = false,
+    overrideStyle = undefined,
+    first = undefined,
+    last = undefined
+  }: Props = $props();
 
   const document = getDocument()
   const nodes = getDocumentNodes()
-  $: style = overrideStyle ?? getContentStyleString(node, $document, inline)
-  $: component = getContentRenderer(node, inLink)
-  $: id =
-    typeof node === 'object' && node && !inToc
+  let style = $derived(overrideStyle ?? getContentStyleString(node, $document, inline))
+  let component = $derived(getContentRenderer(node, inLink))
+  let id =
+    $derived(typeof node === 'object' && node && !inToc
       ? 'tocItem' in node
         ? getTocTarget(node, $nodes)
         : 'id' in node
         ? node.id
         : undefined
-      : undefined
+      : undefined)
 
-  $: neverNode = node as never
+  let neverNode = $derived(node as never)
 </script>
 
 {#if !inToc && typeof node === 'object' && node && 'pageBreak' in node && (node.pageBreak === 'before' || node.pageBreak === 'beforeEven' || node.pageBreak === 'beforeOdd')}
@@ -36,12 +48,13 @@
 {/if}
 
 {#if component === ContentLinkRenderer}
-  <svelte:component this={component} {node} />
+  {@const SvelteComponent = component}
+  <SvelteComponent {node} />
 {:else if component}
   {#if component !== ContentTextRenderer || !('text' in node) || node.text !== ''}
+    {@const SvelteComponent_1 = component}
     <span {style} {id}>
-      <svelte:component
-        this={component}
+      <SvelteComponent_1
         node={neverNode}
         {inline}
         {first}
