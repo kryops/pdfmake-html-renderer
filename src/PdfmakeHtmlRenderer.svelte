@@ -16,13 +16,11 @@
   let { document, pageShadow = true, mode = 'shrinkToFit' }: Props = $props()
 
   const documentStore = writable(document)
-  documentStore.set(document)
   $effect(() => {
     documentStore.set(document)
   })
 
   const nodesStore = writable(flattenNodes(document?.content))
-  documentStore.set(document)
   $effect(() => {
     nodesStore.set(flattenNodes(document?.content))
   })

@@ -53,7 +53,7 @@
     "qrcode": "^1.5.4"
   },
   "peerDependencies": {
-    "svelte": "^4.0.0"
+    "svelte": "^5.15.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
