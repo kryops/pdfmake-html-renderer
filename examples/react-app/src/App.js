@@ -1,6 +1,5 @@
 import { useRef, useEffect } from 'react'
 import { PdfmakeHtmlRenderer } from 'pdfmake-html-renderer'
-import { mount, unmount } from 'svelte'
 
 import 'pdfmake-html-renderer/dist/index.css'
 
@@ -10,7 +9,7 @@ function App() {
   useEffect(() => {
     if (!containerRef.current) return
 
-    const app = mount(PdfmakeHtmlRenderer, {
+    const app = new PdfmakeHtmlRenderer({
       target: containerRef.current,
       props: {
         document: {
@@ -28,7 +27,7 @@ function App() {
     })
 
     return () => {
-      unmount(app)
+      app.$destroy()
     }
   }, [])
 

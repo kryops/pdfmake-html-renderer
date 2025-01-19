@@ -16,10 +16,8 @@
   <body>
     <div id="main"></div>
     <script src="../../dist/global.js"></script>
-    <script type="module">
-      import { mount } from 'https://esm.sh/svelte@5?dev'
-
-      mount(pdfmakeHtmlRenderer.PdfmakeHtmlRenderer, {
+    <script>
+      new pdfmakeHtmlRenderer.PdfmakeHtmlRenderer({
         target: document.getElementById('main'),
         props: {
           document: {
