@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../../dist/index.css" />
+
+    <title>pdfmake-html-renderer Vanilla Example</title>
+  </head>
+
+  <body>
+    <div id="main"></div>
+    <script src="../../dist/global.js"></script>
+    <script type="module">
+      import { mount } from 'https://esm.sh/svelte@5?dev'
+
+      mount(pdfmakeHtmlRenderer.PdfmakeHtmlRenderer, {
+        target: document.getElementById('main'),
+        props: {
+          document: {
+            content: [
+              {
+                text: 'pdfmake-html-renderer Vanilla Example',
+                fontSize: 18,
+                bold: true,
+              },
+              '\n',
+              'Hello, world!',
+            ],
+          },
+        },
+      })
+    </script>
+  </body>
+</html>
