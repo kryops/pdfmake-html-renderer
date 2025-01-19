@@ -1,4 +1,4 @@
-import PdfmakeHtmlRenderer from './PdfmakeHtmlRenderer.svelte'
+import Root from './Root.svelte'
 
-export { PdfmakeHtmlRenderer }
-export default PdfmakeHtmlRenderer
+export { Root as PdfmakeHtmlRenderer }
+export default Root

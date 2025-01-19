@@ -4,11 +4,17 @@
   import { getPageSize } from '../styling/page'
   import ContentRenderer from './ContentRenderer.svelte'
 
-  const document = getDocument()
+  const documentStore = getDocument()
+  let document = $documentStore
 
-  export let node: Content | DynamicContent
-  $: content =
-    typeof node === 'function' ? node(1, 1, getPageSize($document)) : node
+  interface Props {
+    node: Content | DynamicContent
+  }
+
+  let { node }: Props = $props()
+  let content = $derived(
+    typeof node === 'function' ? node(1, 1, getPageSize(document)) : node
+  )
 </script>
 
 {#if content}

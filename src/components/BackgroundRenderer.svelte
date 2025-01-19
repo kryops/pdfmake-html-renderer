@@ -4,12 +4,18 @@
   import { getPageSize } from '../styling/page'
   import ContentRenderer from './ContentRenderer.svelte'
 
-  const document = getDocument()
+  const documentStore = getDocument()
+  let document = $documentStore
 
-  export let node: Content | DynamicBackground
+  interface Props {
+    node: Content | DynamicBackground
+  }
 
-  $: content =
-    typeof node === 'function' ? node(1, getPageSize($document)) : node
+  let { node }: Props = $props()
+
+  let content = $derived(
+    typeof node === 'function' ? node(1, getPageSize(document)) : node
+  )
 </script>
 
 {#if content}

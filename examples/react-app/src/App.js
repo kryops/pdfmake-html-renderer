@@ -1,15 +1,18 @@
-import toReact from 'svelte-adapter/react'
+import { useRef, useEffect } from 'react'
 import { PdfmakeHtmlRenderer } from 'pdfmake-html-renderer'
 
 import 'pdfmake-html-renderer/dist/index.css'
 
-const Renderer = toReact(PdfmakeHtmlRenderer)
-
 function App() {
-  return (
-    <div>
-      <Renderer
-        document={{
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    const app = new PdfmakeHtmlRenderer({
+      target: containerRef.current,
+      props: {
+        document: {
           content: [
             {
               text: 'pdfmake-html-renderer React Example',
@@ -19,10 +22,16 @@ function App() {
             '\n',
             'Hello, world!',
           ],
-        }}
-      />
-    </div>
-  )
+        },
+      },
+    })
+
+    return () => {
+      app.$destroy()
+    }
+  }, [])
+
+  return <div ref={containerRef} />
 }
 
 export default App

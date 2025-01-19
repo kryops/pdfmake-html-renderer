@@ -1,14 +1,19 @@
 import fs from 'fs'
 import http from 'http'
 import path from 'path'
+import { fileURLToPath } from 'url'
 import getPort from 'get-port'
 import { toMatchImageSnapshot } from 'jest-image-snapshot'
 import type { TDocumentDefinitions } from 'pdfmake/interfaces'
 
 // @ts-ignore
 import { PdfmakeHtmlRenderer } from '../dist/server'
+import { render } from 'svelte/server'
 
 expect.extend({ toMatchImageSnapshot })
+
+const __filename = fileURLToPath(import.meta.url) // get the resolved path to the file
+const __dirname = path.dirname(__filename) // get the name of the directory
 
 const js = fs.readFileSync(path.join(__dirname, '../dist/global.js'), 'utf8')
 const css = fs.readFileSync(path.join(__dirname, '../dist/index.css'), 'utf8')
@@ -46,6 +51,7 @@ async function takeScreenshot() {
   await new Promise(resolve => setTimeout(resolve, 1000))
   const screenshot = await page.screenshot({
     fullPage: true,
+    captureBeyondViewport: true,
   })
   await page.close()
   return screenshot
@@ -111,9 +117,11 @@ export async function imageSnapshot(
 export async function serverImageSnapshot(
   document: TDocumentDefinitions
 ): Promise<void> {
-  const { html, css } = PdfmakeHtmlRenderer.render({
-    document,
-    pageShadow: false,
+  const { body, head } = render(PdfmakeHtmlRenderer, {
+    props: {
+      document,
+      pageShadow: false,
+    },
   })
 
   response.mimeType = 'text/html'
@@ -124,12 +132,10 @@ export async function serverImageSnapshot(
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <style>
-      ${css.code}
-    </style>
+    ${head}
   </head>
   <body>
-    <div id="main">${html}</div>
+    <div id="main">${body}</div>
   </body>
   </html>`
 

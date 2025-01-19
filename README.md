@@ -80,11 +80,10 @@ Otherwise, the renderer may use a fallback font depending on the fonts installed
 import PdfmakeHtmlRenderer from 'pdfmake-html-renderer'
 ```
 
-This library was built using the [Svelte](https://svelte.dev/) framework, which should allow integrating it into pretty much any web application:
+This library was built using the [Svelte](https://svelte.dev/) framework:
 
 - To consume it from a [Svelte](https://svelte.dev/) application, you may have to add build tooling to support TypeScript into your pipeline, as Svelte needs to compile the components from source
-- For a [React](https://reactjs.org/) or [Vue.js](https://vuejs.org/) application, you can use an adapter like [`svelte-adapter`](https://github.com/pngwn/svelte-adapter)
-- For other frameworks or VanillaJS, have a look at the [Svelte Component API](https://svelte.dev/docs/client-side-component-api)
+  - This version was built using Svelte 5. Use version <= 0.3.1 for older versions of Svelte
 
 Check out the `/examples` folder for some example projects.
 
@@ -105,12 +104,9 @@ This library also provides an **experimental** server build that renders static 
 ```js
 const { PdfmakeHtmlRenderer } = require('pdfmake-html-renderer/server')
 
-const { html, css } = PdfmakeHtmlRenderer.render({
+const { body, head } = PdfmakeHtmlRenderer.render({
   document: { content: ['Hello, world!'] },
 })
-
-// html contains the HTML code
-// css.code contains the CSS code
 ```
 
 Check out `/examples/nodejs` for an exmaple.

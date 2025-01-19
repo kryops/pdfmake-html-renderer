@@ -11,6 +11,10 @@ export default defineConfig(async ({ isSsrBuild, mode }) => {
       svelte({
         compilerOptions: {
           cssHash: ({ hash, css }) => `phr-${hash(css)}`,
+          css: isSsrBuild ? 'injected' : undefined,
+          compatibility: {
+            componentApi: 4,
+          },
         },
       }),
     ],

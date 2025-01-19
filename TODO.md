@@ -1,9 +1,5 @@
 # TODO
 
-## Features
-
-- Error Boundary
-
 ## Robustness
 
 - Unit tests

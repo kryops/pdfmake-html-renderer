@@ -7,14 +7,23 @@
   import { flattenNodes } from './logic/content'
   import type { PageSizeMode } from './styling/page'
 
-  export let document: TDocumentDefinitions
-  export let pageShadow = true
-  export let mode: PageSizeMode = 'shrinkToFit'
+  interface Props {
+    document: TDocumentDefinitions
+    pageShadow?: boolean
+    mode?: PageSizeMode
+  }
+
+  let { document, pageShadow = true, mode = 'shrinkToFit' }: Props = $props()
 
   const documentStore = writable(document)
-  $: documentStore.set(document)
+  $effect(() => {
+    documentStore.set(document)
+  })
+
   const nodesStore = writable(flattenNodes(document?.content))
-  $: nodesStore.set(flattenNodes(document?.content))
+  $effect(() => {
+    nodesStore.set(flattenNodes(document?.content))
+  })
 
   setContext(contextKey, {
     document: documentStore,
