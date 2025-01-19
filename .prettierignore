@@ -4,3 +4,4 @@ package.json
 dist
 node_modules
 docs
+**/*.svelte
