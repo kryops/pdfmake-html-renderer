@@ -25,26 +25,28 @@
     node.layout === 'headerLineOnly' ||
     node.layout === 'lightHorizontalLines'}
 >
-  {#each node.table?.body ?? [] as tr, rowIndex}
-    <tr
-      class:phr-header={(node.table.headerRows ?? -1) === rowIndex + 1 &&
-        rowIndex < (node.table?.body.length ?? 0) - 1}
-    >
-      {#each tr as td, columnIndex}
-        {#if shouldRenderCell(td, rowIndex, columnIndex, coveredCells)}
-          <td
-            colspan={td.colSpan}
-            rowspan={td.rowSpan}
-            style={getTableCellStyleString(td, node, rowIndex, columnIndex)}
-          >
-            {#if isActualTableCell(td)}
-              <ContentRenderer node={td} />
-            {/if}
-          </td>
-        {/if}
-      {/each}
-    </tr>
-  {/each}
+  <tbody>
+    {#each node.table?.body ?? [] as tr, rowIndex}
+      <tr
+        class:phr-header={(node.table.headerRows ?? -1) === rowIndex + 1 &&
+          rowIndex < (node.table?.body.length ?? 0) - 1}
+      >
+        {#each tr as td, columnIndex}
+          {#if shouldRenderCell(td, rowIndex, columnIndex, coveredCells)}
+            <td
+              colspan={td.colSpan}
+              rowspan={td.rowSpan}
+              style={getTableCellStyleString(td, node, rowIndex, columnIndex)}
+            >
+              {#if isActualTableCell(td)}
+                <ContentRenderer node={td} />
+              {/if}
+            </td>
+          {/if}
+        {/each}
+      </tr>
+    {/each}
+  </tbody>
 </table>
 
 <style>
@@ -61,32 +63,32 @@
 
   /* table layouts */
 
-  .phr-noSidePadding > tr > td:first-child {
+  .phr-noSidePadding > tbody > tr > td:first-child {
     padding-left: 0;
   }
-  .phr-noSidePadding > tr > td:last-child {
+  .phr-noSidePadding > tbody > tr > td:last-child {
     padding-right: 0;
   }
 
-  .phr-noBorders > tr > td {
+  .phr-noBorders > tbody > tr > td {
     border: none;
   }
 
-  .phr-headerLineOnly > .phr-header {
+  .phr-headerLineOnly > tbody > .phr-header {
     border-bottom: 2pt solid #000;
   }
 
-  .phr-headerLineOnly > tr > td {
+  .phr-headerLineOnly > tbody > tr > td {
     border: none;
     padding-left: 8pt;
     padding-right: 8pt;
   }
 
-  .phr-lightHorizontalLines > .phr-header > td {
+  .phr-lightHorizontalLines > tbody > .phr-header > td {
     border-bottom-width: 2pt;
   }
 
-  .phr-lightHorizontalLines > tr > td {
+  .phr-lightHorizontalLines > tbody > tr > td {
     border-left: none;
     border-right: none;
     border-top: none;
@@ -95,11 +97,11 @@
     padding-right: 8pt;
   }
 
-  .phr-lightHorizontalLines > tr:first-child > td {
+  .phr-lightHorizontalLines > tbody > tr:first-child > td {
     border-bottom-color: #000;
   }
 
-  .phr-lightHorizontalLines > tr:last-child > td {
+  .phr-lightHorizontalLines > tbody > tr:last-child > td {
     border-bottom: none;
   }
 </style>

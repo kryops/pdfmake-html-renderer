@@ -90,8 +90,13 @@ export function flattenNodes(node: Content): Content[] {
     }
   }
 
-  if ('table' in node && node.table && typeof node.table === 'object') {
-    node.table.body?.forEach(tr => {
+  if (
+    'table' in node &&
+    node.table &&
+    typeof node.table === 'object' &&
+    Array.isArray(node.table.body)
+  ) {
+    node.table.body.forEach(tr => {
       if (!Array.isArray(tr)) return
       return tr.forEach(td => nodes.push(...flattenNodes(td as Content)))
     })

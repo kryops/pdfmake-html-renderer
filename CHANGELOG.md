@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Added support for style `extends`
+- Fixed invalid table layout styles for server-side rendering
 
 ## v0.3.2 - 2026-01-31
 
