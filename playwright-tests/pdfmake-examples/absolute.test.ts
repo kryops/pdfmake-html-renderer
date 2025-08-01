@@ -1,7 +1,12 @@
-import { beeImage } from './_images'
+import type { TDocumentDefinitions } from 'pdfmake/interfaces'
+import { test } from '@playwright/test'
+import { takeSnapshots } from '../image-snapshot'
+import { beeImage } from './images'
+
+// This example does not work too well, as the original is stretched across multiple pages
 
 // https://github.com/bpampuch/pdfmake/blob/master/examples/absolute.js
-export default `{
+const document: TDocumentDefinitions = {
   content: [
     {
       image: 'bee',
@@ -34,36 +39,15 @@ export default `{
       absolutePosition: { x: 300, y: 100 },
     },
 
-    {
-      text: 'You can put images at any position',
-      pageBreak: 'after',
-    },
+    { text: 'You can put images at any position', pageBreak: 'after' },
 
-    {
-      text: 'As',
-      absolutePosition: { x: 100, y: 100 },
-    },
-    {
-      text: 'well',
-      absolutePosition: { x: 150, y: 150 },
-    },
-    {
-      text: 'as',
-      absolutePosition: { x: 200, y: 200 },
-    },
-    {
-      text: 'text',
-      absolutePosition: { x: 250, y: 150 },
-    },
-    {
-      text: '!!!',
-      absolutePosition: { x: 300, y: 100 },
-      pageBreak: 'after',
-    },
+    { text: 'As', absolutePosition: { x: 100, y: 100 } },
+    { text: 'well', absolutePosition: { x: 150, y: 150 } },
+    { text: 'as', absolutePosition: { x: 200, y: 200 } },
+    { text: 'text', absolutePosition: { x: 250, y: 150 } },
+    { text: '!!!', absolutePosition: { x: 300, y: 100 }, pageBreak: 'after' },
 
-    {
-      text: 'And this is a table on top of an image at x:100 y:100',
-    },
+    { text: 'And this is a table on top of an image at x:100 y:100' },
     {
       image: 'bee',
       width: 100,
@@ -80,9 +64,7 @@ export default `{
             {
               stack: [
                 "Let's try an unordered list",
-                {
-                  ul: ['item 1', 'item 2'],
-                },
+                { ul: ['item 1', 'item 2'] },
               ],
             },
             /* a nested table will appear here as soon as I fix a bug */
@@ -101,7 +83,7 @@ export default `{
             {
               text: [
                 'Inlines can be ',
-                { text: 'styled\\n', italics: true },
+                { text: 'styled\n', italics: true },
                 { text: 'easily as everywhere else', fontSize: 10 },
               ],
             },
@@ -110,27 +92,15 @@ export default `{
       },
     },
   ],
-  images: {
-    bee: '${beeImage}',
-  },
+  images: { bee: beeImage },
   styles: {
-    header: {
-      fontSize: 18,
-      bold: true,
-      margin: [0, 0, 0, 10],
-    },
-    subheader: {
-      fontSize: 16,
-      bold: true,
-      margin: [0, 10, 0, 5],
-    },
-    tableExample: {
-      margin: [0, 5, 0, 15],
-    },
-    tableHeader: {
-      bold: true,
-      fontSize: 13,
-      color: 'black',
-    },
+    header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
+    subheader: { fontSize: 16, bold: true, margin: [0, 10, 0, 5] },
+    tableExample: { margin: [0, 5, 0, 15] },
+    tableHeader: { bold: true, fontSize: 13, color: 'black' },
   },
-}`
+}
+
+test('pdfmake/absolute', async ({ page }) => {
+  await takeSnapshots(document, page)
+})
