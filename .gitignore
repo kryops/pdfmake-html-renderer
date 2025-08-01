@@ -180,3 +180,9 @@ dist
 .snowpack
 build
 .svelte-kit
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
