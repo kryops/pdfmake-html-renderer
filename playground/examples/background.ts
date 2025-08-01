@@ -1,4 +1,4 @@
-import { beeImage } from '../../test/pdfmake-examples/images'
+import { beeImage } from './_images'
 
 // https://github.com/bpampuch/pdfmake/blob/master/examples/background.js
 export default `{

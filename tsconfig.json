@@ -12,12 +12,7 @@
     "types": [
       "svelte",
       "vite/client",
-      "ace-builds",
-      "jest",
-      "jest-image-snapshot",
-      "puppeteer",
-      "jest-environment-puppeteer",
-      "expect-puppeteer"
+      "ace-builds"
     ]
   },
   "exclude": [
