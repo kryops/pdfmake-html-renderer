@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/playwright:v1.57.0-noble
 
 WORKDIR /workspace
 
-RUN corepack enable && corepack prepare yarn@4.9.2 --activate || true
+RUN corepack enable && corepack prepare yarn@4.12.0 --activate || true
 
 COPY package.json yarn.lock playwright.config.ts ./
 RUN yarn install
