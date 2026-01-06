@@ -10,7 +10,7 @@ const document: TDocumentDefinitions = {
         body: [
           ['One', 'Two'],
           // incomplete borderColor does not override v/hLineColor
-          [{ text: 'Three', borderColor: ['yellow'] }, 'Four'],
+          [{ text: 'Three', borderColor: ['yellow'] as any }, 'Four'],
           [{ text: 'Overflowing Text', noWrap: true }, {}],
         ],
       },
