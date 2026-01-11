@@ -235,7 +235,7 @@ export default `{
     {
       color: 'blue',
       markerColor: 'red',
-      ul: ['item 1', 'item 2', 'item 3'],
+      ul: ['item 1', 'item 2', { text: 'item 3 with custom marker color', markerColor: 'lime' }],
     },
     { text: '\\n\\nColored ordered list', style: 'header' },
     {
@@ -246,7 +246,7 @@ export default `{
     {
       color: 'blue',
       markerColor: 'red',
-      ol: ['item 1', 'item 2', 'item 3'],
+      ol: ['item 1', 'item 2', { text: 'item 3 with custom marker color', markerColor: 'lime' }],
     },
     { text: '\\n\\nOrdered list - type: lower-alpha', style: 'header' },
     {

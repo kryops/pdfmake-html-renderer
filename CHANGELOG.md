@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Added support for `wordBreak: 'break-all'` (#9)
+- Added support for `markerColor` in list items
 
 ## v0.3.1 - 2024-08-25
 

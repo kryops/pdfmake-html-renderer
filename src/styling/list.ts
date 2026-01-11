@@ -23,11 +23,20 @@ export function getUnorderedListStyleString(
 export function getUnorderedListEntryStyleString(
   entry: UnorderedListElement
 ): string | undefined {
-  if (!entry.listType) return undefined
+  // @ts-expect-error need to add markerColor to @types/pdfmake
+  if (!entry.listType && !entry.markerColor) return undefined
 
-  return getStyleString({
-    'list-style-type': entry.listType,
-  })
+  const style: CssDictionary = {}
+
+  if (entry.listType) {
+    style['list-style-type'] = entry.listType
+  }
+
+  if ('markerColor' in entry && entry.markerColor) {
+    style['--marker-color'] = entry.markerColor
+  }
+
+  return getStyleString(style)
 }
 
 const romanChars: { [key: number]: string | undefined } = {
@@ -140,7 +149,9 @@ export function getOrderedListStyleString(node: ContentOrderedList): string {
 export function getOrderedListEntryStyleString(
   entry: OrderedListElement
 ): string | undefined {
-  if (entry.counter === undefined && !entry.listType) return undefined
+  // @ts-expect-error need to add markerColor to @types/pdfmake
+  if (entry.counter === undefined && !entry.listType && !entry.markerColor)
+    return undefined
 
   const style: CssDictionary = {}
 
@@ -156,6 +167,10 @@ export function getOrderedListEntryStyleString(
       style['--separator1'] = "''"
       style['--separator2'] = "''"
     }
+  }
+
+  if ('markerColor' in entry && entry.markerColor) {
+    style['--marker-color'] = entry.markerColor
   }
 
   return getStyleString(style)
