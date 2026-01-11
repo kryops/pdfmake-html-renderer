@@ -4,6 +4,7 @@
 
 - Added support for `wordBreak: 'break-all'` (#9)
 - Added support for `markerColor` in list items
+- Fixed invalid HTML nesting for server-side rendering leading to incorrect styles
 
 ## v0.3.1 - 2024-08-25
 

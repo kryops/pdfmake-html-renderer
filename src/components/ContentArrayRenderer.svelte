@@ -9,7 +9,7 @@
 </script>
 
 {#if inline}
-  <span>
+  <div class="phr-inline">
     {#each node as entry, i}
       <ContentRenderer
         node={entry}
@@ -18,25 +18,27 @@
         last={last && i === node.length - 1}
       />
     {/each}
-  </span>
+  </div>
 {:else}
   {#each node as entry}
-    <p>
+    <div class="phr-block">
       <ContentRenderer node={entry} />
-    </p>
+    </div>
   {/each}
 {/if}
 
 <style>
-  span {
+  .phr-inline {
+    display: inline;
     /* Prevent whitespace between inline nodes */
     font-size: 0;
   }
-  span > :global(*) {
+  .phr-inline > :global(*) {
     font-size: var(--font-size);
   }
 
-  p {
+  .phr-block {
+    display: block;
     margin: 0;
   }
 </style>

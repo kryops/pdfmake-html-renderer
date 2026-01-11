@@ -24,8 +24,8 @@
       ? 'tocItem' in node
         ? getTocTarget(node, $nodes)
         : 'id' in node
-        ? node.id
-        : undefined
+          ? node.id
+          : undefined
       : undefined
 
   $: neverNode = node as never
@@ -39,7 +39,7 @@
   <svelte:component this={component} {node} />
 {:else if component}
   {#if component !== ContentTextRenderer || !('text' in node) || node.text !== ''}
-    <span {style} {id}>
+    <div {style} {id}>
       <svelte:component
         this={component}
         node={neverNode}
@@ -47,7 +47,7 @@
         {first}
         {last}
       />
-    </span>
+    </div>
   {/if}
 {:else if typeof node === 'object' && node && 'attachment' in node}
   <!-- render nothing -->
@@ -60,7 +60,8 @@
 {/if}
 
 <style>
-  span {
+  div {
+    display: inline;
     background: var(--background);
     /* text would probably be better, but browser support is still bad */
     background-clip: content-box;
