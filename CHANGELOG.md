@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added support for `wordBreak: 'break-all'` (#9)
+
 ## v0.3.1 - 2024-08-25
 
 - Fixed canvas element not displayed if its height or width is based on the line width only (#5)

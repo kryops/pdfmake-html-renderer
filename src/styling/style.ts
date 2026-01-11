@@ -94,5 +94,9 @@ export function getStyleDictionary(style: Style | undefined, isNode = false) {
     obj['--column-gap'] = String(Number(style.columnGap) / 2) + 'pt'
   }
 
+  if ('wordBreak' in style && style.wordBreak === 'break-all') {
+    obj['word-break'] = 'break-all'
+  }
+
   return obj
 }

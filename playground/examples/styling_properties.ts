@@ -53,5 +53,22 @@ export default `{
         ' World',
       ],
     },
+    {
+      text: 'Customize word break:',
+      pageBreak: 'before'
+    },
+    {
+      text: 'DefaultLine\\n"BreakBehaviour" "ForATextWithVeryVery" "LongLongWords"',
+      fontSize: 30,
+    },
+    {
+      text: '\\n\\n',
+      fontSize: 30,
+    },
+    {
+      text: 'BreakAll\\n"LineBreakBehaviour" "ForATextWithVeryVery" "LongLongWords"',
+      fontSize: 30,
+      wordBreak: 'break-all',
+    }
   ],
 }`
