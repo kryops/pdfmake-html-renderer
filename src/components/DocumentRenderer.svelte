@@ -7,7 +7,6 @@
   } from '../styling/page'
   import type { PageSizeMode } from '../styling/page'
   import HeaderFooterRenderer from './HeaderFooterRenderer.svelte'
-  import { getFooterHeight, getHeaderHeight } from '../styling/header'
   import BackgroundRenderer from './BackgroundRenderer.svelte'
   import WatermarkRenderer from './WatermarkRenderer.svelte'
 
@@ -25,23 +24,25 @@
     style={getPageStyleString(document, clientWidth, mode)}
   >
     {#if document.background}
-      <div class="phr-backgroundLayer">
-        <BackgroundRenderer node={document.background} />
-      </div>
+      <BackgroundRenderer node={document.background} />
     {/if}
     <div class="phr-pageContent" style={getPageContentStyleString(document)}>
       {#if document.header}
-        <div class="phr-header" style="height: {getHeaderHeight(document)}">
-          <HeaderFooterRenderer node={document.header} />
-        </div>
+        <HeaderFooterRenderer
+          type="header"
+          node={document.header}
+          pageMargins={document.pageMargins}
+        />
       {/if}
       {#if document.content}
         <ContentRenderer node={document.content} />
       {/if}
       {#if document.footer}
-        <div class="phr-footer" style="height: {getFooterHeight(document)}">
-          <HeaderFooterRenderer node={document.footer} />
-        </div>
+        <HeaderFooterRenderer
+          type="footer"
+          node={document.footer}
+          pageMargins={document.pageMargins}
+        />
       {/if}
       {#if document.watermark}
         <WatermarkRenderer node={document.watermark} />
@@ -74,29 +75,9 @@
   .phr-pageShadow {
     box-shadow: 0 0 2em #333;
   }
-  .phr-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    overflow: hidden;
-  }
   .phr-pageContent {
     position: relative;
     flex: 1 1 auto;
     z-index: 1;
-  }
-  .phr-footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    overflow: hidden;
-  }
-  .phr-backgroundLayer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
   }
 </style>

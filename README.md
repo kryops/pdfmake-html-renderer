@@ -13,8 +13,8 @@ Playground: https://kryops.github.io/pdfmake-html-renderer/
 ## Limitations
 
 - **Paging** is not implemented: The document is rendered as a single page
-  - Header and footer are rendered at the very top and the very bottom
-  - Watermark and background are rendered only once at the top
+  - Header and footer are rendered at the very top and the very bottom (for sections only if they specify their own)
+  - Watermark and background are rendered only once at the top (for sections only if they specify their own)
   - Elements positioned through `absolutePosition` are positioned in reference to the top
   - Page references are rendered as `X`
   - `linkToPage` properties are ignored
@@ -28,6 +28,9 @@ Playground: https://kryops.github.io/pdfmake-html-renderer/
 - **List markers** in ordered lists are right-aligned, while `pdfmake` aligns them to the left
 - **QR Codes** look slightly different to the ones created by `pdfmake`, and may be larger for some values of `fit`
 - **Attachments** are not displayed
+- **Sections** support is limited:
+  - Sections do not support different page sizes
+  - Copying properties of the previous section via `'inherit'` is not supported
 
 ### Supported browsers
 

@@ -13,5 +13,16 @@
 </script>
 
 {#if content}
-  <ContentRenderer node={content} />
+  <div class="phr-backgroundLayer">
+    <ContentRenderer node={content} />
+  </div>
 {/if}
+
+<style>
+  .phr-backgroundLayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+</style>

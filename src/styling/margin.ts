@@ -17,6 +17,23 @@ export function getMarginString(
   return margins + 'pt'
 }
 
+export function getNegativeHorizontalMarginString(
+  margins: Margins | undefined,
+  defaultMargin = 0
+): string {
+  if (!margins) return `0 ${-defaultMargin}pt`
+  if (Array.isArray(margins)) {
+    if (margins.length >= 4) {
+      const [left, top, right, bottom] = margins
+      return [0, right, 0, left].map(it => -(it ?? 0) + 'pt').join(' ')
+    } else {
+      const [horizontal, vertical] = margins
+      return [0, horizontal].map(it => -(it ?? 0) + 'pt').join(' ')
+    }
+  }
+  return margins + 'pt'
+}
+
 export function getMarginStringFromStyle(style: Style): string | undefined {
   if (style.margin !== undefined) {
     return getMarginString(style.margin)

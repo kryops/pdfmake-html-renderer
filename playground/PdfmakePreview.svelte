@@ -1,7 +1,7 @@
 <script lang="ts">
   import pdfmake from 'pdfmake/build/pdfmake.min'
+  import vfs from 'pdfmake/build/vfs_fonts'
   import type { TDocumentDefinitions } from 'pdfmake/interfaces'
-  import { vfs } from './pdfmake/vfs_fonts'
   import { onDestroy, onMount } from 'svelte'
 
   export let document: TDocumentDefinitions
@@ -13,16 +13,14 @@
     if (renderedDocument === document) return
     renderedDocument = document
 
-    pdfmake.vfs = vfs
+    pdfmake.addVirtualFileSystem(vfs)
 
     if (blobUrl) {
       URL.revokeObjectURL(blobUrl)
       blobUrl = undefined
     }
     const pdfContent = pdfmake.createPdf(document)
-    const blob = await new Promise<Blob>(resolve => {
-      pdfContent.getBlob(resolve)
-    })
+    const blob = await pdfContent.getBlob()
     blobUrl = URL.createObjectURL(blob)
   }
 

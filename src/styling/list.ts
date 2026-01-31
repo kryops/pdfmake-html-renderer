@@ -23,7 +23,6 @@ export function getUnorderedListStyleString(
 export function getUnorderedListEntryStyleString(
   entry: UnorderedListElement
 ): string | undefined {
-  // @ts-expect-error need to add markerColor to @types/pdfmake
   if (!entry.listType && !entry.markerColor) return undefined
 
   const style: CssDictionary = {}
@@ -32,7 +31,7 @@ export function getUnorderedListEntryStyleString(
     style['list-style-type'] = entry.listType
   }
 
-  if ('markerColor' in entry && entry.markerColor) {
+  if (entry.markerColor) {
     style['--marker-color'] = entry.markerColor
   }
 
@@ -149,7 +148,6 @@ export function getOrderedListStyleString(node: ContentOrderedList): string {
 export function getOrderedListEntryStyleString(
   entry: OrderedListElement
 ): string | undefined {
-  // @ts-expect-error need to add markerColor to @types/pdfmake
   if (entry.counter === undefined && !entry.listType && !entry.markerColor)
     return undefined
 
@@ -169,7 +167,7 @@ export function getOrderedListEntryStyleString(
     }
   }
 
-  if ('markerColor' in entry && entry.markerColor) {
+  if (entry.markerColor) {
     style['--marker-color'] = entry.markerColor
   }
 

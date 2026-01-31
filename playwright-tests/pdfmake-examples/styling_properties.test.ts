@@ -60,7 +60,6 @@ const document: TDocumentDefinitions = {
     {
       text: 'BreakAll\n"LineBreakBehaviour" "ForATextWithVeryVery" "LongLongWords"',
       fontSize: 30,
-      // @ts-expect-error need to add to @types/pdfmake
       wordBreak: 'break-all',
     },
   ],
