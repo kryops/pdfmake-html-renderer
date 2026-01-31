@@ -43,7 +43,7 @@ function getContentStyleDictionary(
   )
     styles.display = 'inline-block'
 
-  // some elmeents do not apply backgrounds, only their children do
+  // some elements do not apply backgrounds, only their children do
   if (
     Array.isArray(node) ||
     (typeof node === 'object' &&
@@ -68,7 +68,7 @@ function getContentStyleDictionary(
     }
   }
 
-  if (node.style) {
+  if ('style' in node && node.style) {
     if (typeof node.style === 'string') {
       applyBaseStyle(node.style)
     } else if (Array.isArray(node.style)) {
@@ -86,14 +86,22 @@ function getContentStyleDictionary(
       padding: '0',
     })
   } else {
-    if (node.absolutePosition && typeof node.absolutePosition === 'object') {
+    if (
+      'absolutePosition' in node &&
+      node.absolutePosition &&
+      typeof node.absolutePosition === 'object'
+    ) {
       Object.assign(styles, {
         position: 'absolute',
         left: `${node.absolutePosition.x ?? 0}pt`,
         top: `${node.absolutePosition.y ?? 0}pt`,
       })
     }
-    if (node.relativePosition && typeof node.relativePosition === 'object') {
+    if (
+      'relativePosition' in node &&
+      node.relativePosition &&
+      typeof node.relativePosition === 'object'
+    ) {
       // relative positioning removes the space taken.
       // it can be combined with absolute positioning
       Object.assign(styles, {

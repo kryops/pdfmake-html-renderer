@@ -1,12 +1,24 @@
-import type { Style } from 'pdfmake/interfaces'
+import type { Content, Style, DecorationStyle } from 'pdfmake/interfaces'
 import type { CssDictionary } from './css-dictionary'
 import { getMarginStringFromStyle } from './margin'
 import { colorToRgb } from './utils'
 
-export function getStyleDictionary(style: Style | undefined, isNode = false) {
+export function getStyleDictionary(
+  input: Style | Content | undefined,
+  isNode = false
+) {
   const obj: CssDictionary = {}
 
-  if (!style || typeof style !== 'object') return obj
+  if (
+    !input ||
+    typeof input !== 'object' ||
+    Array.isArray(input) ||
+    // section nodes do not support style
+    ('section' in input && input.section)
+  )
+    return obj
+
+  const style = input as Style
 
   if (style.font)
     obj['font-family'] = style.font + ', Roboto, Helvetica, sans-serif'
@@ -57,6 +69,21 @@ export function getStyleDictionary(style: Style | undefined, isNode = false) {
   }
   if (style.decorationStyle) {
     obj['text-decoration-style'] = style.decorationStyle
+  }
+  if (style.decorationThickness) {
+    // only an approximation, but good enough
+    const factorByStyle: Record<DecorationStyle, number> = {
+      solid: 1,
+      dashed: 0.5,
+      dotted: 0.5,
+      double: 0.5,
+      wavy: 0.333,
+    }
+    const factor =
+      (style.decorationStyle && factorByStyle[style.decorationStyle]) ||
+      factorByStyle.solid
+
+    obj['text-decoration-thickness'] = style.decorationThickness * factor + 'pt'
   }
   if (style.opacity) obj.opacity = String(style.opacity)
   if (style.characterSpacing)

@@ -15,6 +15,7 @@ import ContentCanvasRenderer from '../components/ContentCanvasRenderer.svelte'
 import ContentTocRenderer from '../components/ContentTocRenderer.svelte'
 import ContentPageReferenceRenderer from '../components/ContentPageReferenceRenderer.svelte'
 import ContentTextReferenceRenderer from '../components/ContentTextReferenceRenderer.svelte'
+import ContentSectionRenderer from '../components/ContentSectionRenderer.svelte'
 
 export function getContentRenderer(node: Content, inLink: boolean) {
   if (typeof node === 'string' || typeof node === 'number') {
@@ -28,7 +29,9 @@ export function getContentRenderer(node: Content, inLink: boolean) {
 
     if (typeof node !== 'object' || !node) return null
 
-    if ('columns' in node && Array.isArray(node.columns)) {
+    if ('section' in node && node.section) {
+      return ContentSectionRenderer
+    } else if ('columns' in node && Array.isArray(node.columns)) {
       return ContentColumnsRenderer
     } else if ('stack' in node && Array.isArray(node.stack)) {
       return ContentStackRenderer

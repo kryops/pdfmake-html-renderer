@@ -9,32 +9,34 @@
 
   const document = getDocument()
   const nodes = getDocumentNodes()
+
+  $: items = getTocItemNodes(node, $document.content)
 </script>
 
-<div>
-  {#if node.toc.title}
-    <div class="phr-title">
-      <ContentRenderer node={node.toc.title} />
-    </div>
-  {/if}
-  {#each getTocItemNodes(node, $document.content) as tocItem}
-    <a class="phr-tocItem" href="#{getTocTarget(tocItem, $nodes)}">
-      <ContentRenderer
-        node={tocItem}
-        inToc
-        overrideStyle={getTocItemStyleString(tocItem, node, $document)}
-      />
-    </a>
-  {/each}
-</div>
+{#if !node.toc.hideEmpty || items.length > 0}
+  <div>
+    {#if node.toc.title}
+      <div>
+        <ContentRenderer node={node.toc.title} />
+      </div>
+    {/if}
+    {#each getTocItemNodes(node, $document.content) as tocItem}
+      <a class="phr-tocItem" href="#{getTocTarget(tocItem, $nodes)}">
+        <ContentRenderer
+          node={tocItem}
+          inToc
+          overrideStyle={getTocItemStyleString(tocItem, node, $document)}
+        />
+      </a>
+    {/each}
+  </div>
+{/if}
 
 <style>
-  .phr-title {
-    margin-bottom: 12pt;
-  }
   .phr-tocItem {
     display: block;
-    margin: 6pt 0;
+    margin: 0;
+    margin-bottom: 4pt;
     text-decoration: unset;
     color: unset;
   }

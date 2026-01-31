@@ -3,9 +3,4 @@ declare module 'qrcode/build/qrcode.min' {
   export default qrcode
 }
 
-declare module 'pdfmake/build/pdfmake.min' {
-  const pdfmake: typeof import('pdfmake/build/pdfmake')
-  export default pdfmake
-}
-
 declare var ace: typeof import('ace-builds')

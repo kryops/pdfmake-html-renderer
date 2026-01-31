@@ -63,7 +63,6 @@
   div {
     display: inline;
     background: var(--background);
-    /* text would probably be better, but browser support is still bad */
     background-clip: content-box;
   }
 

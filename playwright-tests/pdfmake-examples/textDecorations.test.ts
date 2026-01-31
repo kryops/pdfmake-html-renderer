@@ -48,6 +48,35 @@ ct.push({
     },
   ],
 })
+ct.push(' ')
+ct.push({
+  columns: [
+    {
+      text: 'Dashed style',
+      decoration: 'underline',
+      decorationStyle: 'dashed',
+      decorationThickness: 3,
+    },
+    {
+      text: 'Dotted style',
+      decoration: 'underline',
+      decorationStyle: 'dotted',
+      decorationThickness: 3,
+    },
+    {
+      text: 'Double style',
+      decoration: 'underline',
+      decorationStyle: 'double',
+      decorationThickness: 3,
+    },
+    {
+      text: 'Wavy style',
+      decoration: 'underline',
+      decorationStyle: 'wavy',
+      decorationThickness: 3,
+    },
+  ],
+})
 
 const document: TDocumentDefinitions = { content: ct }
 
