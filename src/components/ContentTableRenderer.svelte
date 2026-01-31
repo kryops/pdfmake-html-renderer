@@ -49,7 +49,7 @@
 
 <style>
   td {
-    border: 1px solid #000;
+    border: 1pt solid #000;
     padding: 2pt 4pt;
     vertical-align: top;
     background: rgba(var(--fill-color), var(--fill-opacity, 0));
