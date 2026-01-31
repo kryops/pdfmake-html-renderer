@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.3.2 - 2026-01-31
 
 - Added support for `section` elements
 - Added support for `wordBreak: 'break-all'` (#9)
