@@ -1,6 +1,11 @@
-import type { Content, Style, DecorationStyle } from 'pdfmake/interfaces'
+import type {
+  Content,
+  Style,
+  DecorationStyle,
+  StyleDictionary,
+} from 'pdfmake/interfaces'
 import type { CssDictionary } from './css-dictionary'
-import { getMarginStringFromStyle } from './margin'
+import { getInheritedMarginOverride, getMarginStringFromStyle } from './margin'
 import { colorToRgb } from './utils'
 
 export function getStyleDictionary(
@@ -126,4 +131,44 @@ export function getStyleDictionary(
   }
 
   return obj
+}
+
+export function getEffectiveNamedStyle(
+  styleDictionary: StyleDictionary,
+  name: string,
+  seenStyles?: Set<string>
+): Style {
+  const style = styleDictionary[name]
+
+  if (!style || seenStyles?.has(name)) return {}
+
+  if (
+    style.extends === undefined ||
+    (Array.isArray(style.extends) && style.extends.length === 0)
+  ) {
+    return style
+  }
+
+  const { extends: originalExtends, ...actualStyle } = style
+  const extendsArray = Array.isArray(originalExtends)
+    ? originalExtends
+    : [originalExtends]
+
+  const baseStyles = extendsArray.map(baseStyleName =>
+    getEffectiveNamedStyle(
+      styleDictionary,
+      baseStyleName,
+      // For margins, pdfmake uses a global set that ignores overrides if the style has been seen before
+      new Set([...(seenStyles ?? []), name])
+    )
+  )
+
+  return [...baseStyles, actualStyle].reduce((acc, styleOverride) => {
+    const margins = getInheritedMarginOverride(acc, styleOverride)
+    return {
+      ...acc,
+      ...styleOverride,
+      ...(margins ? { margin: margins } : {}),
+    }
+  }, {} as Style)
 }

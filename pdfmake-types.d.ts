@@ -10,5 +10,7 @@ declare module 'pdfmake/interfaces' {
 
   interface Style {
     decorationThickness?: number | undefined
+    // cannot actually exist on all styles, only on the ones in the styles dictionary
+    extends?: string | string[] | undefined
   }
 }

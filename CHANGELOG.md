@@ -1,11 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- Added support for style `extends`
+
 ## v0.3.2 - 2026-01-31
 
 - Added support for `section` elements
-- Added support for `wordBreak: 'break-all'` (#9)
+- Added support for `wordBreak: 'break-all'`
 - Added support for `markerColor` in list items
-- Added support for `SVGElement` values in `svg` elements (#10)
+- Added support for `SVGElement` values in `svg` elements
 - Added support for ToC `hideEmpty`, `sortBy`, `sortLocale`
 - Added support for `decorationThickness`
 - Fixed invalid HTML nesting for server-side rendering leading to incorrect styles

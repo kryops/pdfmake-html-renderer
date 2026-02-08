@@ -50,3 +50,32 @@ export function getMarginStringFromStyle(style: Style): string | undefined {
 
   return undefined
 }
+
+function normalizeMargins(margins: Margins): [number, number, number, number] {
+  if (Array.isArray(margins)) {
+    if (margins.length >= 4) {
+      const [left, top, right, bottom] = margins
+      return [left, top, right!, bottom!]
+    } else {
+      const [horizontal, vertical] = margins
+      return [horizontal, vertical, horizontal, vertical]
+    }
+  }
+  return [margins, margins, margins, margins]
+}
+
+export function getInheritedMarginOverride(
+  baseStyle: Style,
+  style: Style
+): Margins | undefined {
+  if (baseStyle.margin === undefined || style.margin !== undefined)
+    return undefined
+
+  const normalizedBaseMargins = normalizeMargins(baseStyle.margin)
+  return [
+    style.marginLeft ?? normalizedBaseMargins[0],
+    style.marginTop ?? normalizedBaseMargins[1],
+    style.marginRight ?? normalizedBaseMargins[2],
+    style.marginBottom ?? normalizedBaseMargins[3],
+  ]
+}
