@@ -214,6 +214,9 @@ export function getTableCellStyleString(
       if (bottom) style['border-bottom-color'] = bottom
       if (right) style['border-right-color'] = right
     }
+    if (node.verticalAlignment) {
+      style['vertical-align'] = node.verticalAlignment
+    }
   }
 
   return getStyleString(style)

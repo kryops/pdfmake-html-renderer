@@ -21,6 +21,17 @@ const document: TDocumentDefinitions = {
         paddingLeft: () => null, // == 0
       },
     },
+    ' ',
+    {
+      table: {
+        heights: 40,
+        body: [
+          [{ text: 'top', verticalAlignment: 'top' }, 'column B'],
+          [{ text: 'middle', verticalAlignment: 'middle' }, 'column B'],
+          [{ text: 'bottom', verticalAlignment: 'bottom' }, 'column B'],
+        ],
+      },
+    },
   ],
 }
 

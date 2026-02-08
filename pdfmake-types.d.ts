@@ -1,4 +1,4 @@
-import { Style, TableOfContent } from 'pdfmake/interfaces'
+import { Style, TableOfContent, TableCellProperties } from 'pdfmake/interfaces'
 
 // Types updates not yet released to DefinitelyTyped
 declare module 'pdfmake/interfaces' {
@@ -12,5 +12,9 @@ declare module 'pdfmake/interfaces' {
     decorationThickness?: number | undefined
     // cannot actually exist on all styles, only on the ones in the styles dictionary
     extends?: string | string[] | undefined
+  }
+
+  interface TableCellProperties {
+    verticalAlignment?: 'top' | 'middle' | 'bottom' | undefined
   }
 }

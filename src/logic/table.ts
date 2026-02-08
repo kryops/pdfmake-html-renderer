@@ -6,6 +6,7 @@ export type ActualTableCell = Content & {
   border?: [boolean, boolean, boolean, boolean]
   borderColor?: [string, string, string, string]
   fillOpacity?: number
+  verticalAlignment?: 'top' | 'middle' | 'bottom' | undefined
 }
 
 export function isActualTableCell(cell: TableCell): cell is ActualTableCell {
