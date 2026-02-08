@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Added support for style `extends`
+- Added support for `verticalAlignment` on table cells
 
 ## v0.3.2 - 2026-01-31
 
