@@ -36,11 +36,7 @@ export function getTableCellStyleString(
     const columnWidth = table.table.widths[columnIndex]
     // we treat *-sized columns like auto for now,
     // but set the table's width to 100% when at least one column is *-sized
-    if (
-      columnWidth !== undefined &&
-      columnWidth !== 'auto' &&
-      columnWidth !== '*'
-    ) {
+    if (columnWidth != null && columnWidth !== 'auto' && columnWidth !== '*') {
       const width = getSize(columnWidth)
       style.width = width
       // overflow longer text
@@ -54,7 +50,7 @@ export function getTableCellStyleString(
     style.height = table.table.heights + 'pt'
   } else if (Array.isArray(table.table.heights)) {
     const height = table.table.heights[rowIndex]
-    if (height !== undefined) style.height = height + 'pt'
+    if (height != null) style.height = height + 'pt'
   } else if (typeof table.table.heights === 'function') {
     const height = table.table.heights(rowIndex)
     if (height != null && height !== 'auto') style.height = height + 'pt'

@@ -6,7 +6,7 @@ import type {
 } from 'pdfmake/interfaces'
 import type { CssDictionary } from './css-dictionary'
 import { getInheritedMarginOverride, getMarginStringFromStyle } from './margin'
-import { colorToRgb } from './utils'
+import { colorToRgb, omitNullish } from './utils'
 
 export function getStyleDictionary(
   input: Style | Content | undefined,
@@ -25,57 +25,55 @@ export function getStyleDictionary(
 
   const style = input as Style
 
-  if (style.font)
+  if (style.font != null)
     obj['font-family'] = style.font + ', Roboto, Helvetica, sans-serif'
-  if (style.fontSize) {
+  if (style.fontSize != null) {
     obj['font-size'] = style.fontSize + 'pt'
     obj['--font-size'] = style.fontSize + 'pt'
   }
-  if (style.lineHeight) obj['line-height'] = String(style.lineHeight)
-  if (style.bold !== undefined)
-    obj['font-weight'] = style.bold ? 'bold' : 'normal'
-  if (style.italics !== undefined)
+  if (style.lineHeight != null) obj['line-height'] = String(style.lineHeight)
+  if (style.bold != null) obj['font-weight'] = style.bold ? 'bold' : 'normal'
+  if (style.italics != null)
     obj['font-style'] = style.italics ? 'italic' : 'normal'
-  if (style.alignment) {
+  if (style.alignment != null) {
     obj['text-align'] = style.alignment
     obj.display = 'block'
   }
-  if (style.color) obj.color = style.color
+  if (style.color != null) obj.color = style.color
   // We ignore tiling patterns (arrays)
-  if (style.background && !Array.isArray(style.background)) {
+  if (style.background != null && !Array.isArray(style.background)) {
     obj['--background'] = style.background
   }
   const marginStyle = getMarginStringFromStyle(style)
-  if (marginStyle !== undefined) {
+  if (marginStyle != null) {
     obj.display = 'block'
     // we set padding instead of margin because pdfmake does not collapse margins
-    if (!isNode || style.margin !== undefined) {
+    if (!isNode || style.margin != null) {
       obj.padding = marginStyle
     } else {
-      if (style.marginLeft !== undefined)
+      if (style.marginLeft != null)
         obj['padding-left'] = style.marginLeft + 'pt'
-      if (style.marginTop !== undefined)
-        obj['padding-top'] = style.marginTop + 'pt'
-      if (style.marginRight !== undefined)
+      if (style.marginTop != null) obj['padding-top'] = style.marginTop + 'pt'
+      if (style.marginRight != null)
         obj['padding-right'] = style.marginRight + 'pt'
-      if (style.marginBottom !== undefined)
+      if (style.marginBottom != null)
         obj['padding-bottom'] = style.marginBottom + 'pt'
     }
   }
-  if (style.decoration) {
+  if (style.decoration != null) {
     obj['text-decoration'] = (
       Array.isArray(style.decoration) ? style.decoration : [style.decoration]
     )
       .map(it => (it === 'lineThrough' ? 'line-through' : it))
       .join(' ')
   }
-  if (style.decorationColor) {
+  if (style.decorationColor != null) {
     obj['text-decoration-color'] = style.decorationColor
   }
-  if (style.decorationStyle) {
+  if (style.decorationStyle != null) {
     obj['text-decoration-style'] = style.decorationStyle
   }
-  if (style.decorationThickness) {
+  if (style.decorationThickness != null) {
     // only an approximation, but good enough
     const factorByStyle: Record<DecorationStyle, number> = {
       solid: 1,
@@ -90,31 +88,28 @@ export function getStyleDictionary(
 
     obj['text-decoration-thickness'] = style.decorationThickness * factor + 'pt'
   }
-  if (style.opacity) obj.opacity = String(style.opacity)
-  if (style.characterSpacing)
+  if (style.opacity != null) obj.opacity = String(style.opacity)
+  if (style.characterSpacing != null)
     obj['letter-spacing'] = style.characterSpacing + 'pt'
-  if (style.leadingIndent) {
+  if (style.leadingIndent != null) {
     obj['text-indent'] = style.leadingIndent + 'pt'
     obj.display = 'block'
   }
   if (style.sub || style.sup) {
     // cannot use super as font-size: 0 within array will move the baseline
     obj['vertical-align'] = style.sub ? 'sub' : 'top'
-    if (!style.fontSize) {
-      obj['font-size'] = 'calc(var(--font-size) * 0.58)'
-      // cannot redeclare --font-size variable as it would try to use it for the element itself
-    }
+    obj['font-size'] = 'calc(var(--font-size) * 0.58)'
   }
 
   // inherit to table cells below
-  if (style.fillColor) {
+  if (style.fillColor != null) {
     const fillColorRgb = colorToRgb(style.fillColor)
     if (fillColorRgb) {
       obj['--fill-color'] = fillColorRgb.join(', ')
       obj['--fill-opacity'] = '1'
     }
   }
-  if (style.fillOpacity !== undefined)
+  if (style.fillOpacity != null)
     obj['--fill-opacity'] = String(style.fillOpacity)
 
   if (style.noWrap) {
@@ -122,11 +117,11 @@ export function getStyleDictionary(
     obj['--white-space'] = 'nowrap'
   }
 
-  if (style.columnGap !== undefined) {
+  if (style.columnGap != null) {
     obj['--column-gap'] = String(Number(style.columnGap) / 2) + 'pt'
   }
 
-  if ('wordBreak' in style && style.wordBreak === 'break-all') {
+  if (style.wordBreak === 'break-all') {
     obj['word-break'] = 'break-all'
   }
 
@@ -143,10 +138,10 @@ export function getEffectiveNamedStyle(
   if (!style || seenStyles?.has(name)) return {}
 
   if (
-    style.extends === undefined ||
+    style.extends == null ||
     (Array.isArray(style.extends) && style.extends.length === 0)
   ) {
-    return style
+    return omitNullish(style)
   }
 
   const { extends: originalExtends, ...actualStyle } = style
@@ -167,7 +162,7 @@ export function getEffectiveNamedStyle(
     const margins = getInheritedMarginOverride(acc, styleOverride)
     return {
       ...acc,
-      ...styleOverride,
+      ...omitNullish(styleOverride),
       ...(margins ? { margin: margins } : {}),
     }
   }, {} as Style)

@@ -12,25 +12,50 @@ const document: TDocumentDefinitions = {
     { text: 'Green with margin 20 + marginTop: 50', style: 'marginOverride4' },
     { text: 'Green without margins', style: 'marginOverride5' },
     {
-      text: 'Green with margin 20 (pdfmake renders marginLeft: 50)',
+      text: 'Green with margin 20',
       style: 'marginOverride6',
     },
     {
-      text: 'Red with margin 20 + marginLeft: 50 (pdfmake renders marginLeft: 20)',
+      text: 'Red with margin 20 + marginLeft: 50',
       style: 'marginOverride7',
     },
     {
-      text: 'Green with margin 20 (pdfmake renders marginLeft: 50)',
+      text: 'Green with margin 20',
       style: ['marginOverride2', 'marginOverride3'],
     },
+
+    // NOTE: pdfmake ignores the margin completely, only applies marginLeft
     {
-      text: 'Red with margin 20 + marginLeft: 50 (pdfmake renders marginLeft: 20)',
+      text: 'Red with margin 20 + marginLeft: 50',
       style: ['marginOverride3', 'marginOverride2'],
+    },
+
+    {
+      text: 'Red with marginLeft: 50',
+      style: ['margin', 'marginLeft'],
     },
 
     { text: 'Blue, bold, italic', style: 'circle1' },
     { text: 'Orange, bold, italic', style: 'circle2' },
     { text: 'Orange, bold, italic', style: 'circle3' },
+
+    {
+      text: 'inline red + undefined => red',
+      style: [{ color: 'red' }, { color: undefined }],
+      color: undefined,
+    },
+    {
+      text: 'inline red + null => red',
+      style: [{ color: 'red' }, { color: null as any }],
+      color: null as any,
+    },
+    { text: 'extends red + undefined => red', style: 'undefined' },
+    { text: 'extends red + null => red', style: 'null' },
+
+    '-------',
+
+    { text: 'invisible (opacity: 0)', opacity: 0 },
+    { text: 'invisible (fontSize: 0)', fontSize: 0 },
   ],
   styles: {
     red: {
@@ -38,6 +63,15 @@ const document: TDocumentDefinitions = {
     },
     green: {
       color: 'green',
+    },
+
+    undefined: {
+      extends: 'red',
+      color: undefined,
+    },
+    null: {
+      extends: 'red',
+      color: null as any,
     },
 
     marginLeft: {

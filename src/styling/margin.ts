@@ -4,7 +4,7 @@ export function getMarginString(
   margins: Margins | undefined,
   defaultMargin = 0
 ): string {
-  if (!margins) return defaultMargin + 'pt'
+  if (margins == null) return defaultMargin + 'pt'
   if (Array.isArray(margins)) {
     if (margins.length >= 4) {
       const [left, top, right, bottom] = margins
@@ -21,7 +21,7 @@ export function getNegativeHorizontalMarginString(
   margins: Margins | undefined,
   defaultMargin = 0
 ): string {
-  if (!margins) return `0 ${-defaultMargin}pt`
+  if (margins == null) return `0 ${-defaultMargin}pt`
   if (Array.isArray(margins)) {
     if (margins.length >= 4) {
       const [left, top, right, bottom] = margins
@@ -35,7 +35,7 @@ export function getNegativeHorizontalMarginString(
 }
 
 export function getMarginStringFromStyle(style: Style): string | undefined {
-  if (style.margin !== undefined) {
+  if (style.margin != null) {
     return getMarginString(style.margin)
   }
   const margins: Margins = [
@@ -68,8 +68,7 @@ export function getInheritedMarginOverride(
   baseStyle: Style,
   style: Style
 ): Margins | undefined {
-  if (baseStyle.margin === undefined || style.margin !== undefined)
-    return undefined
+  if (baseStyle.margin == null || style.margin != null) return undefined
 
   const normalizedBaseMargins = normalizeMargins(baseStyle.margin)
   return [

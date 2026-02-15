@@ -19,7 +19,7 @@
 >
   {#each entriesToRender as [entry, nextEntry]}
     <li
-      class:phr-customCounter={entry.counter !== undefined}
+      class:phr-customCounter={entry.counter != null}
       style={getOrderedListEntryStyleString(entry)}
     >
       <ContentRenderer node={entry} />

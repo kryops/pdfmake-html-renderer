@@ -1,11 +1,5 @@
-import type {
-  Content,
-  Column,
-  TDocumentDefinitions,
-  ContentColumns,
-} from 'pdfmake/interfaces'
+import type { Content, Column } from 'pdfmake/interfaces'
 import type { CssDictionary } from './css-dictionary'
-import { getStyleProperty } from './inheritance'
 import { getSize } from './size'
 import { getStyleString } from './utils'
 
@@ -27,7 +21,7 @@ export function getColumnStyleString(node: Content) {
     const column = node as Column
     if (column.width === 'auto') {
       // do nothing - default styles are already applied
-    } else if (column.width === undefined || column.width === '*') {
+    } else if (column.width == null || column.width === '*') {
       Object.assign(styles, starWidthStyle)
     } else {
       styles.width = getSize(column.width)

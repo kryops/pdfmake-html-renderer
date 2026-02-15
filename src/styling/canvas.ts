@@ -84,7 +84,7 @@ function getCanvasLineElementProperties(
     'stroke-width': (element.lineWidth ?? 1) + 'pt',
   }
 
-  if (element.strokeOpacity !== undefined) {
+  if (element.strokeOpacity != null) {
     properties['stroke-opacity'] = String(element.strokeOpacity)
   }
 

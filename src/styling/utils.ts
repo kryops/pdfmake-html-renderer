@@ -41,3 +41,9 @@ export function opacityColor(
 
   return `rgba(${rgb.join(', ')}, ${opacity})`
 }
+
+export function omitNullish<T extends object>(input: T): T {
+  return Object.fromEntries(
+    Object.entries(input).filter(([, value]) => value != null)
+  ) as T
+}

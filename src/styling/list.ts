@@ -148,12 +148,12 @@ export function getOrderedListStyleString(node: ContentOrderedList): string {
 export function getOrderedListEntryStyleString(
   entry: OrderedListElement
 ): string | undefined {
-  if (entry.counter === undefined && !entry.listType && !entry.markerColor)
+  if (entry.counter == null && !entry.listType && !entry.markerColor)
     return undefined
 
   const style: CssDictionary = {}
 
-  if (entry.counter !== undefined) {
+  if (entry.counter != null) {
     style['counter-set'] = 'custom ' + entry.counter
   }
 

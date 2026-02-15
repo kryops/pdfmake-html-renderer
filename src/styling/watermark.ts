@@ -15,7 +15,7 @@ export function getWatermarkStyleString(
     typeof node === 'string' ? node.length : (node.text?.length ?? 0)
 
   const angle =
-    typeof node === 'object' && node && node.angle !== undefined
+    typeof node === 'object' && node && node.angle != null
       ? ((360 - node.angle) * Math.PI) / 180
       : defaultAngle
   const diagonal = Math.min(Math.abs(width / Math.cos(angle)), defaultDiagonal)

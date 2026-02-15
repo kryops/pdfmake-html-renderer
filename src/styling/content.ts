@@ -2,7 +2,7 @@ import type { Content, Style, TDocumentDefinitions } from 'pdfmake/interfaces'
 import type { CssDictionary } from './css-dictionary'
 import { getPageSize } from './page'
 import { getEffectiveNamedStyle, getStyleDictionary } from './style'
-import { getStyleString } from './utils'
+import { getStyleString, omitNullish } from './utils'
 
 function getContentStyleDictionary(
   node: Content,
@@ -58,7 +58,7 @@ function getContentStyleDictionary(
 
   const applyBaseStyle = (nameOrStyle: string | Style) => {
     if (typeof nameOrStyle === 'object') {
-      Object.assign(styles, nameOrStyle)
+      Object.assign(styles, omitNullish(nameOrStyle))
       return
     }
 
