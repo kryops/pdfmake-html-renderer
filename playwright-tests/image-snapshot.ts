@@ -62,7 +62,7 @@ const stringify = function (obj: object): string {
 export async function imageSnapshot(
   document: TDocumentDefinitions,
   page: Page
-): Promise<void> {
+): Promise<Buffer> {
   response.mimeType = 'text/html'
   response.content = `<!DOCTYPE html>
   <html lang="en">
@@ -94,12 +94,13 @@ export async function imageSnapshot(
 
   await page.goto('http://127.0.0.1:' + port)
   await expect(page).toHaveScreenshot({ fullPage: true })
+  return page.screenshot({ fullPage: true })
 }
 
 export async function serverImageSnapshot(
   document: TDocumentDefinitions,
   page: Page
-): Promise<void> {
+): Promise<Buffer> {
   const { html, css } = PdfmakeHtmlRenderer.render({
     document,
     pageShadow: false,
@@ -124,12 +125,18 @@ export async function serverImageSnapshot(
 
   await page.goto('http://127.0.0.1:' + port)
   await expect(page).toHaveScreenshot({ fullPage: true })
+  return page.screenshot({ fullPage: true })
 }
 
 export async function takeSnapshots(
   document: TDocumentDefinitions,
-  page: Page
+  page: Page,
+  allowDifferent = false
 ): Promise<void> {
-  await imageSnapshot(document, page)
-  await serverImageSnapshot(document, page)
+  const clientScreenshot = await imageSnapshot(document, page)
+  const serverScreenshot = await serverImageSnapshot(document, page)
+
+  if (!allowDifferent) {
+    expect(clientScreenshot.equals(serverScreenshot)).toBe(true)
+  }
 }

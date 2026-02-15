@@ -40,5 +40,6 @@ const document: TDocumentDefinitions = {
 }
 
 test('pdfmake/qrCode', async ({ page }) => {
-  await takeSnapshots(document, page)
+  // QR codes are not supported for server rendering yet
+  await takeSnapshots(document, page, true)
 })
