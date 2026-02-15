@@ -1755,13 +1755,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/pdfmake@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "@types/pdfmake@npm:0.3.0"
+"@types/pdfmake@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "@types/pdfmake@npm:0.3.1"
   dependencies:
     "@types/node": "npm:*"
     "@types/pdfkit": "npm:*"
-  checksum: 10/e53df63ab1878f27701beb576e167a537ae721fc4e9dd63f3b6fb63fb56439af2fc1acb7afcfb5a2129a4ca841e8634ec4967b5ffabb54ba27ab90da0658e3a9
+  checksum: 10/d35185ea570d3ab554db232ebeb8c3c3bfabbaccdac67b470be01c3da960a93879531be074b08f031eceea6299f2fef4f4456dcffd0631457726cd8391c0fd74
   languageName: node
   linkType: hard
 
@@ -3975,13 +3975,13 @@ __metadata:
     "@sveltejs/vite-plugin-svelte": "npm:^3.1.2"
     "@tsconfig/svelte": "npm:^5.0.7"
     "@types/node": "npm:^24.10.12"
-    "@types/pdfmake": "npm:^0.3.0"
+    "@types/pdfmake": "npm:^0.3.1"
     "@types/qrcode": "npm:^1.5.6"
     ace-builds: "npm:^1.43.6"
     css-color-names: "npm:^1.0.1"
     get-port: "npm:^7.1.0"
     npm-run-all: "npm:^4.1.5"
-    pdfmake: "npm:^0.3.3"
+    pdfmake: "npm:^0.3.4"
     prettier: "npm:^3.8.1"
     publint: "npm:^0.3.17"
     qrcode: "npm:^1.5.4"
@@ -3998,14 +3998,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"pdfmake@npm:^0.3.3":
-  version: 0.3.3
-  resolution: "pdfmake@npm:0.3.3"
+"pdfmake@npm:^0.3.4":
+  version: 0.3.4
+  resolution: "pdfmake@npm:0.3.4"
   dependencies:
     linebreak: "npm:^1.1.0"
     pdfkit: "npm:^0.17.2"
     xmldoc: "npm:^2.0.3"
-  checksum: 10/27ad7d7ff7aa280b9370d3dc274f3a5fafd880857b24ef68bb4e8084847e86bf58a7595d2f2157d275fd4628c79d6dfc43b54089fc9fa5e268e7c653233fd63f
+  checksum: 10/4e358532acc9c44895386b3a5f0afbebdfc978a7a0273c76da8d5c8a3dc85843c0a0b2752f82a9e978c3a8c91118ee0f80dda54d28cb6719149cf203007cfa2b
   languageName: node
   linkType: hard
 
