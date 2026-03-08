@@ -6,6 +6,7 @@
 - Added support for `verticalAlignment` on table cells
 - Fixed invalid table layout styles for server-side rendering
 - Fixed styling issues around `0`, `undefined` and `null` values
+- Fixed rendering SVG images without `xmlns` attribute
 
 ## v0.3.2 - 2026-01-31
 
