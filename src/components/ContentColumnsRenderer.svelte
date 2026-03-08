@@ -1,17 +1,26 @@
 <script lang="ts">
   import type { ContentColumns } from 'pdfmake/interfaces'
   import ContentRenderer from './ContentRenderer.svelte'
-  import { getColumnStyleString } from '../styling/column'
+  import {
+    getColumnStyleString,
+    getSnakingColumnsStyleString,
+  } from '../styling/column'
 
   export let node: ContentColumns
 </script>
 
 <div class="phr-container">
-  {#each node.columns as column}
-    <div style={getColumnStyleString(column)}>
-      <ContentRenderer node={column} />
+  {#if node.snakingColumns}
+    <div style={getSnakingColumnsStyleString(node)}>
+      <ContentRenderer node={node.columns[0]} inline />
     </div>
-  {/each}
+  {:else}
+    {#each node.columns as column}
+      <div style={getColumnStyleString(column)}>
+        <ContentRenderer node={column} />
+      </div>
+    {/each}
+  {/if}
 </div>
 
 <style>

@@ -4,6 +4,7 @@
 
 - Added support for style `extends`
 - Added support for `verticalAlignment` on table cells
+- Added partial support for `snakingColumns` in columns
 - Fixed invalid table layout styles for server-side rendering
 - Fixed styling issues around `0`, `undefined` and `null` values
 - Fixed rendering SVG images without `xmlns` attribute

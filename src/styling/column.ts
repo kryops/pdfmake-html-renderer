@@ -1,4 +1,4 @@
-import type { Content, Column } from 'pdfmake/interfaces'
+import type { Content, Column, ContentColumns } from 'pdfmake/interfaces'
 import type { CssDictionary } from './css-dictionary'
 import { getSize } from './size'
 import { getStyleString } from './utils'
@@ -29,4 +29,12 @@ export function getColumnStyleString(node: Content) {
   }
 
   return getStyleString(styles)
+}
+
+export function getSnakingColumnsStyleString(node: ContentColumns) {
+  return getStyleString({
+    'column-count': String(node.columns.length),
+    // x2 because it is applied as margin for normal columns
+    'column-gap': 'calc(var(--column-gap, 0) * 2)',
+  })
 }

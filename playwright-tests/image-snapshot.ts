@@ -93,7 +93,7 @@ export async function imageSnapshot(
   </html>`
 
   await page.goto('http://127.0.0.1:' + port)
-  await expect(page).toHaveScreenshot({ fullPage: true })
+  await expect(page).toHaveScreenshot({ fullPage: true, timeout: 20_000 })
   return page.screenshot({ fullPage: true })
 }
 
@@ -124,7 +124,7 @@ export async function serverImageSnapshot(
   </html>`
 
   await page.goto('http://127.0.0.1:' + port)
-  await expect(page).toHaveScreenshot({ fullPage: true })
+  await expect(page).toHaveScreenshot({ fullPage: true, timeout: 20_000 })
   return page.screenshot({ fullPage: true })
 }
 

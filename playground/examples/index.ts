@@ -11,6 +11,7 @@ import pageReference from './pageReference'
 import qrCode from './qrCode'
 import relative from './relative'
 import sections from './sections'
+import snaking_columns from './snaking_columns'
 import styling_inlines from './styling_inlines'
 import styling_named_styles from './styling_named_styles'
 import styling_named_styles_with_extends from './styling_named_styles_with_extends'
@@ -44,6 +45,10 @@ export const examples: Example[] = [
   {
     name: 'Columns',
     code: columns_simple,
+  },
+  {
+    name: 'Columns (snaking)',
+    code: snaking_columns,
   },
   {
     name: 'Images',

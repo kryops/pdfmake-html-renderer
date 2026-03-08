@@ -23,7 +23,9 @@ Playground: https://kryops.github.io/pdfmake-html-renderer/
   - `pageBreakBefore` is not implemented
   - For short content, we enforce the height of a single page (unless `mode: 'fluid'` is set)
 - **Tiling patterns** are not supported
-- **Column widths** behave slightly differently, especially when combining `*` and `auto` widths
+- **Columns** support is limited:
+  - Widths behave slightly differently, especially when combining `*` and `auto` widths
+  - Snaking columns do not support custom widths, and break at different places
 - **Relative positioning** ignores the `alignment` property
 - **List markers** in ordered lists are right-aligned, while `pdfmake` aligns them to the left
 - **QR Codes** look slightly different to the ones created by `pdfmake`, and may be larger for some values of `fit`
