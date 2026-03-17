@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.3.3 - 2026-03-17
 
 - Added support for style `extends`
 - Added support for `verticalAlignment` on table cells
