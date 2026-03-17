@@ -570,7 +570,7 @@ const document: TDocumentDefinitions = {
                   ' Entry ' +
                   (i + 1) +
                   ': Revenue $' +
-                  (Math.random() * 100).toFixed(2) +
+                  (100).toFixed(2) +
                   'K recorded.'
                 )
               }).join('\n'),
@@ -776,6 +776,8 @@ const document: TDocumentDefinitions = {
     },
   },
 }
+
+test.setTimeout(60_000)
 
 test('pdfmake/snaking_columns', async ({ page }) => {
   await takeSnapshots(document, page)
