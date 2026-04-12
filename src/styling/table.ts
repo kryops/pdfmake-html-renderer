@@ -33,7 +33,12 @@ export function getTableCellStyleString(
   const style: CssDictionary = {}
 
   if (Array.isArray(table.table.widths)) {
-    const columnWidth = table.table.widths[columnIndex]
+    // pdfmake mutates the table widths to contain objects
+    let columnWidth = table.table.widths[columnIndex]
+    if (typeof columnWidth === 'object' && 'width' in columnWidth) {
+      columnWidth = (columnWidth as any).width
+    }
+
     // we treat *-sized columns like auto for now,
     // but set the table's width to 100% when at least one column is *-sized
     if (columnWidth != null && columnWidth !== 'auto' && columnWidth !== '*') {
