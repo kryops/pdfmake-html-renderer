@@ -42,7 +42,7 @@
     "build": "vite build && vite build --ssr && BUILD_GLOBAL=true vite build && mv dist/style.css dist/index.css && rimraf dist/server/style.css && svelte-package -i src -o dist/svelte",
     "docs": "vite build --config playground.vite.config.ts",
     "lint:tsc": "tsc --noEmit",
-    "lint:svelte": "svelte-check --ignore examples",
+    "lint:svelte": "svelte-check",
     "lint:prettier": "prettier --check --cache '**/*.{js,ts,md}'",
     "lint": "run-p 'lint:*'",
     "prettify": "prettier --write --cache '**/*.{js,ts,md}'",

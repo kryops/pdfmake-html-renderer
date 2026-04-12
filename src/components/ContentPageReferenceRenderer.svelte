@@ -3,7 +3,7 @@
   import { getDocumentNodes } from '../context'
   import { getReferenceText } from '../logic/reference'
 
-  interface Props {
+  export interface Props {
     node: ContentPageReference
   }
 

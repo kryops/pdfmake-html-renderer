@@ -6,7 +6,7 @@
   import { flattenNodes } from './logic/content'
   import type { PageSizeMode } from './styling/page'
 
-  interface Props {
+  export interface Props {
     document: TDocumentDefinitions
     pageShadow?: boolean
     mode?: PageSizeMode

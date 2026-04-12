@@ -3,7 +3,7 @@
   import { getDocument } from '../context'
   import { getWatermarkStyleString } from '../styling/watermark'
 
-  interface Props {
+  export interface Props {
     node: string | Watermark
   }
 

@@ -11,7 +11,7 @@
   import WatermarkRenderer from './WatermarkRenderer.svelte'
   import BackgroundRenderer from './BackgroundRenderer.svelte'
 
-  interface Props {
+  export interface Props {
     node: ContentSection
   }
 

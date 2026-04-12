@@ -5,7 +5,7 @@
   import { getTocItemStyleString } from '../styling/toc'
   import ContentRenderer from './ContentRenderer.svelte'
 
-  interface Props {
+  export interface Props {
     node: ContentToc
   }
 

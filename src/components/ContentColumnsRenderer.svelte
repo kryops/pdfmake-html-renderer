@@ -6,11 +6,11 @@
     getSnakingColumnsStyleString,
   } from '../styling/column'
 
-  interface Props {
-    node: ContentColumns;
+  export interface Props {
+    node: ContentColumns
   }
 
-  let { node }: Props = $props();
+  let { node }: Props = $props()
 </script>
 
 <div class="phr-container">

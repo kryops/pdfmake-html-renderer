@@ -3,7 +3,7 @@
   import { getDocument } from '../context'
   import { getImageStyleString } from '../styling/image'
 
-  interface Props {
+  export interface Props {
     node: ContentImage
   }
 

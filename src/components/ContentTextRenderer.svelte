@@ -4,13 +4,13 @@
   import ContentRenderer from './ContentRenderer.svelte'
   import StringRenderer from './StringRenderer.svelte'
 
-  interface Props {
-    node: ContentText;
-    first?: boolean;
-    last?: boolean;
+  export interface Props {
+    node: ContentText
+    first?: boolean
+    last?: boolean
   }
 
-  let { node, first = true, last = true }: Props = $props();
+  let { node, first = true, last = true }: Props = $props()
 </script>
 
 {#if Array.isArray(node.text)}

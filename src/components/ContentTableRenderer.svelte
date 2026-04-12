@@ -11,11 +11,11 @@
   } from '../styling/table'
   import ContentRenderer from './ContentRenderer.svelte'
 
-  interface Props {
-    node: ContentTable;
+  export interface Props {
+    node: ContentTable
   }
 
-  let { node }: Props = $props();
+  let { node }: Props = $props()
 
   let coveredCells = $derived(getTableCellsCoveredBySpans(node))
 </script>

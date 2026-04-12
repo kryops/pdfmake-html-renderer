@@ -6,7 +6,7 @@
 
   const document = getDocument()
 
-  interface Props {
+  export interface Props {
     node: Content | DynamicBackground
   }
 

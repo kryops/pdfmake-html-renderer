@@ -7,7 +7,7 @@
 
   const document = getDocument()
 
-  interface Props {
+  export interface Props {
     type: 'header' | 'footer'
     node: Content | DynamicContent
     pageMargins: Margins | undefined

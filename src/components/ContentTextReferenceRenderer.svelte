@@ -4,7 +4,7 @@
   import { getReferencedNode, getReferenceText } from '../logic/reference'
   import ContentRenderer from './ContentRenderer.svelte'
 
-  interface Props {
+  export interface Props {
     node: ContentTextReference
   }
 

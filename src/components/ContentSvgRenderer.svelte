@@ -2,7 +2,7 @@
   import type { ContentSvg } from 'pdfmake/interfaces'
   import { getImageStyleString } from '../styling/image'
 
-  interface Props {
+  export interface Props {
     node: ContentSvg
   }
 

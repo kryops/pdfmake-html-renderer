@@ -6,7 +6,7 @@
 
   import { onDestroy, onMount } from 'svelte'
 
-  interface Props {
+  export interface Props {
     content: string
   }
 

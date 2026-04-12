@@ -7,7 +7,7 @@
   import ContentLinkRenderer from './ContentLinkRenderer.svelte'
   import ContentTextRenderer from './ContentTextRenderer.svelte'
 
-  interface Props {
+  export interface Props {
     node: Content | any
     inline?: boolean
     inToc?: boolean

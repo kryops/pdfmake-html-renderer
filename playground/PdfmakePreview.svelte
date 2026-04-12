@@ -4,7 +4,7 @@
   import type { TDocumentDefinitions } from 'pdfmake/interfaces'
   import { onDestroy, onMount } from 'svelte'
 
-  interface Props {
+  export interface Props {
     document: TDocumentDefinitions
   }
 
