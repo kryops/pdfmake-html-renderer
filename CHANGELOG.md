@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.4.0 - 2026-04-12
+
+- **[BREAKING]** Updated to Svelte 5
+  - The global build was replaced with a `/standalone` export, which is now also the preferred way to integrate into other frameworks
+  - The server-side rendering API was adapted following Svelte's changes
+  - See the `/examples` folder for updated examples
+
 ## v0.3.3 - 2026-03-17
 
 - Added support for style `extends`
