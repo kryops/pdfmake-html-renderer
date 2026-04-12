@@ -50,21 +50,26 @@
   <hr />
 {/if}
 
-{#if component === ContentLinkRenderer}
-  {@const SvelteComponent = component}
-  <SvelteComponent {node} />
-{:else if component}
-  {#if component !== ContentTextRenderer || !('text' in node) || node.text !== ''}
-    {@const SvelteComponent_1 = component}
-    <div {style} {id}>
-      <SvelteComponent_1 node={neverNode} {inline} {first} {last} />
-    </div>
+<svelte:boundary onerror={error => console.error(error)}>
+  {#if component === ContentLinkRenderer}
+    {@const SvelteComponent = component}
+    <SvelteComponent {node} />
+  {:else if component}
+    {#if component !== ContentTextRenderer || !('text' in node) || node.text !== ''}
+      {@const SvelteComponent_1 = component}
+      <div {style} {id}>
+        <SvelteComponent_1 node={neverNode} {inline} {first} {last} />
+      </div>
+    {/if}
+  {:else if typeof node === 'object' && node && 'attachment' in node}
+    <!-- render nothing -->
+  {:else}
+    <span class="phr-unknown">Unknown: {JSON.stringify(node)}</span>
   {/if}
-{:else if typeof node === 'object' && node && 'attachment' in node}
-  <!-- render nothing -->
-{:else}
-  <span class="phr-unknown">Unknown: {JSON.stringify(node)}</span>
-{/if}
+  {#snippet failed(error)}
+    <span class="phr-unknown">{error}</span>
+  {/snippet}
+</svelte:boundary>
 
 {#if !inToc && typeof node === 'object' && node && 'pageBreak' in node && (node.pageBreak === 'after' || node.pageBreak === 'afterEven' || node.pageBreak === 'afterOdd')}
   <hr />
