@@ -2,8 +2,13 @@
   import type { ContentText } from 'pdfmake/interfaces'
   import ContentRenderer from './ContentRenderer.svelte'
 
-  // cannot use ContentLink as it is only a sub-type that ContentRenderer won't accept
-  export let node: ContentText
+  
+  interface Props {
+    // cannot use ContentLink as it is only a sub-type that ContentRenderer won't accept
+    node: ContentText;
+  }
+
+  let { node }: Props = $props();
 </script>
 
 <a

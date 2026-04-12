@@ -3,11 +3,15 @@
   import { getDocument } from '../context'
   import { getImageStyleString } from '../styling/image'
 
-  export let node: ContentImage
+  interface Props {
+    node: ContentImage;
+  }
+
+  let { node }: Props = $props();
 
   const document = getDocument()
-  $: image = $document.images?.[node.image]
-  $: src = (typeof image === 'object' ? image.url : image) ?? node.image
+  let image = $derived($document.images?.[node.image])
+  let src = $derived((typeof image === 'object' ? image.url : image) ?? node.image)
 </script>
 
 <img {src} alt="" style={getImageStyleString(node)} />

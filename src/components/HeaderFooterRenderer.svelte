@@ -7,12 +7,16 @@
 
   const document = getDocument()
 
-  export let type: 'header' | 'footer'
-  export let node: Content | DynamicContent
-  export let pageMargins: Margins | undefined
+  interface Props {
+    type: 'header' | 'footer';
+    node: Content | DynamicContent;
+    pageMargins: Margins | undefined;
+  }
 
-  $: content =
-    typeof node === 'function' ? node(1, 1, getPageSize($document)) : node
+  let { type, node, pageMargins }: Props = $props();
+
+  let content =
+    $derived(typeof node === 'function' ? node(1, 1, getPageSize($document)) : node)
 </script>
 
 <div

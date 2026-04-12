@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import type { TDocumentDefinitions } from 'pdfmake/interfaces'
   import type { Example } from './examples'
 
@@ -9,15 +11,15 @@
 
   import { version } from '../package.json'
 
-  let activeExample: Example | null = null
-  let document: TDocumentDefinitions | null = null
+  let activeExample: Example | null = $state(null)
+  let document: TDocumentDefinitions | null = $state(null)
 
   const sessionKey = 'pdfmakeHtmlRendererPlaygroundContent'
 
-  let content = sessionStorage.getItem(sessionKey) ?? examples[0].code
+  let content = $state(sessionStorage.getItem(sessionKey) ?? examples[0].code)
 
-  let pdfmakeEnabled = false
-  let errorMessage: string | null = null
+  let pdfmakeEnabled = $state(false)
+  let errorMessage: string | null = $state(null)
 
   /**
    * We could do this on every keypress, but this would lead to errors
@@ -37,13 +39,15 @@
     }
   }
 
-  let timer: any
+  let timer: any = $state()
 
-  $: (() => {
-    sessionStorage.setItem(sessionKey, content)
-    clearTimeout(timer)
-    timer = setTimeout(updateDocument, 250)
-  })()
+  run(() => {
+    (() => {
+      sessionStorage.setItem(sessionKey, content)
+      clearTimeout(timer)
+      timer = setTimeout(updateDocument, 250)
+    })()
+  });
 </script>
 
 <div class="container">
@@ -55,11 +59,11 @@
     <span>
       <select
         bind:value={activeExample}
-        on:change={() => {
+        onchange={() => {
           if (activeExample) content = activeExample.code
         }}
       >
-        <option value={null} />
+        <option value={null}></option>
         {#each examples as example}
           <option value={example}>
             {example.name}
@@ -67,7 +71,7 @@
         {/each}
       </select>
     </span>
-    <span class="link" on:click={() => (pdfmakeEnabled = !pdfmakeEnabled)}
+    <span class="link" onclick={() => (pdfmakeEnabled = !pdfmakeEnabled)}
       >{pdfmakeEnabled ? 'Hide' : 'Show'} pdfmake preview</span
     >
     <a

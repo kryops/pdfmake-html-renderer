@@ -5,12 +5,16 @@
   import { getTocItemStyleString } from '../styling/toc'
   import ContentRenderer from './ContentRenderer.svelte'
 
-  export let node: ContentToc
+  interface Props {
+    node: ContentToc;
+  }
+
+  let { node }: Props = $props();
 
   const document = getDocument()
   const nodes = getDocumentNodes()
 
-  $: items = getTocItemNodes(node, $document.content)
+  let items = $derived(getTocItemNodes(node, $document.content))
 </script>
 
 {#if !node.toc.hideEmpty || items.length > 0}

@@ -4,11 +4,15 @@
   import { getReferencedNode, getReferenceText } from '../logic/reference'
   import ContentRenderer from './ContentRenderer.svelte'
 
-  export let node: ContentTextReference
+  interface Props {
+    node: ContentTextReference;
+  }
+
+  let { node }: Props = $props();
 
   const nodes = getDocumentNodes()
 
-  $: referencedNode = getReferencedNode(node.textReference, $nodes)
+  let referencedNode = $derived(getReferencedNode(node.textReference, $nodes))
 </script>
 
 <a href="#{node.textReference}">

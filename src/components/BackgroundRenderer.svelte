@@ -6,10 +6,14 @@
 
   const document = getDocument()
 
-  export let node: Content | DynamicBackground
+  interface Props {
+    node: Content | DynamicBackground;
+  }
 
-  $: content =
-    typeof node === 'function' ? node(1, getPageSize($document)) : node
+  let { node }: Props = $props();
+
+  let content =
+    $derived(typeof node === 'function' ? node(1, getPageSize($document)) : node)
 </script>
 
 {#if content}

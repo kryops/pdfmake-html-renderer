@@ -10,11 +10,15 @@
   import BackgroundRenderer from './BackgroundRenderer.svelte'
   import WatermarkRenderer from './WatermarkRenderer.svelte'
 
-  export let document: TDocumentDefinitions
-  export let pageShadow: boolean
-  export let mode: PageSizeMode
+  interface Props {
+    document: TDocumentDefinitions;
+    pageShadow: boolean;
+    mode: PageSizeMode;
+  }
 
-  let clientWidth: number
+  let { document, pageShadow, mode }: Props = $props();
+
+  let clientWidth: number = $state()
 </script>
 
 <div bind:clientWidth class="phr-container">

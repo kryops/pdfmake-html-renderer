@@ -3,7 +3,11 @@
   import { getDocumentNodes } from '../context'
   import { getReferenceText } from '../logic/reference'
 
-  export let node: ContentPageReference
+  interface Props {
+    node: ContentPageReference;
+  }
+
+  let { node }: Props = $props();
 
   const nodes = getDocumentNodes()
 </script>

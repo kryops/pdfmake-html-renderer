@@ -1,7 +1,11 @@
 <script lang="ts">
-  export let node: string | number
-  export let first = true
-  export let last = true
+  interface Props {
+    node: string | number;
+    first?: boolean;
+    last?: boolean;
+  }
+
+  let { node, first = true, last = true }: Props = $props();
 
   // Cannot reference node inside the function, as Svelte's reactivity won't re-render
   function trimText(myNode: string | number) {

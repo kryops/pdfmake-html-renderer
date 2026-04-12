@@ -11,17 +11,21 @@
   import WatermarkRenderer from './WatermarkRenderer.svelte'
   import BackgroundRenderer from './BackgroundRenderer.svelte'
 
-  export let node: ContentSection
+  interface Props {
+    node: ContentSection;
+  }
+
+  let { node }: Props = $props();
 
   const document = getDocument()
 
-  $: margins =
-    node.pageMargins === null
+  let margins =
+    $derived(node.pageMargins === null
       ? undefined
       : // TODO "inherit" should actually inherit from the previous section, not the document
         node.pageMargins === 'inherit'
         ? $document.pageMargins
-        : node.pageMargins
+        : node.pageMargins)
 </script>
 
 <hr />

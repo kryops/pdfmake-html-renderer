@@ -1,13 +1,19 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import type { ContentSvg } from 'pdfmake/interfaces'
   import { getImageStyleString } from '../styling/image'
 
-  export let node: ContentSvg
+  interface Props {
+    node: ContentSvg;
+  }
 
-  let container: HTMLDivElement
+  let { node }: Props = $props();
 
-  $: src =
-    typeof node.svg === 'string'
+  let container: HTMLDivElement = $state()
+
+  let src =
+    $derived(typeof node.svg === 'string'
       ? 'data:image/svg+xml,' +
         encodeURIComponent(
           node.svg.indexOf('xmlns') === -1
@@ -17,16 +23,18 @@
               )
             : node.svg
         )
-      : undefined
+      : undefined)
 
-  $: if (
-    typeof SVGElement !== 'undefined' &&
-    node.svg instanceof SVGElement &&
-    container
-  ) {
-    container.innerHTML = ''
-    container.appendChild(node.svg.cloneNode(true))
-  }
+  run(() => {
+    if (
+      typeof SVGElement !== 'undefined' &&
+      node.svg instanceof SVGElement &&
+      container
+    ) {
+      container.innerHTML = ''
+      container.appendChild(node.svg.cloneNode(true))
+    }
+  });
 </script>
 
 {#if src}
