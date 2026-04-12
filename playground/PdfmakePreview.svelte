@@ -1,19 +1,17 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
   import pdfmake from 'pdfmake/build/pdfmake.min'
   import vfs from 'pdfmake/build/vfs_fonts'
   import type { TDocumentDefinitions } from 'pdfmake/interfaces'
   import { onDestroy, onMount } from 'svelte'
 
   interface Props {
-    document: TDocumentDefinitions;
+    document: TDocumentDefinitions
   }
 
-  let { document }: Props = $props();
+  let { document }: Props = $props()
   let renderedDocument: TDocumentDefinitions
   let blobUrl: string | undefined = $state(undefined)
-  let timer: any = $state()
+  let timer: any // no $state, leads to infinite loop in effect!
 
   async function createPdfBlob() {
     if (renderedDocument === document) return
@@ -32,13 +30,11 @@
 
   onMount(createPdfBlob)
 
-  run(() => {
-    (() => {
-      document // we access the document to ensure that changes will call this function
-      clearTimeout(timer)
-      timer = setTimeout(createPdfBlob, 1000)
-    })()
-  });
+  $effect(() => {
+    document // we access the document to ensure that changes will call this function
+    clearTimeout(timer)
+    timer = setTimeout(createPdfBlob, 1000)
+  })
 
   onDestroy(() => {
     if (blobUrl) URL.revokeObjectURL(blobUrl)

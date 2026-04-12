@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
   import type { Ace } from 'ace-builds'
 
   import 'ace-builds/src-min-noconflict/ace'
@@ -9,13 +7,13 @@
   import { onDestroy, onMount } from 'svelte'
 
   interface Props {
-    content: string;
+    content: string
   }
 
-  let { content = $bindable() }: Props = $props();
+  let { content = $bindable() }: Props = $props()
 
-  let div: HTMLDivElement = $state()
-  let editor: Ace.Editor = $state()
+  let div: HTMLDivElement | undefined = $state()
+  let editor: Ace.Editor | undefined = $state()
 
   onMount(() => {
     editor = ace.edit(div, {
@@ -26,14 +24,14 @@
       fontSize: 16,
     })
 
-    editor.on('change', () => (content = editor.getValue()))
+    editor.on('change', () => (content = editor?.getValue() ?? ''))
   })
 
-  run(() => {
+  $effect(() => {
     if (editor && editor.getValue() !== content) editor.setValue(content)
-  });
+  })
 
-  onDestroy(() => editor.destroy())
+  onDestroy(() => editor?.destroy())
 </script>
 
 <div class="editor" bind:this={div}></div>

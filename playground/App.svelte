@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
   import type { TDocumentDefinitions } from 'pdfmake/interfaces'
   import type { Example } from './examples'
 
@@ -39,15 +37,13 @@
     }
   }
 
-  let timer: any = $state()
+  let timer: any // no $state, leads to infinite loop in effect!
 
-  run(() => {
-    (() => {
-      sessionStorage.setItem(sessionKey, content)
-      clearTimeout(timer)
-      timer = setTimeout(updateDocument, 250)
-    })()
-  });
+  $effect(() => {
+    sessionStorage.setItem(sessionKey, content)
+    clearTimeout(timer)
+    timer = setTimeout(updateDocument, 250)
+  })
 </script>
 
 <div class="container">

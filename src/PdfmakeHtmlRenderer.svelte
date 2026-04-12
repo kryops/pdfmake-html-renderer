@@ -1,11 +1,8 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy'
-
   import type { TDocumentDefinitions } from 'pdfmake/interfaces'
   import { setContext } from 'svelte'
   import { documentContextKey, nodesContextKey } from './context'
   import DocumentRenderer from './components/DocumentRenderer.svelte'
-  import { writable } from 'svelte/store'
   import { flattenNodes } from './logic/content'
   import type { PageSizeMode } from './styling/page'
 
