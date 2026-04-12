@@ -2,7 +2,8 @@
   "name": "nodejs",
   "version": "0.0.1",
   "private": true,
-  "main": "index.cjs",
+  "main": "index.mjs",
+  "type": "module",
   "dependencies": {
     "pdfmake-html-renderer": "link:../.."
   }
