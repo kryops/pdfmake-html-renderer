@@ -34,7 +34,7 @@ export default defineConfig(async ({ isSsrBuild, mode }) => {
           return 'index.mjs'
         },
       },
-      rollupOptions: {
+      rolldownOptions: {
         external: isStandalone ? [] : ['qrcode'],
         output: {
           // This suppresses the warning about having both a default and a named export
