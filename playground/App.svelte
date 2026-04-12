@@ -8,6 +8,7 @@
   import PdfmakePreview from './PdfmakePreview.svelte'
 
   import { version } from '../package.json'
+  import { evaluateDocument } from './utils'
 
   let activeExample: Example | null = $state(null)
   let document: TDocumentDefinitions | null = $state(null)
@@ -25,11 +26,7 @@
    */
   function updateDocument() {
     try {
-      if (content.trim().startsWith('{')) {
-        document = new Function(`return (${content});`)()
-      } else {
-        document = new Function(`${content}\nreturn dd;`)()
-      }
+      document = evaluateDocument(content)
       errorMessage = null
     } catch (error) {
       errorMessage = (error as any).message ?? String(error)
@@ -89,7 +86,7 @@
           <PdfmakeHtmlRenderer {document} pageShadow={false} />
         </div>
         {#if pdfmakeEnabled}
-          <PdfmakePreview {document} />
+          <PdfmakePreview {content} />
         {/if}
       {/if}
     </div>
