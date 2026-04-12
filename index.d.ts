@@ -1,7 +1,7 @@
 /// <reference types="svelte" />
 /// <reference types="pdfmake" />
 import { TDocumentDefinitions } from 'pdfmake/interfaces'
-import { SvelteComponent } from 'svelte'
+import { Component } from 'svelte'
 
 export interface PdfmakeHtmlRendererProps {
   /**
@@ -33,14 +33,7 @@ export interface PdfmakeHtmlRendererProps {
 
 /**
  * pdfmake HTML renderer component.
- *
- * See https://svelte.dev/docs/client-side-component-api
- * about how to use Svelte components.
  */
-export class PdfmakeHtmlRenderer extends SvelteComponent<
-  PdfmakeHtmlRendererProps,
-  {},
-  {}
-> {}
+export const PdfmakeHtmlRenderer: Component<PdfmakeHtmlRendererProps>
 
 export default PdfmakeHtmlRenderer

@@ -31,7 +31,14 @@
       "import": "./dist/server/index.js",
       "require": "./dist/server/index.cjs"
     },
+    "./standalone": {
+      "types": "./standalone.d.ts",
+      "import": "./dist/standalone.mjs"
+    },
     "./dist/index.css": {
+      "default": "./dist/index.css"
+    },
+    "./index.css": {
       "default": "./dist/index.css"
     }
   },
@@ -39,7 +46,8 @@
   "scripts": {
     "clean": "rimraf dist",
     "start": "vite --config playground.vite.config.ts",
-    "build": "vite build && vite build --ssr && BUILD_GLOBAL=true vite build && mv dist/style.css dist/index.css && rimraf dist/server/style.css && svelte-package -i src -o dist/svelte",
+    "build": "vite build && vite build --ssr && BUILD_STANDALONE=true vite build && mv dist/style.css dist/index.css && rimraf dist/server/style.css && svelte-package -i src -o dist/svelte",
+    "build:dev": "vite build --mode development && vite build --ssr --mode development && BUILD_STANDALONE=true vite build --mode development && mv dist/style.css dist/index.css && rimraf dist/server/style.css && svelte-package -i src -o dist/svelte",
     "docs": "vite build --config playground.vite.config.ts",
     "lint:tsc": "tsc --noEmit",
     "lint:svelte": "svelte-check",

@@ -3,5 +3,6 @@
 !index.d.ts
 !server.cjs
 !server.d.ts
+!standalone.d.ts
 !README.md
 !LICENSE.md

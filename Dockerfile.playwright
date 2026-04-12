@@ -4,7 +4,8 @@ WORKDIR /workspace
 
 RUN corepack enable && corepack prepare yarn@4.12.0 --activate || true
 
-COPY package.json yarn.lock playwright.config.ts ./
+COPY .yarn/releases/ ./.yarn/releases/
+COPY package.json yarn.lock .yarnrc.yml .yarn/releases/** playwright.config.ts ./
 RUN yarn install
 
 CMD ["yarn", "playwright", "test"]

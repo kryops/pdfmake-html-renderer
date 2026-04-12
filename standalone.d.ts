@@ -3,4 +3,4 @@ import { PdfmakeHtmlRenderer } from './index'
 export * from './index'
 export default PdfmakeHtmlRenderer
 
-export { render } from 'svelte/server'
+export { mount, unmount } from 'svelte'

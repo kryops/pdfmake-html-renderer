@@ -7,10 +7,10 @@ import type { TDocumentDefinitions } from 'pdfmake/interfaces'
 import { expect, test, type Page } from '@playwright/test'
 
 // @ts-ignore
-import { PdfmakeHtmlRenderer } from '../dist/server'
+import { PdfmakeHtmlRenderer, render } from '../dist/server'
 
 const js = fs.readFileSync(
-  path.join(import.meta.dirname, '../dist/global.js'),
+  path.join(import.meta.dirname, '../dist/standalone.mjs'),
   'utf8'
 )
 const css = fs.readFileSync(
@@ -28,6 +28,18 @@ const server = http.createServer((req, res) => {
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
   res.setHeader('Pragma', 'no-cache')
   res.setHeader('Expires', '0')
+
+  if (req.url === '/index.mjs') {
+    res.setHeader('Content-Type', 'application/javascript')
+    res.end(js)
+    return
+  }
+  if (req.url === '/index.css') {
+    res.setHeader('Content-Type', 'text/css')
+    res.end(css)
+    return
+  }
+
   res.end(response.content)
 })
 
@@ -71,17 +83,14 @@ export async function imageSnapshot(
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <style>
-      ${css}
-    </style>
+    <link rel="stylesheet" type="text/css" href="/index.css" />
   </head>
   <body>
     <div id="main"></div>
-    <script>
-      ${js}
-    </script>
-    <script>
-      new pdfmakeHtmlRenderer.PdfmakeHtmlRenderer({
+    <script type="module">
+      import { PdfmakeHtmlRenderer, mount } from '/index.mjs'
+
+      mount(PdfmakeHtmlRenderer, {
         target: document.getElementById('main'),
         props: {
           document: ${stringify(document)},
@@ -101,9 +110,11 @@ export async function serverImageSnapshot(
   document: TDocumentDefinitions,
   page: Page
 ): Promise<Buffer> {
-  const { html, css } = PdfmakeHtmlRenderer.render({
-    document,
-    pageShadow: false,
+  const { body, head } = render(PdfmakeHtmlRenderer, {
+    props: {
+      document,
+      pageShadow: false,
+    },
   })
 
   response.mimeType = 'text/html'
@@ -114,12 +125,10 @@ export async function serverImageSnapshot(
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <style>
-      ${css.code}
-    </style>
+    ${head}
   </head>
   <body>
-    <div id="main">${html}</div>
+    <div id="main">${body}</div>
   </body>
   </html>`
 
