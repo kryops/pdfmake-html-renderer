@@ -7,13 +7,14 @@
   const document = getDocument()
 
   interface Props {
-    node: Content | DynamicBackground;
+    node: Content | DynamicBackground
   }
 
-  let { node }: Props = $props();
+  let { node }: Props = $props()
 
-  let content =
-    $derived(typeof node === 'function' ? node(1, getPageSize($document)) : node)
+  let content = $derived(
+    typeof node === 'function' ? node(1, getPageSize(document)) : node
+  )
 </script>
 
 {#if content}

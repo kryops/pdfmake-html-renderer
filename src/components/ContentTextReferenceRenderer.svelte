@@ -5,14 +5,14 @@
   import ContentRenderer from './ContentRenderer.svelte'
 
   interface Props {
-    node: ContentTextReference;
+    node: ContentTextReference
   }
 
-  let { node }: Props = $props();
+  let { node }: Props = $props()
 
   const nodes = getDocumentNodes()
 
-  let referencedNode = $derived(getReferencedNode(node.textReference, $nodes))
+  let referencedNode = $derived(getReferencedNode(node.textReference, nodes))
 </script>
 
 <a href="#{node.textReference}">
@@ -20,7 +20,7 @@
   {#if referencedNode && typeof referencedNode === 'object' && 'text' in referencedNode}
     <ContentRenderer node={referencedNode.text} inline />
   {:else}
-    <span>{getReferenceText(node.textReference, $nodes)}</span>
+    <span>{getReferenceText(node.textReference, nodes)}</span>
   {/if}
 </a>
 

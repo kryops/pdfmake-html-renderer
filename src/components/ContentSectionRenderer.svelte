@@ -12,27 +12,28 @@
   import BackgroundRenderer from './BackgroundRenderer.svelte'
 
   interface Props {
-    node: ContentSection;
+    node: ContentSection
   }
 
-  let { node }: Props = $props();
+  let { node }: Props = $props()
 
   const document = getDocument()
 
-  let margins =
-    $derived(node.pageMargins === null
+  let margins = $derived(
+    node.pageMargins === null
       ? undefined
       : // TODO "inherit" should actually inherit from the previous section, not the document
         node.pageMargins === 'inherit'
-        ? $document.pageMargins
-        : node.pageMargins)
+        ? document.pageMargins
+        : node.pageMargins
+  )
 </script>
 
 <hr />
 
 <div
   style={getStyleString({
-    margin: getNegativeHorizontalMarginString($document.pageMargins, 40),
+    margin: getNegativeHorizontalMarginString(document.pageMargins, 40),
     padding: getMarginString(margins, 40),
   })}
 >

@@ -1,35 +1,26 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
+  import { run } from 'svelte/legacy'
 
   import type { TDocumentDefinitions } from 'pdfmake/interfaces'
   import { setContext } from 'svelte'
-  import { contextKey } from './context'
+  import { documentContextKey, nodesContextKey } from './context'
   import DocumentRenderer from './components/DocumentRenderer.svelte'
   import { writable } from 'svelte/store'
   import { flattenNodes } from './logic/content'
   import type { PageSizeMode } from './styling/page'
 
   interface Props {
-    document: TDocumentDefinitions;
-    pageShadow?: boolean;
-    mode?: PageSizeMode;
+    document: TDocumentDefinitions
+    pageShadow?: boolean
+    mode?: PageSizeMode
   }
 
-  let { document, pageShadow = true, mode = 'shrinkToFit' }: Props = $props();
+  let { document, pageShadow = true, mode = 'shrinkToFit' }: Props = $props()
 
-  const documentStore = writable(document)
-  run(() => {
-    documentStore.set(document)
-  });
-  const nodesStore = writable(flattenNodes(document?.content))
-  run(() => {
-    nodesStore.set(flattenNodes(document?.content))
-  });
+  const nodes = $derived(flattenNodes(document?.content))
 
-  setContext(contextKey, {
-    document: documentStore,
-    nodes: nodesStore,
-  })
+  setContext(documentContextKey, () => document)
+  setContext(nodesContextKey, () => nodes)
 </script>
 
 {#if document}

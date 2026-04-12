@@ -8,13 +8,13 @@
   import ContentTextRenderer from './ContentTextRenderer.svelte'
 
   interface Props {
-    node: Content | any;
-    inline?: boolean;
-    inToc?: boolean;
-    inLink?: boolean;
-    overrideStyle?: string | undefined;
-    first?: boolean | undefined;
-    last?: boolean | undefined;
+    node: Content | any
+    inline?: boolean
+    inToc?: boolean
+    inLink?: boolean
+    overrideStyle?: string | undefined
+    first?: boolean | undefined
+    last?: boolean | undefined
   }
 
   let {
@@ -24,21 +24,24 @@
     inLink = false,
     overrideStyle = undefined,
     first = undefined,
-    last = undefined
-  }: Props = $props();
+    last = undefined,
+  }: Props = $props()
 
   const document = getDocument()
   const nodes = getDocumentNodes()
-  let style = $derived(overrideStyle ?? getContentStyleString(node, $document, inline))
+  let style = $derived(
+    overrideStyle ?? getContentStyleString(node, document, inline)
+  )
   let component = $derived(getContentRenderer(node, inLink))
-  let id =
-    $derived(typeof node === 'object' && node && !inToc
+  let id = $derived(
+    typeof node === 'object' && node && !inToc
       ? 'tocItem' in node
-        ? getTocTarget(node, $nodes)
+        ? getTocTarget(node, nodes)
         : 'id' in node
           ? node.id
           : undefined
-      : undefined)
+      : undefined
+  )
 
   let neverNode = $derived(node as never)
 </script>
@@ -54,12 +57,7 @@
   {#if component !== ContentTextRenderer || !('text' in node) || node.text !== ''}
     {@const SvelteComponent_1 = component}
     <div {style} {id}>
-      <SvelteComponent_1
-        node={neverNode}
-        {inline}
-        {first}
-        {last}
-      />
+      <SvelteComponent_1 node={neverNode} {inline} {first} {last} />
     </div>
   {/if}
 {:else if typeof node === 'object' && node && 'attachment' in node}

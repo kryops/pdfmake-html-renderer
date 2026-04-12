@@ -8,15 +8,16 @@
   const document = getDocument()
 
   interface Props {
-    type: 'header' | 'footer';
-    node: Content | DynamicContent;
-    pageMargins: Margins | undefined;
+    type: 'header' | 'footer'
+    node: Content | DynamicContent
+    pageMargins: Margins | undefined
   }
 
-  let { type, node, pageMargins }: Props = $props();
+  let { type, node, pageMargins }: Props = $props()
 
-  let content =
-    $derived(typeof node === 'function' ? node(1, 1, getPageSize($document)) : node)
+  let content = $derived(
+    typeof node === 'function' ? node(1, 1, getPageSize(document)) : node
+  )
 </script>
 
 <div

@@ -2,17 +2,13 @@ import type { Content, TDocumentDefinitions } from 'pdfmake/interfaces'
 import { getContext } from 'svelte'
 import type { Readable, Writable } from 'svelte/store'
 
-export const contextKey = 'pdfmake-document'
+export const documentContextKey = 'pdfmake-document'
+export const nodesContextKey = 'pdfmake-nodes'
 
-export interface RendererContext {
-  document: Writable<TDocumentDefinitions>
-  nodes: Writable<Content[]>
+export function getDocument(): TDocumentDefinitions {
+  return getContext<() => TDocumentDefinitions>(documentContextKey)()
 }
 
-export function getDocument(): Readable<TDocumentDefinitions> {
-  return getContext<RendererContext>(contextKey).document
-}
-
-export function getDocumentNodes(): Readable<Content[]> {
-  return getContext<RendererContext>(contextKey).nodes
+export function getDocumentNodes(): Content[] {
+  return getContext<() => Content[]>(nodesContextKey)()
 }

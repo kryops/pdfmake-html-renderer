@@ -4,17 +4,17 @@
   import { getReferenceText } from '../logic/reference'
 
   interface Props {
-    node: ContentPageReference;
+    node: ContentPageReference
   }
 
-  let { node }: Props = $props();
+  let { node }: Props = $props()
 
   const nodes = getDocumentNodes()
 </script>
 
 <a
   href="#{node.pageReference}"
-  title={getReferenceText(node.pageReference, $nodes)}>X</a
+  title={getReferenceText(node.pageReference, nodes)}>X</a
 >
 
 <style>

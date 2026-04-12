@@ -4,15 +4,15 @@
   import { getWatermarkStyleString } from '../styling/watermark'
 
   interface Props {
-    node: string | Watermark;
+    node: string | Watermark
   }
 
-  let { node }: Props = $props();
+  let { node }: Props = $props()
   let text = $derived(typeof node === 'object' && node ? node.text : node)
   const document = getDocument()
 </script>
 
-<span class="phr-watermark" style={getWatermarkStyleString(node, $document)}>
+<span class="phr-watermark" style={getWatermarkStyleString(node, document)}>
   {text ?? ''}
 </span>
 

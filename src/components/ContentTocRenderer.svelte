@@ -6,15 +6,15 @@
   import ContentRenderer from './ContentRenderer.svelte'
 
   interface Props {
-    node: ContentToc;
+    node: ContentToc
   }
 
-  let { node }: Props = $props();
+  let { node }: Props = $props()
 
   const document = getDocument()
   const nodes = getDocumentNodes()
 
-  let items = $derived(getTocItemNodes(node, $document.content))
+  let items = $derived(getTocItemNodes(node, document.content))
 </script>
 
 {#if !node.toc.hideEmpty || items.length > 0}
@@ -24,12 +24,12 @@
         <ContentRenderer node={node.toc.title} />
       </div>
     {/if}
-    {#each getTocItemNodes(node, $document.content) as tocItem}
-      <a class="phr-tocItem" href="#{getTocTarget(tocItem, $nodes)}">
+    {#each getTocItemNodes(node, document.content) as tocItem}
+      <a class="phr-tocItem" href="#{getTocTarget(tocItem, nodes)}">
         <ContentRenderer
           node={tocItem}
           inToc
-          overrideStyle={getTocItemStyleString(tocItem, node, $document)}
+          overrideStyle={getTocItemStyleString(tocItem, node, document)}
         />
       </a>
     {/each}
