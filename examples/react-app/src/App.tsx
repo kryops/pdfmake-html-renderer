@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { PdfmakeHtmlRenderer, mount, unmount } from 'pdfmake-html-renderer/standalone'
+import { PdfmakeHtmlRenderer } from 'pdfmake-html-renderer'
+import { mount, unmount } from 'svelte'
 import 'pdfmake-html-renderer/index.css'
 
 function App() {

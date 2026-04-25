@@ -35,7 +35,7 @@ export default defineConfig(async ({ isSsrBuild, mode }) => {
         },
       },
       rolldownOptions: {
-        external: isStandalone ? [] : ['qrcode'],
+        external: isStandalone ? [] : ['qrcode', /^svelte($|\/)/],
         output: {
           // This suppresses the warning about having both a default and a named export
           exports: 'named',

@@ -1,7 +1,9 @@
 // @ts-check
 
 import { createServer } from 'node:http'
-import PdfmakeHtmlRenderer, { render } from 'pdfmake-html-renderer/server'
+import PdfmakeHtmlRenderer from 'pdfmake-html-renderer/server'
+
+import { render } from 'svelte/server'
 
 const hostname = '127.0.0.1'
 const port = 3000

@@ -1,10 +1,19 @@
 # Changelog
 
+## Unreleased
+
+- Fixed using `mount`/`unmount` from the `svelte` module (still re-exported from `pdfmake-html-renderer`)
+- Fixed using `render` from `svelte/server` (still re-exported from `pdfmake-html-renderer/server`)
+
 ## v0.4.0 - 2026-04-12
 
 - **[BREAKING]** Updated to Svelte 5
-  - The global build was replaced with a `/standalone` export, which is now also the preferred way to integrate into other frameworks
+  - The component API for rendering from other frameworks or VanillaJS was replaced
+    - Now requires `mount`/`unmount` from `pdfmake-html-renderer`
+  - The global build was replaced with a `/standalone` export, which bundles Svelte's `mount` and `unmount`
   - The server-side rendering API was adapted following Svelte's changes
+    - Requires using `render` from `pdfmake-html-renderer/server`
+    - Now returns `body`+`head` instead of `html`+`css`
   - See the `/examples` folder for updated examples
 
 ## v0.3.3 - 2026-03-17
