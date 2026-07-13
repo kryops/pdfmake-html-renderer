@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.4.1 - 2026-07-13
 
 - Added support for server-side rendering of QR Codes
 - Fixed using `mount`/`unmount` from the `svelte` module (still re-exported from `pdfmake-html-renderer`)
