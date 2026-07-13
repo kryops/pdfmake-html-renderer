@@ -9,14 +9,10 @@
 
   let { node }: Props = $props()
 
-  let qrCode = $derived(buildQrCode(node))
+  let src = $derived(buildQrCode(node))
 </script>
 
-{#await qrCode then src}
-  {#if src}
-    <img {src} alt="" style={getQrStyleString(node, src)} />
-  {/if}
-{/await}
+<img {src} alt="" style={getQrStyleString(node, src)} />
 
 <style>
   img {

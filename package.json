@@ -63,7 +63,7 @@
     "test:playwright:run-update": "yarn test:playwright:run yarn playwright test --update-snapshots"
   },
   "dependencies": {
-    "qrcode": "^1.5.4"
+    "lean-qr": "^2.7.2"
   },
   "peerDependencies": {
     "svelte": "^5.0.0"
@@ -78,7 +78,6 @@
     "@tsconfig/svelte": "^5.0.7",
     "@types/node": "^24.10.12",
     "@types/pdfmake": "^0.3.1",
-    "@types/qrcode": "^1.5.6",
     "ace-builds": "^1.43.6",
     "css-color-names": "^1.0.1",
     "get-port": "^7.1.0",

@@ -93,8 +93,6 @@ This library was built using the [Svelte](https://svelte.dev/) framework, which 
 
 Check out the `/examples` folder for some example projects.
 
-> **TIP**: If you don't need QR Code support, you can try and ignore the `qrcode` package in your build process / bundler. This will roughly cut this package's bundle size in half.
-
 ### TypeScript support
 
 This package provides TypeScript typings. They depend on the typings for `svelte` and `pdfmake`, which are not included as dependencies and need to be added manually:
@@ -121,7 +119,6 @@ Check out `/examples/nodejs` for an exmaple.
 
 Rendering on the server comes with some additional limitations:
 
-- QR codes are not supported
 - Zooming / shrinking the page does not work
 - Relative positioning may not always be placed correctly
 

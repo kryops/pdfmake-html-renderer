@@ -19,6 +19,8 @@ const { body, head } = render(PdfmakeHtmlRenderer, {
         },
         '\n',
         'Hello, world!',
+        '\n',
+        { qr: 'foobar' },
       ],
     },
   },
