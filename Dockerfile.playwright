@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/playwright:v1.58.2-noble
+FROM mcr.microsoft.com/playwright:v1.61.1-noble
 
 WORKDIR /workspace
 
-RUN corepack enable && corepack prepare yarn@4.12.0 --activate || true
+RUN corepack enable && corepack prepare yarn@4.17.1 --activate || true
 
 COPY .yarn/releases/ ./.yarn/releases/
 COPY package.json yarn.lock .yarnrc.yml .yarn/releases/** playwright.config.ts ./
