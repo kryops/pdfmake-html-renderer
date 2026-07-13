@@ -1,8 +1,8 @@
 {
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
-  "typescript.preferences.quoteStyle": "single",
-  "typescript.tsdk": "node_modules/typescript/lib",
+  "js/ts.preferences.quoteStyle": "single",
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
   "search.exclude": {
     "**/node_modules": true,
     "dist": true,
@@ -12,4 +12,5 @@
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"
   },
+  "js/ts.experimental.useTsgo": false,
 }
