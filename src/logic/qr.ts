@@ -57,8 +57,8 @@ export function buildQrCode(node: ContentQr): string {
   })
 
   const svgSource = toSvgSource(code, {
-    on: colorToHex(node.foreground),
-    off: colorToHex(node.background),
+    on: colorToHex(node.foreground) ?? '#000',
+    off: colorToHex(node.background) ?? '#fff',
     pad: 0,
     width: null,
     height: null,

@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fixed QR code background defaulting to transparent instead of white (regression in 0.4.1)
+
 ## v0.4.1 - 2026-07-13
 
 - Added support for server-side rendering of QR Codes
