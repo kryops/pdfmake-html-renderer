@@ -4,6 +4,8 @@ import { getContext } from 'svelte'
 export const documentContextKey = 'pdfmake-document'
 export const nodesContextKey = 'pdfmake-nodes'
 
+// NOTE: Need to be consumed via $derived() to stay reactive
+
 export function getDocument(): TDocumentDefinitions {
   return getContext<() => TDocumentDefinitions>(documentContextKey)()
 }

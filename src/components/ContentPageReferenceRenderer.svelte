@@ -9,7 +9,7 @@
 
   let { node }: Props = $props()
 
-  const nodes = getDocumentNodes()
+  const nodes = $derived(getDocumentNodes())
 </script>
 
 <a

@@ -4,6 +4,7 @@
 
 - Fixed QR code background defaulting to transparent instead of white (regression in 0.4.1)
 - Fixed section margins, added support for `pageMargins: 'inherit'`
+- Fixed some changes to a document not being reflected in the rendered output
 
 ## v0.4.1 - 2026-07-13
 

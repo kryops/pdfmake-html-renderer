@@ -9,7 +9,7 @@
 
   let { node }: Props = $props()
   let text = $derived(typeof node === 'object' && node ? node.text : node)
-  const document = getDocument()
+  const document = $derived(getDocument())
 </script>
 
 <span class="phr-watermark" style={getWatermarkStyleString(node, document)}>

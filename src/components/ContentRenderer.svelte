@@ -27,8 +27,7 @@
     last = undefined,
   }: Props = $props()
 
-  const document = getDocument()
-  const nodes = getDocumentNodes()
+  const document = $derived(getDocument())
   let style = $derived(
     overrideStyle ?? getContentStyleString(node, document, inline)
   )
@@ -36,7 +35,7 @@
   let id = $derived(
     typeof node === 'object' && node && !inToc
       ? 'tocItem' in node
-        ? getTocTarget(node, nodes)
+        ? getTocTarget(node, getDocumentNodes())
         : 'id' in node
           ? node.id
           : undefined

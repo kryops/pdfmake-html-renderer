@@ -4,7 +4,7 @@
   import { getPageSize } from '../styling/page'
   import ContentRenderer from './ContentRenderer.svelte'
 
-  const document = getDocument()
+  const document = $derived(getDocument())
 
   export interface Props {
     node: Content | DynamicBackground

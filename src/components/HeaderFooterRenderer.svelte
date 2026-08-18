@@ -5,8 +5,6 @@
   import ContentRenderer from './ContentRenderer.svelte'
   import { getFooterHeight, getHeaderHeight } from '../styling/header'
 
-  const document = getDocument()
-
   export interface Props {
     type: 'header' | 'footer'
     node: Content | DynamicContent
@@ -16,7 +14,7 @@
   let { type, node, pageMargins }: Props = $props()
 
   let content = $derived(
-    typeof node === 'function' ? node(1, 1, getPageSize(document)) : node
+    typeof node === 'function' ? node(1, 1, getPageSize(getDocument())) : node
   )
 </script>
 

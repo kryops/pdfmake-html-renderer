@@ -9,7 +9,7 @@
 
   let { node }: Props = $props()
 
-  const document = getDocument()
+  const document = $derived(getDocument())
   let image = $derived(document.images?.[node.image])
   let src = $derived(
     (typeof image === 'object' ? image.url : image) ?? node.image

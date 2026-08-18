@@ -10,13 +10,13 @@
 
   let { node }: Props = $props()
 
-  const nodes = getDocumentNodes()
+  const nodes = $derived(getDocumentNodes())
 
   let referencedNode = $derived(getReferencedNode(node.textReference, nodes))
 </script>
 
 <a href="#{node.textReference}">
-  <!-- we cannot just render the whole refernced node, as its own styles are not applied -->
+  <!-- we cannot just render the whole referenced node, as its own styles are not applied -->
   {#if referencedNode && typeof referencedNode === 'object' && 'text' in referencedNode}
     <ContentRenderer node={referencedNode.text} inline />
   {:else}

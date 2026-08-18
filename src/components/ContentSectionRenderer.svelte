@@ -18,8 +18,8 @@
 
   let { node }: Props = $props()
 
-  const document = getDocument()
-  const nodes = getDocumentNodes()
+  const document = $derived(getDocument())
+  const nodes = $derived(getDocumentNodes())
 
   let margins = $derived(
     (node.pageMargins === 'inherit'
