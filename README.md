@@ -36,7 +36,7 @@ Playground: https://kryops.github.io/pdfmake-html-renderer/
 
 ### Supported browsers
 
-Currently, only evergreen browsers are supported explicitly (see `.browserslistrc`).
+Currently, only evergreen browsers are supported explicitly.
 
 If you need to support older browsers with your application, you should be able to run this library through [Babel](https://babeljs.io/) as part of your build process and polyfill newer APIs through [core-js](https://github.com/zloirock/core-js).
 
@@ -89,7 +89,7 @@ This library was built using the [Svelte](https://svelte.dev/) framework, which 
 
 - To consume it from a [Svelte](https://svelte.dev/) application, you may have to add build tooling to support TypeScript into your pipeline, as Svelte needs to compile the components from source
   - Note: This version was built using Svelte 5. For Svelte 4 support, use version 0.3 of this library
-- For other frameworks or VanillaJS, have a look at the [Svelte Component API](https://svelte.dev/docs/svelte/imperative-component-api). Due to problems with using an external import of the `svelte` package after the Svelte 5 update, the `/standalone` build already includes the `mount`/`unmount` functions
+- For other frameworks or VanillaJS, have a look at the [Svelte Component API](https://svelte.dev/docs/svelte/imperative-component-api)
 
 Check out the `/examples` folder for some example projects.
 
