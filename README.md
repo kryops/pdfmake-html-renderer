@@ -32,7 +32,6 @@ Playground: https://kryops.github.io/pdfmake-html-renderer/
 - **Attachments** are not displayed
 - **Sections** support is limited:
   - Sections do not support different page sizes
-  - Copying properties of the previous section via `'inherit'` is not supported
 
 ### Supported browsers
 

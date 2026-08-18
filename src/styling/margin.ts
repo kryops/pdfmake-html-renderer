@@ -31,7 +31,7 @@ export function getNegativeHorizontalMarginString(
       return [0, horizontal].map(it => -(it ?? 0) + 'pt').join(' ')
     }
   }
-  return margins + 'pt'
+  return `0 ${-margins}pt`
 }
 
 export function getMarginStringFromStyle(style: Style): string | undefined {

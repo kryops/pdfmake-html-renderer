@@ -1,7 +1,8 @@
 <script lang="ts">
   import type { ContentSection } from 'pdfmake/interfaces'
   import ContentRenderer from './ContentRenderer.svelte'
-  import { getDocument } from '../context'
+  import { getDocument, getDocumentNodes } from '../context'
+  import { getInheritedPageMargins } from '../logic/section'
   import {
     getMarginString,
     getNegativeHorizontalMarginString,
@@ -18,14 +19,12 @@
   let { node }: Props = $props()
 
   const document = getDocument()
+  const nodes = getDocumentNodes()
 
   let margins = $derived(
-    node.pageMargins === null
-      ? undefined
-      : // TODO "inherit" should actually inherit from the previous section, not the document
-        node.pageMargins === 'inherit'
-        ? document.pageMargins
-        : node.pageMargins
+    (node.pageMargins === 'inherit'
+      ? getInheritedPageMargins(nodes, node)
+      : node.pageMargins) ?? undefined
   )
 </script>
 

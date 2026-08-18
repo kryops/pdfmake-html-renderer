@@ -3,6 +3,7 @@ import { test } from '@playwright/test'
 import { takeSnapshots } from '../image-snapshot'
 
 const document: TDocumentDefinitions = {
+  pageMargins: 40,
   content: [
     'Inheritance\n\n',
     { text: 'leadingIndent', leadingIndent: 10 },
@@ -39,6 +40,24 @@ const document: TDocumentDefinitions = {
         ],
       ],
       columnGap: 20,
+    },
+    {
+      pageMargins: 20,
+      section: ['Section spacing inheritance', 'This section sets margin 20.'],
+    },
+    {
+      pageMargins: 'inherit',
+      section: [
+        'Second section inherits previous section margins',
+        'This should match the previous section instead of the document default.',
+      ],
+    },
+    {
+      pageMargins: 10,
+      section: [
+        'Third section with 10pt margins',
+        'The explicit section margin is smaller again.',
+      ],
     },
   ],
 }
