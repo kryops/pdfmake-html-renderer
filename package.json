@@ -1,6 +1,6 @@
 {
   "name": "pdfmake-html-renderer",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "author": "Michael Manzinger <michael@kryops.de>",
   "license": "MIT",
   "repository": {
@@ -42,7 +42,10 @@
       "default": "./dist/index.css"
     }
   },
-  "sideEffects": ["**/*.css", "./dist/standalone.mjs"],
+  "sideEffects": [
+    "**/*.css",
+    "./dist/standalone.mjs"
+  ],
   "types": "index.d.ts",
   "scripts": {
     "clean": "rimraf dist",
