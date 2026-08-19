@@ -42,6 +42,7 @@
       "default": "./dist/index.css"
     }
   },
+  "sideEffects": ["**/*.css", "./dist/standalone.mjs"],
   "types": "index.d.ts",
   "scripts": {
     "clean": "rimraf dist",
