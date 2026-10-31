@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added support for `tableAlignment`
+
 ## v0.4.2 - 2026-08-19
 
 - Fixed QR code background defaulting to transparent instead of white (regression in 0.4.1)

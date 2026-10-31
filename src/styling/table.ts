@@ -5,7 +5,7 @@ import { getSize } from './size'
 import { colorToRgb, getStyleString } from './utils'
 
 export function getTableStyleString(node: ContentTable): string | undefined {
-  if (!node.table.widths) return undefined
+  if (!node.table.widths && !node.tableAlignment) return undefined
 
   const style: CssDictionary = {}
 
@@ -20,6 +20,11 @@ export function getTableStyleString(node: ContentTable): string | undefined {
       style['width'] = '100%'
     }
   }
+
+  if (node.tableAlignment === 'right' || node.tableAlignment === 'center') {
+    style['margin-left'] = 'auto'
+  }
+  if (node.tableAlignment === 'center') style['margin-right'] = 'auto'
 
   return getStyleString(style)
 }

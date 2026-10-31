@@ -6,4 +6,8 @@ import {
 } from 'pdfmake/interfaces'
 
 // Types updates not yet released to DefinitelyTyped
-declare module 'pdfmake/interfaces' {}
+declare module 'pdfmake/interfaces' {
+  interface ContentTable {
+    tableAlignment?: 'left' | 'center' | 'right' | undefined
+  }
+}
