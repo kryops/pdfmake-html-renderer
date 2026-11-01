@@ -3,4 +3,3 @@ package.json
 .yarn
 dist
 node_modules
-docs

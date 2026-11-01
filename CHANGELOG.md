@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Added support for `tableAlignment`
+- Switched to trusted publishing via GitHub Actions
 
 ## v0.4.2 - 2026-08-19
 

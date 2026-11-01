@@ -6,7 +6,7 @@ export default defineConfig(async () => {
   return {
     plugins: [svelte()],
     build: {
-      outDir: '../docs',
+      outDir: '../build/playground',
       emptyOutDir: true,
       sourcemap: true,
     },
