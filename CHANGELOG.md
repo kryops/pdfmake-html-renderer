@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.4.3 - 2026-11-01
 
 - Added support for `tableAlignment`
 - Switched to trusted publishing via GitHub Actions
