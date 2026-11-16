@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fixed snaking columns being wider than the surrounding content when using `columnGap`
+
 ## v0.4.4 - 2026-11-16
 
 - Added support for `minWidth`, `maxWidth`, `minHeight` and `maxHeight` on images

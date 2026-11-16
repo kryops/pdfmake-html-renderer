@@ -13,7 +13,7 @@
   let { node }: Props = $props()
 </script>
 
-<div class="phr-container">
+<div class="phr-container" class:phr-snaking={node.snakingColumns}>
   {#if node.snakingColumns}
     <div style={getSnakingColumnsStyleString(node)}>
       <ContentRenderer node={node.columns[0]} inline />
@@ -31,5 +31,11 @@
   .phr-container {
     display: flex;
     margin: 0 calc(-1 * var(--column-gap));
+  }
+
+  /* snaking columns have no margins on their columns that need compensating */
+  .phr-container.phr-snaking {
+    display: block;
+    margin: 0;
   }
 </style>
