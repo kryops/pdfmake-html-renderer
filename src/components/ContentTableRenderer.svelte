@@ -7,7 +7,10 @@
   } from '../logic/table'
   import {
     getTableCellStyleString,
+    getTableColumnCount,
+    getTableColumnStyleString,
     getTableStyleString,
+    hasFixedTableLayout,
   } from '../styling/table'
   import { getDocument } from '../context'
   import ContentRenderer from './ContentRenderer.svelte'
@@ -31,6 +34,13 @@
     node.layout === 'headerLineOnly' ||
     node.layout === 'lightHorizontalLines'}
 >
+  {#if hasFixedTableLayout(node)}
+    <colgroup>
+      {#each { length: getTableColumnCount(node) } as _, columnIndex}
+        <col style={getTableColumnStyleString(node, columnIndex)} />
+      {/each}
+    </colgroup>
+  {/if}
   <tbody>
     {#each node.table?.body ?? [] as tr, rowIndex}
       <tr

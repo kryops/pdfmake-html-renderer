@@ -10,21 +10,103 @@ import { getSize } from './size'
 import { getEffectiveNamedStyle } from './style'
 import { colorToRgb, getStyleString } from './utils'
 
+type ColumnWidth = number | string | null | undefined
+
+function getColumnWidths(table: ContentTable): ColumnWidth[] | undefined {
+  const { widths, body } = table.table
+  if (typeof widths === 'string') {
+    return Array.isArray(body?.[0]) ? body[0].map(() => widths) : [widths]
+  }
+  if (!Array.isArray(widths)) return undefined
+
+  // pdfmake mutates the table widths to contain objects
+  return widths.map(width =>
+    typeof width === 'object' && width ? (width as any).width : width
+  )
+}
+
+const isStar = (width: ColumnWidth) =>
+  width == null || width === '*' || width === 'star'
+
+/**
+ * pdfmake gives all `*` columns the same width, which HTML tables only do
+ * with a fixed layout. This is not possible with `auto` columns, as they are
+ * sized by their content.
+ */
+export function hasFixedTableLayout(table: ContentTable): boolean {
+  const widths = getColumnWidths(table)
+  return (
+    !!widths && widths.some(isStar) && !widths.some(width => width === 'auto')
+  )
+}
+
+/** The left and right padding of a column in a table with the given layout */
+function getColumnPadding(table: ContentTable, columnIndex: number): number {
+  const columns = getColumnWidths(table)?.length ?? 1
+  const isFirst = columnIndex === 0
+  const isLast = columnIndex === columns - 1
+
+  switch (table.layout) {
+    case 'noBorders':
+      return (isFirst ? 0 : 4) + (isLast ? 0 : 4)
+    case 'headerLineOnly':
+    case 'lightHorizontalLines':
+      return (isFirst ? 0 : 8) + (isLast ? 0 : 8)
+  }
+
+  if (typeof table.layout === 'object' && table.layout) {
+    const layout = table.layout as CustomTableLayout
+    const normalizedTable = {
+      ...table,
+      table: { ...table.table, widths: getColumnWidths(table) },
+    }
+    const padding = (property: CustomTableLayout['paddingLeft']) => {
+      if (typeof property === 'number') return property
+      if (typeof property !== 'function') return 4
+      try {
+        return Number(property(columnIndex, normalizedTable as any)) || 0
+      } catch {
+        return 4
+      }
+    }
+    return padding(layout.paddingLeft) + padding(layout.paddingRight)
+  }
+
+  return 8
+}
+
+/** Style of a `<col>` element for tables with a fixed layout */
+export function getTableColumnStyleString(
+  table: ContentTable,
+  columnIndex: number
+): string | undefined {
+  const width = getColumnWidths(table)?.[columnIndex]
+  if (isStar(width) || width == null) return undefined
+
+  const size = getSize(width)
+  // the column width includes the padding, while the specified width does not
+  return getStyleString({
+    width: size.includes('%')
+      ? size
+      : `calc(${size} + ${getColumnPadding(table, columnIndex)}pt)`,
+  })
+}
+
+export function getTableColumnCount(table: ContentTable): number {
+  return getColumnWidths(table)?.length ?? 0
+}
+
 export function getTableStyleString(node: ContentTable): string | undefined {
   if (!node.table.widths && !node.tableAlignment) return undefined
 
   const style: CssDictionary = {}
 
-  if (node.table.widths) {
-    if (node.table.widths === '*') {
-      style['table-layout'] = 'fixed'
-      style['width'] = '100%'
-    } else if (
-      Array.isArray(node.table.widths) &&
-      node.table.widths.includes('*')
-    ) {
-      style['width'] = '100%'
-    }
+  if (hasFixedTableLayout(node)) {
+    style['table-layout'] = 'fixed'
+    style['width'] = '100%'
+  } else if (getColumnWidths(node)?.some(isStar)) {
+    // columns with auto width are sized by their content
+    style['width'] = '100%'
   }
 
   if (node.tableAlignment === 'right' || node.tableAlignment === 'center') {

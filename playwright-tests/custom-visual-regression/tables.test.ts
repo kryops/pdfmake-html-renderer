@@ -110,6 +110,30 @@ const cellValues: TDocumentDefinitions = {
   ],
 }
 
+// All * columns have the same width, independent of their content
+const starWidths: TDocumentDefinitions = {
+  content: [
+    {
+      table: {
+        widths: ['*', '*', '*'],
+        body: [['short', 'a much longer cell with lots of text in it', 'mid']],
+      },
+    },
+    { text: '' },
+    { table: { widths: [100, '*', '*'], body: [['100pt', 'x', 'y']] } },
+    { text: '' },
+    {
+      table: { widths: [100, '*'], body: [['noBorders', 'rest']] },
+      layout: 'noBorders',
+    },
+    { text: '' },
+    {
+      table: { widths: ['20%', '*', '*'], body: [['20%', 'x', 'y']] },
+      layout: { paddingLeft: () => 10, paddingRight: () => 10 },
+    },
+  ],
+}
+
 // One combined snapshot to keep the number of images low
 const combined: TDocumentDefinitions = {
   styles: namedStyleFill.styles,
@@ -121,6 +145,8 @@ const combined: TDocumentDefinitions = {
     ...(spanBorders.content as Content[]),
     ' ',
     ...(cellValues.content as Content[]),
+    ' ',
+    ...(starWidths.content as Content[]),
   ],
 }
 
