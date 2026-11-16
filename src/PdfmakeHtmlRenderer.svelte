@@ -1,7 +1,11 @@
 <script lang="ts">
   import type { TDocumentDefinitions } from 'pdfmake/interfaces'
   import { setContext } from 'svelte'
-  import { documentContextKey, nodesContextKey } from './context'
+  import {
+    documentContextKey,
+    modeContextKey,
+    nodesContextKey,
+  } from './context'
   import DocumentRenderer from './components/DocumentRenderer.svelte'
   import { flattenNodes } from './logic/content'
   import type { PageSizeMode } from './styling/page'
@@ -18,6 +22,7 @@
 
   setContext(documentContextKey, () => document)
   setContext(nodesContextKey, () => nodes)
+  setContext(modeContextKey, () => mode)
 </script>
 
 {#if document}

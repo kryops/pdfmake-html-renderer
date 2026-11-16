@@ -1,9 +1,17 @@
 <script lang="ts">
   import type { Content } from 'pdfmake/interfaces'
-  import { getDocument, getDocumentNodes } from '../context'
+  import { setContext } from 'svelte'
+  import {
+    decorationVariablesContextKey,
+    getDocument,
+    getDocumentNodes,
+    getMode,
+    getParentDecorationVariables,
+  } from '../context'
   import { getContentRenderer, normalizeNode } from '../logic/content'
   import { getTocTarget } from '../logic/toc'
   import { getContentStyleString } from '../styling/content'
+  import { hasFragmentDecorationOverrides } from '../styling/style'
   import ContentLinkRenderer from './ContentLinkRenderer.svelte'
   import ContentTextRenderer from './ContentTextRenderer.svelte'
   import StringRenderer from './StringRenderer.svelte'
@@ -30,8 +38,20 @@
 
   const node = $derived(normalizeNode(rawNode))
   const document = $derived(getDocument())
+  const parentDecorationVariables = getParentDecorationVariables()
+  const mode = getMode()
+  // text fragments can only override the decoration of their parent
+  // when it is applied through CSS variables
+  const decorationVariables = $derived(
+    parentDecorationVariables || hasFragmentDecorationOverrides(node)
+  )
+  setContext(decorationVariablesContextKey, () => decorationVariables)
   let style = $derived(
-    overrideStyle ?? getContentStyleString(node, document, inline)
+    overrideStyle ??
+      getContentStyleString(node, document, inline, {
+        decorationVariables,
+        fluid: mode === 'fluid',
+      })
   )
   let component = $derived(getContentRenderer(node, inLink))
   let id = $derived(

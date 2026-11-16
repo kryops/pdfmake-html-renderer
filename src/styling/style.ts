@@ -196,24 +196,31 @@ export function getEffectiveNamedStyle(
 }
 
 const decorationOverrideKeys = [
+  'decoration',
   'decorationColor',
   'decorationStyle',
   'decorationThickness',
 ] as const
 
 /**
- * Whether any (nested) text fragment of the node overrides the decoration
- * color, style or thickness of the node.
+ * Whether any (nested) text fragment of a decorated node overrides the
+ * decoration, color, style or thickness of the node.
  */
 export function hasFragmentDecorationOverrides(node: Content): boolean {
   if (typeof node !== 'object' || !node || Array.isArray(node)) return false
   if (!('text' in node) || !Array.isArray(node.text)) return false
+  // the decoration may also come from a named style
+  const { decoration, style } = node as Style & { style?: unknown }
+  if (decoration == null && style == null) return false
 
-  return node.text.some(
-    fragment =>
-      typeof fragment === 'object' &&
-      !!fragment &&
-      (decorationOverrideKeys.some(key => (fragment as Style)[key] != null) ||
-        hasFragmentDecorationOverrides(fragment))
-  )
+  const overrides = (fragment: Content): boolean =>
+    typeof fragment === 'object' &&
+    !!fragment &&
+    !Array.isArray(fragment) &&
+    (decorationOverrideKeys.some(key => (fragment as Style)[key] != null) ||
+      ('text' in fragment &&
+        Array.isArray(fragment.text) &&
+        fragment.text.some(overrides)))
+
+  return node.text.some(overrides)
 }

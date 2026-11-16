@@ -1,24 +1,25 @@
 import type { Content, Style, TDocumentDefinitions } from 'pdfmake/interfaces'
 import type { CssDictionary } from './css-dictionary'
 import { getPageSize } from './page'
-import {
-  getEffectiveNamedStyle,
-  getStyleDictionary,
-  hasFragmentDecorationOverrides,
-} from './style'
+import { getEffectiveNamedStyle, getStyleDictionary } from './style'
 import { getStyleString, omitNullish } from './utils'
+
+export interface ContentStyleOptions {
+  /** Apply text decorations through CSS variables, see `getStyleDictionary` */
+  decorationVariables?: boolean
+  fluid?: boolean
+}
 
 function getContentStyleDictionary(
   node: Content,
   document: TDocumentDefinitions,
-  inline: boolean
+  inline: boolean,
+  { decorationVariables = false, fluid = false }: ContentStyleOptions
 ): CssDictionary {
-  const pageSize = getPageSize(document)
-  const maxWidth = pageSize.width
+  const styles: CssDictionary = {}
 
-  const styles: CssDictionary = {
-    'max-width': maxWidth + 'pt',
-  }
+  // the page size is ignored in fluid mode
+  if (!fluid) styles['max-width'] = getPageSize(document).width + 'pt'
 
   // some elements need display: block
   // - columns to grow properly
@@ -58,8 +59,6 @@ function getContentStyleDictionary(
   if (typeof node !== 'object' || !node || Array.isArray(node)) {
     return styles
   }
-
-  const decorationVariables = hasFragmentDecorationOverrides(node)
 
   const applyBaseStyle = (nameOrStyle: string | Style) => {
     if (typeof nameOrStyle === 'object') {
@@ -142,14 +141,16 @@ function getContentStyleDictionary(
 export function getContentStyleString(
   node: Content,
   document: TDocumentDefinitions,
-  inline = false
+  inline = false,
+  options: ContentStyleOptions = {}
 ) {
   const styles = getContentStyleDictionary(
     typeof node === 'string' || typeof node === 'number'
       ? { text: node }
       : node,
     document,
-    inline
+    inline,
+    options
   )
   return getStyleString(styles)
 }

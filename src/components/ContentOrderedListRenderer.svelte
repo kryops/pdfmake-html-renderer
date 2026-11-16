@@ -44,7 +44,7 @@
     counter-increment: item;
   }
 
-  ol.phr-reversed li {
+  ol.phr-reversed > li {
     counter-increment: item -1;
   }
 

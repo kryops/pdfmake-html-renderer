@@ -6,6 +6,7 @@
 - Fixed content being limited to the short side of the page in landscape orientation
 - Fixed the height of headers and footers for numeric and `[horizontal, vertical]` `pageMargins`
 - Fixed `defaultStyle` being ignored in `mode: 'fluid'`
+- Fixed content being limited to the page width in `mode: 'fluid'`
 - Fixed `alignment` being ignored for `image`, `svg` and `canvas`
 - Fixed images and SVGs without explicit size being rendered at 75% of their size (pdfmake interprets pixels as points)
 - Added support for `minWidth`, `maxWidth`, `minHeight` and `maxHeight` on images
@@ -15,7 +16,8 @@
 - Fixed layout borders (`vLineWidth`, `hLineWidth`, etc.) of table cells with `colSpan` or `rowSpan`
 - Fixed empty (`{}`, `null`) and boolean content nodes being rendered as "Unknown"
 - Fixed reversed ordered lists starting at a too high number when they contain nested lists
-- Fixed `decorationThickness`, `decorationColor` and `decorationStyle` of text fragments being ignored when the `decoration` is set on the parent
+- Fixed ordered lists nested in reversed lists counting down
+- Fixed `decorationThickness`, `decorationColor` and `decorationStyle` of text fragments being ignored when the `decoration` is set on the parent, and fragments with their own `decoration` also getting the decoration of the parent
 - Fixed `*` table columns not having the same width (when the table has no `auto` columns)
 - Fixed percentage column widths with `columnGap` being calculated from the width including the gaps
 - Fixed empty text (`{ text: '' }`, `''`) and empty table cells not creating an empty line like in pdfmake
