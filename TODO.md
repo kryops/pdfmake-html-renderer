@@ -13,7 +13,6 @@
 
 ## Build
 
-- GitHub Actions
 - Evaluate switching to SvelteKit
 
 ## Tooling
