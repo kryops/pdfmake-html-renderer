@@ -1,7 +1,9 @@
 # Changelog
 
-## Unreleased
+## v0.4.4 - 2026-11-16
 
+- Added support for `minWidth`, `maxWidth`, `minHeight` and `maxHeight` on images
+- Added support for `fontFeatures`
 - Fixed named page sizes (e.g. `pageSize: 'A5'`) being rendered as squares, and made them case-insensitive
 - Fixed content being limited to the short side of the page in landscape orientation
 - Fixed the height of headers and footers for numeric and `[horizontal, vertical]` `pageMargins`
@@ -9,7 +11,6 @@
 - Fixed content being limited to the page width in `mode: 'fluid'`
 - Fixed `alignment` being ignored for `image`, `svg` and `canvas`
 - Fixed images and SVGs without explicit size being rendered at 75% of their size (pdfmake interprets pixels as points)
-- Added support for `minWidth`, `maxWidth`, `minHeight` and `maxHeight` on images
 - Fixed gradients of different `canvas` elements overriding each other
 - Fixed `fillColor` from a named `style` on a table cell being ignored
 - Fixed `null` table cells breaking the whole table, and number/boolean cells being rendered empty
@@ -22,7 +23,6 @@
 - Fixed percentage column widths with `columnGap` being calculated from the width including the gaps
 - Fixed empty text (`{ text: '' }`, `''`) and empty table cells not creating an empty line like in pdfmake
 - Fixed long words overflowing instead of being broken
-- Added support for `fontFeatures`
 - Tabs are now expanded to four spaces, like in pdfmake
 
 ## v0.4.3 - 2026-11-01
