@@ -62,6 +62,9 @@
             >
               {#if isActualTableCell(td)}
                 <ContentRenderer node={td} />
+              {:else}
+                <!-- pdfmake renders an empty line in empty cells -->
+                <ContentRenderer node="" />
               {/if}
             </td>
           {/if}

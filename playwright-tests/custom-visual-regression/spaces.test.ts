@@ -97,6 +97,25 @@ const document: TDocumentDefinitions = {
       preserveLeadingSpaces: true,
       preserveTrailingSpaces: true,
     },
+    // empty text renders an empty line in pdfmake
+    'Empty text between two tables:',
+    { table: { body: [['a']] } },
+    { text: '' },
+    { table: { body: [['b']] } },
+    'Empty string, empty text with a larger font size, and inline empty text:',
+    '',
+    { text: '', fontSize: 30 },
+    { text: ['inline ', '', { text: '' }, 'empties'] },
+    'Empty list item and empty table cells:',
+    { ul: ['a', '', 'c'] },
+    {
+      table: {
+        body: [
+          ['x', ''],
+          ['', null as any],
+        ],
+      },
+    },
   ],
 }
 
