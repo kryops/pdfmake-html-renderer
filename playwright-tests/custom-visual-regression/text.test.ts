@@ -39,12 +39,15 @@ const decorations: TDocumentDefinitions = {
   styles: { underlined: { decoration: 'underline', decorationThickness: 3 } },
 }
 
-// Words wider than the line are broken, also in columns and cells
+// Words wider than the line are broken, also in fixed-width columns and cells
 const longWords: TDocumentDefinitions = {
   content: [
     'https://example.com/averyveryveryveryveryverylongurlwithoutanybreakopportunities',
     {
-      columns: ['Averyveryveryveryveryverylongwordwithoutbreaks', 'short'],
+      columns: [
+        { width: 60, text: 'Averyveryveryveryverylongwordwithoutbreaks' },
+        'short',
+      ],
     },
     {
       table: {

@@ -20,7 +20,7 @@
     </div>
   {:else}
     {#each node.columns as column}
-      <div style={getColumnStyleString(column)}>
+      <div style={getColumnStyleString(column, node.columns.length)}>
         <ContentRenderer node={column} />
       </div>
     {/each}

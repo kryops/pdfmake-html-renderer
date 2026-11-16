@@ -3,7 +3,7 @@ import type { CssDictionary } from './css-dictionary'
 import { getSize } from './size'
 import { getStyleString } from './utils'
 
-export function getColumnStyleString(node: Content) {
+export function getColumnStyleString(node: Content, columnCount = 1) {
   const starWidthStyle = {
     'flex-basis': 0,
     'flex-grow': 1,
@@ -13,8 +13,6 @@ export function getColumnStyleString(node: Content) {
     'flex-grow': '0',
     'flex-shrink': '1',
     margin: `0 var(--column-gap, '0')`,
-    // allows long words to be broken instead of overflowing the column
-    'min-width': '0',
   }
 
   if (typeof node !== 'object' || Array.isArray(node)) {
@@ -26,7 +24,17 @@ export function getColumnStyleString(node: Content) {
     } else if (column.width == null || column.width === '*') {
       Object.assign(styles, starWidthStyle)
     } else {
-      styles.width = getSize(column.width)
+      const width = getSize(column.width)
+      if (width.includes('%')) {
+        // pdfmake calculates percentages from the space left after the gaps,
+        // which are the margins of all columns here
+        styles.width = `calc((100% - 2 * ${columnCount} * var(--column-gap, 0pt)) * ${parseFloat(width) / 100})`
+      } else {
+        styles.width = width
+      }
+      // pdfmake breaks words that are wider than the column
+      styles['min-width'] = '0'
+      styles['overflow-wrap'] = 'anywhere'
     }
   }
 

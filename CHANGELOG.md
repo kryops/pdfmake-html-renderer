@@ -17,6 +17,7 @@
 - Fixed reversed ordered lists starting at a too high number when they contain nested lists
 - Fixed `decorationThickness`, `decorationColor` and `decorationStyle` of text fragments being ignored when the `decoration` is set on the parent
 - Fixed `*` table columns not having the same width (when the table has no `auto` columns)
+- Fixed percentage column widths with `columnGap` being calculated from the width including the gaps
 - Fixed long words overflowing instead of being broken
 - Added support for `fontFeatures`
 - Tabs are now expanded to four spaces, like in pdfmake
