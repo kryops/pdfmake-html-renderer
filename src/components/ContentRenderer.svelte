@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Content } from 'pdfmake/interfaces'
   import { getDocument, getDocumentNodes } from '../context'
-  import { getContentRenderer } from '../logic/content'
+  import { getContentRenderer, normalizeNode } from '../logic/content'
   import { getTocTarget } from '../logic/toc'
   import { getContentStyleString } from '../styling/content'
   import ContentLinkRenderer from './ContentLinkRenderer.svelte'
@@ -18,7 +18,7 @@
   }
 
   let {
-    node,
+    node: rawNode,
     inline = false,
     inToc = false,
     inLink = false,
@@ -27,6 +27,7 @@
     last = undefined,
   }: Props = $props()
 
+  const node = $derived(normalizeNode(rawNode))
   const document = $derived(getDocument())
   let style = $derived(
     overrideStyle ?? getContentStyleString(node, document, inline)
@@ -54,7 +55,7 @@
     {@const SvelteComponent = component}
     <SvelteComponent {node} />
   {:else if component}
-    {#if component !== ContentTextRenderer || !('text' in node) || node.text !== ''}
+    {#if component !== ContentTextRenderer || !('text' in node) || (node.text !== '' && node.text != null)}
       {@const SvelteComponent_1 = component}
       <div {style} {id}>
         <SvelteComponent_1 node={neverNode} {inline} {first} {last} />

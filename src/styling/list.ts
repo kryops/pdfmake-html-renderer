@@ -79,10 +79,19 @@ function getRomanChars(num: number, start = 1000): string {
   return chars + getRomanChars(current, start / 10)
 }
 
+/** Nested lists do not take up a number, they belong to the previous item */
+function countNumberedItems(node: ContentOrderedList): number {
+  if (!Array.isArray(node.ol)) return 0
+  return node.ol.filter(
+    item =>
+      !(typeof item === 'object' && item && ('ul' in item || 'ol' in item))
+  ).length
+}
+
 function getMaxCharacters(node: ContentOrderedList): number {
   if (!Array.isArray(node.ol)) return 1
 
-  let largestNumber = (node.start ?? 1) + node.ol.length
+  let largestNumber = (node.start ?? 1) + countNumberedItems(node)
   const counters = node.ol.filter(it => it.counter).map(it => it.counter!)
   if (counters.length) {
     largestNumber = Math.max(largestNumber, ...counters)
@@ -136,7 +145,7 @@ export function getOrderedListStyleString(node: ContentOrderedList): string {
   if (node.markerColor) style['--marker-color'] = node.markerColor
 
   const startPosition = node.reversed
-    ? (node.start ?? node.ol.length) + 1
+    ? (node.start ?? countNumberedItems(node)) + 1
     : (node.start ?? 1) - 1
   if (startPosition !== 0) style['counter-reset'] = `item ${startPosition}`
 

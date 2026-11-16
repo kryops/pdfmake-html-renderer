@@ -13,13 +13,17 @@
   }
 
   let { node }: Props = $props()
+
+  // gradient IDs need to be unique within the whole document
+  const uid = $props.id()
 </script>
 
+<div class="phr-media">
 <svg {...getCanvasProperties(node)}>
   <defs>
     {#each node.canvas as element, elementIndex}
       {#if 'linearGradient' in element && element.linearGradient?.length}
-        <linearGradient id="gradient{elementIndex}">
+        <linearGradient id="{uid}-gradient{elementIndex}">
           {#each element.linearGradient as stopColor, stopIndex}
             <stop
               offset="{(stopIndex /
@@ -35,20 +39,27 @@
   </defs>
   {#each node.canvas as element, index}
     {#if element.type === 'rect'}
-      <rect {...getCanvasRectProperties(element, index)} />
+      <rect {...getCanvasRectProperties(element, `${uid}-gradient${index}`)} />
     {:else if element.type === 'ellipse'}
-      <ellipse {...getCanvasEllipseProperties(element, index)} />
+      <ellipse {...getCanvasEllipseProperties(element, `${uid}-gradient${index}`)} />
     {:else if element.type === 'line'}
       <line {...getCanvasLineProperties(element)} />
     {:else if element.type === 'polyline'}
-      <polyline {...getCanvasPolylineProperties(element, index)} />
+      <polyline {...getCanvasPolylineProperties(element, `${uid}-gradient${index}`)} />
     {/if}
   {/each}
 </svg>
+</div>
 
 <style>
-  svg {
+  .phr-media {
     display: block;
+    line-height: 0;
+  }
+
+  svg {
+    display: inline-block;
+    vertical-align: top;
     overflow: visible;
   }
 </style>

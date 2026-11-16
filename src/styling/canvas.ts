@@ -53,14 +53,14 @@ export function getCanvasProperties(node: ContentCanvas): Properties {
 
 function getCanvasFilledElementProperties(
   element: CanvasFilledElement,
-  index: number
+  gradientId: string
 ): Properties {
   const properties: Properties = {
     fill: 'none',
   }
 
   if (element.linearGradient) {
-    properties.fill = `url('#gradient${index}')`
+    properties.fill = `url('#${gradientId}')`
   } else if (element.color) {
     const color = opacityColor(element.color, element.fillOpacity)
     if (color) properties.fill = color
@@ -102,10 +102,10 @@ function getCanvasLineElementProperties(
 
 export function getCanvasRectProperties(
   rect: CanvasRect,
-  index: number
+  gradientId: string
 ): Properties {
   const properties: Properties = {
-    ...getCanvasFilledElementProperties(rect, index),
+    ...getCanvasFilledElementProperties(rect, gradientId),
     ...getCanvasLineElementProperties(rect),
     x: rect.x + 'pt',
     y: rect.y + 'pt',
@@ -123,10 +123,10 @@ export function getCanvasRectProperties(
 
 export function getCanvasEllipseProperties(
   ellipse: CanvasEllipse,
-  index: number
+  gradientId: string
 ): Properties {
   const properties: Properties = {
-    ...getCanvasFilledElementProperties(ellipse, index),
+    ...getCanvasFilledElementProperties(ellipse, gradientId),
     ...getCanvasLineElementProperties(ellipse),
     cx: ellipse.x + 'pt',
     cy: ellipse.y + 'pt',
@@ -155,14 +155,14 @@ export function getCanvasLineProperties(line: CanvasLine): Properties {
 
 export function getCanvasPolylineProperties(
   line: CanvasPolyline,
-  index: number
+  gradientId: string
 ): Properties {
   if (!Array.isArray(line.points)) return {}
 
   const points = line.closePath ? [...line.points, line.points[0]] : line.points
 
   const properties: Properties = {
-    ...getCanvasFilledElementProperties(line, index),
+    ...getCanvasFilledElementProperties(line, gradientId),
     ...getCanvasLineElementProperties(line),
     points: points
       .filter(point => typeof point === 'object' && !!point)

@@ -16,10 +16,20 @@
   )
 </script>
 
-<img {src} alt="" style={getImageStyleString(node)} />
+<div class="phr-media">
+  <img {src} alt="" style={getImageStyleString(node)} />
+</div>
 
 <style>
-  img {
+  /* Inline content, so that the inherited text-align (alignment) applies.
+     The line height is 0 to prevent a gap below the image. */
+  .phr-media {
     display: block;
+    line-height: 0;
+  }
+
+  img {
+    display: inline-block;
+    vertical-align: top;
   }
 </style>

@@ -1,7 +1,13 @@
-import type { ContentTable, CustomTableLayout } from 'pdfmake/interfaces'
+import type {
+  ContentTable,
+  CustomTableLayout,
+  Style,
+  TDocumentDefinitions,
+} from 'pdfmake/interfaces'
 import type { ActualTableCell } from '../logic/table'
 import type { CssDictionary } from './css-dictionary'
 import { getSize } from './size'
+import { getEffectiveNamedStyle } from './style'
 import { colorToRgb, getStyleString } from './utils'
 
 export function getTableStyleString(node: ContentTable): string | undefined {
@@ -29,13 +35,41 @@ export function getTableStyleString(node: ContentTable): string | undefined {
   return getStyleString(style)
 }
 
+/** The fill that a cell gets from its named styles */
+function getFillFromStyles(
+  node: ActualTableCell,
+  document: TDocumentDefinitions
+): Pick<Style, 'fillColor' | 'fillOpacity'> {
+  const result: Pick<Style, 'fillColor' | 'fillOpacity'> = {}
+  if (typeof node !== 'object' || !node || !('style' in node) || !node.style)
+    return result
+
+  const styles = Array.isArray(node.style) ? node.style : [node.style]
+  for (const entry of styles) {
+    const effective =
+      typeof entry === 'string'
+        ? document.styles?.[entry]
+          ? getEffectiveNamedStyle(document.styles, entry)
+          : {}
+        : entry
+    if (effective.fillColor != null) result.fillColor = effective.fillColor
+    if (effective.fillOpacity != null)
+      result.fillOpacity = effective.fillOpacity
+  }
+  return result
+}
+
 export function getTableCellStyleString(
   node: ActualTableCell,
   table: ContentTable,
   rowIndex: number,
-  columnIndex: number
+  columnIndex: number,
+  document: TDocumentDefinitions
 ): string {
   const style: CssDictionary = {}
+  // the right/bottom lines of a cell are after its last spanned column/row
+  const colSpan = (typeof node === 'object' && node && node.colSpan) || 1
+  const rowSpan = (typeof node === 'object' && node && node.rowSpan) || 1
 
   if (Array.isArray(table.table.widths)) {
     // pdfmake mutates the table widths to contain objects
@@ -51,6 +85,8 @@ export function getTableCellStyleString(
       style.width = width
       // overflow longer text
       style['max-width'] = width
+      // pdfmake breaks words that are wider than the column
+      style['overflow-wrap'] = 'anywhere'
     }
   }
 
@@ -97,7 +133,7 @@ export function getTableCellStyleString(
             horizontal ? columnIndex : rowIndex
           )
           const val2 = property(
-            horizontal ? rowIndex + 1 : columnIndex + 1,
+            horizontal ? rowIndex + rowSpan : columnIndex + colSpan,
             normalizedTable,
             horizontal ? columnIndex : rowIndex
           )
@@ -190,6 +226,17 @@ export function getTableCellStyleString(
       style['border-style'] = 'none'
     }
   }
+
+  const styleFill = getFillFromStyles(node, document)
+  if (styleFill.fillColor) {
+    const fillColorRgb = colorToRgb(styleFill.fillColor)
+    if (fillColorRgb) {
+      style['--fill-color'] = fillColorRgb.join(', ')
+      style['--fill-opacity'] = '1'
+    }
+  }
+  if (styleFill.fillOpacity != null)
+    style['--fill-opacity'] = String(styleFill.fillOpacity)
 
   if (typeof node === 'object' && node) {
     if ('noWrap' in node && node.noWrap) {

@@ -13,6 +13,8 @@ export function getColumnStyleString(node: Content) {
     'flex-grow': '0',
     'flex-shrink': '1',
     margin: `0 var(--column-gap, '0')`,
+    // allows long words to be broken instead of overflowing the column
+    'min-width': '0',
   }
 
   if (typeof node !== 'object' || Array.isArray(node)) {

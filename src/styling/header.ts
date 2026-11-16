@@ -1,23 +1,12 @@
 import type { Margins } from 'pdfmake/interfaces'
+import { normalizeMargins } from './margin'
 
 export function getHeaderHeight(pageMargins: Margins | undefined): string {
-  if (Array.isArray(pageMargins)) {
-    if (pageMargins.length >= 4) {
-      return pageMargins[1] + 'pt'
-    } else {
-      return pageMargins[0] + 'pt'
-    }
-  }
-  return '40pt'
+  if (pageMargins == null) return '40pt'
+  return normalizeMargins(pageMargins)[1] + 'pt'
 }
 
 export function getFooterHeight(pageMargins: Margins | undefined): string {
-  if (Array.isArray(pageMargins)) {
-    if (pageMargins.length >= 4) {
-      return pageMargins[3] + 'pt'
-    } else {
-      return pageMargins[1] + 'pt'
-    }
-  }
-  return '40pt'
+  if (pageMargins == null) return '40pt'
+  return normalizeMargins(pageMargins)[3] + 'pt'
 }

@@ -71,9 +71,14 @@ const stringify = function (obj: object): string {
   return json
 }
 
+export interface SnapshotOptions {
+  mode?: 'shrinkToFit' | 'zoomToFit' | 'natural' | 'fluid'
+}
+
 export async function imageSnapshot(
   document: TDocumentDefinitions,
-  page: Page
+  page: Page,
+  options: SnapshotOptions = {}
 ): Promise<Buffer> {
   response.mimeType = 'text/html'
   response.content = `<!DOCTYPE html>
@@ -95,6 +100,7 @@ export async function imageSnapshot(
         props: {
           document: ${stringify(document)},
           pageShadow: false,
+          mode: ${JSON.stringify(options.mode ?? 'shrinkToFit')},
         }
       })
     </script>
@@ -108,12 +114,14 @@ export async function imageSnapshot(
 
 export async function serverImageSnapshot(
   document: TDocumentDefinitions,
-  page: Page
+  page: Page,
+  options: SnapshotOptions = {}
 ): Promise<Buffer> {
   const { body, head } = render(PdfmakeHtmlRenderer, {
     props: {
       document,
       pageShadow: false,
+      mode: options.mode,
     },
   })
 
@@ -139,10 +147,11 @@ export async function serverImageSnapshot(
 export async function takeSnapshots(
   document: TDocumentDefinitions,
   page: Page,
-  allowDifferent = false
+  allowDifferent = false,
+  options: SnapshotOptions = {}
 ): Promise<void> {
-  const clientScreenshot = await imageSnapshot(document, page)
-  const serverScreenshot = await serverImageSnapshot(document, page)
+  const clientScreenshot = await imageSnapshot(document, page, options)
+  const serverScreenshot = await serverImageSnapshot(document, page, options)
 
   if (!allowDifferent) {
     expect(clientScreenshot.equals(serverScreenshot)).toBe(true)

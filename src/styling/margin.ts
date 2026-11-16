@@ -51,7 +51,9 @@ export function getMarginStringFromStyle(style: Style): string | undefined {
   return undefined
 }
 
-function normalizeMargins(margins: Margins): [number, number, number, number] {
+export function normalizeMargins(
+  margins: Margins
+): [number, number, number, number] {
   if (Array.isArray(margins)) {
     if (margins.length >= 4) {
       const [left, top, right, bottom] = margins

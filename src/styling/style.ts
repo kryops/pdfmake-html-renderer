@@ -10,7 +10,8 @@ import { colorToRgb, omitNullish } from './utils'
 
 export function getStyleDictionary(
   input: Style | Content | undefined,
-  isNode = false
+  isNode = false,
+  decorationVariables = false
 ) {
   const obj: CssDictionary = {}
 
@@ -60,18 +61,35 @@ export function getStyleDictionary(
         obj['padding-bottom'] = style.marginBottom + 'pt'
     }
   }
+  // Text decorations are propagated to child elements by CSS, and children
+  // cannot override their line style, color or thickness.
+  // When fragments override these, the decoration is instead applied to each
+  // text through CSS variables (see StringRenderer).
+  const decorationAsVariables = decorationVariables || style.decoration == null
+  // Without a decoration of its own, the style may still be combined with a
+  // decoration from a named style on the same element, or a parent
+  const setDecorationProperty = (name: string, value: string) => {
+    if (decorationAsVariables) obj[`--decoration-${name}`] = value
+    if (!decorationVariables) obj[`text-decoration-${name}`] = value
+  }
+
   if (style.decoration != null) {
-    obj['text-decoration'] = (
+    const decoration = (
       Array.isArray(style.decoration) ? style.decoration : [style.decoration]
     )
       .map(it => (it === 'lineThrough' ? 'line-through' : it))
       .join(' ')
+    if (decorationAsVariables) {
+      obj['--decoration-line'] = decoration
+    } else {
+      obj['text-decoration'] = decoration
+    }
   }
   if (style.decorationColor != null) {
-    obj['text-decoration-color'] = style.decorationColor
+    setDecorationProperty('color', style.decorationColor)
   }
   if (style.decorationStyle != null) {
-    obj['text-decoration-style'] = style.decorationStyle
+    setDecorationProperty('style', style.decorationStyle)
   }
   if (style.decorationThickness != null) {
     // only an approximation, but good enough
@@ -86,7 +104,10 @@ export function getStyleDictionary(
       (style.decorationStyle && factorByStyle[style.decorationStyle]) ||
       factorByStyle.solid
 
-    obj['text-decoration-thickness'] = style.decorationThickness * factor + 'pt'
+    setDecorationProperty(
+      'thickness',
+      style.decorationThickness * factor + 'pt'
+    )
   }
   if (style.opacity != null) obj.opacity = String(style.opacity)
   if (style.characterSpacing != null)
@@ -119,6 +140,12 @@ export function getStyleDictionary(
 
   if (style.columnGap != null) {
     obj['--column-gap'] = String(Number(style.columnGap) / 2) + 'pt'
+  }
+
+  if (style.fontFeatures?.length) {
+    obj['font-feature-settings'] = style.fontFeatures
+      .map(feature => JSON.stringify(feature))
+      .join(', ')
   }
 
   if (style.wordBreak === 'break-all') {
@@ -166,4 +193,27 @@ export function getEffectiveNamedStyle(
       ...(margins ? { margin: margins } : {}),
     }
   }, {} as Style)
+}
+
+const decorationOverrideKeys = [
+  'decorationColor',
+  'decorationStyle',
+  'decorationThickness',
+] as const
+
+/**
+ * Whether any (nested) text fragment of the node overrides the decoration
+ * color, style or thickness of the node.
+ */
+export function hasFragmentDecorationOverrides(node: Content): boolean {
+  if (typeof node !== 'object' || !node || Array.isArray(node)) return false
+  if (!('text' in node) || !Array.isArray(node.text)) return false
+
+  return node.text.some(
+    fragment =>
+      typeof fragment === 'object' &&
+      !!fragment &&
+      (decorationOverrideKeys.some(key => (fragment as Style)[key] != null) ||
+        hasFragmentDecorationOverrides(fragment))
+  )
 }

@@ -180,6 +180,7 @@ dist
 .snowpack
 build
 .svelte-kit
+/pdfmake/
 
 # Playwright
 /test-results/

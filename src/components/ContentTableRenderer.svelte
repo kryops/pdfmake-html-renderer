@@ -9,6 +9,7 @@
     getTableCellStyleString,
     getTableStyleString,
   } from '../styling/table'
+  import { getDocument } from '../context'
   import ContentRenderer from './ContentRenderer.svelte'
 
   export interface Props {
@@ -17,6 +18,7 @@
 
   let { node }: Props = $props()
 
+  const document = $derived(getDocument())
   let coveredCells = $derived(getTableCellsCoveredBySpans(node))
 </script>
 
@@ -38,9 +40,15 @@
         {#each tr as td, columnIndex}
           {#if shouldRenderCell(td, rowIndex, columnIndex, coveredCells)}
             <td
-              colspan={td.colSpan}
-              rowspan={td.rowSpan}
-              style={getTableCellStyleString(td, node, rowIndex, columnIndex)}
+              colspan={td?.colSpan}
+              rowspan={td?.rowSpan}
+              style={getTableCellStyleString(
+                td,
+                node,
+                rowIndex,
+                columnIndex,
+                document
+              )}
             >
               {#if isActualTableCell(td)}
                 <ContentRenderer node={td} />

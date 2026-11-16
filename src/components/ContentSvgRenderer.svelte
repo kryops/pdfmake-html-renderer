@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { ContentSvg } from 'pdfmake/interfaces'
-  import { getImageStyleString } from '../styling/image'
+  import { getImageStyleString, getSvgSize } from '../styling/image'
 
   export interface Props {
     node: ContentSvg
@@ -36,22 +36,38 @@
   })
 </script>
 
-{#if src}
-  <img {src} alt="" style={getImageStyleString(node)} />
-{:else}
-  <div bind:this={container}></div>
-{/if}
+<div class="phr-media">
+  {#if src}
+    <img
+      {src}
+      alt=""
+      style={getImageStyleString(
+        node,
+        typeof node.svg === 'string' ? getSvgSize(node.svg) : undefined
+      )}
+    />
+  {:else}
+    <div class="phr-svgContainer" bind:this={container}></div>
+  {/if}
+</div>
 
 <style>
-  img {
+  .phr-media {
     display: block;
+    line-height: 0;
   }
 
-  div {
+  img {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .phr-svgContainer {
     display: inline;
   }
 
-  div :global(svg) {
-    display: block;
+  .phr-svgContainer :global(svg) {
+    display: inline-block;
+    vertical-align: top;
   }
 </style>

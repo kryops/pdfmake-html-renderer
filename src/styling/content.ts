@@ -1,7 +1,11 @@
 import type { Content, Style, TDocumentDefinitions } from 'pdfmake/interfaces'
 import type { CssDictionary } from './css-dictionary'
 import { getPageSize } from './page'
-import { getEffectiveNamedStyle, getStyleDictionary } from './style'
+import {
+  getEffectiveNamedStyle,
+  getStyleDictionary,
+  hasFragmentDecorationOverrides,
+} from './style'
 import { getStyleString, omitNullish } from './utils'
 
 function getContentStyleDictionary(
@@ -10,8 +14,7 @@ function getContentStyleDictionary(
   inline: boolean
 ): CssDictionary {
   const pageSize = getPageSize(document)
-  const maxWidth =
-    pageSize.orientation === 'landscape' ? pageSize.height : pageSize.width
+  const maxWidth = pageSize.width
 
   const styles: CssDictionary = {
     'max-width': maxWidth + 'pt',
@@ -56,6 +59,8 @@ function getContentStyleDictionary(
     return styles
   }
 
+  const decorationVariables = hasFragmentDecorationOverrides(node)
+
   const applyBaseStyle = (nameOrStyle: string | Style) => {
     if (typeof nameOrStyle === 'object') {
       Object.assign(styles, omitNullish(nameOrStyle))
@@ -67,7 +72,9 @@ function getContentStyleDictionary(
       Object.assign(
         styles,
         getStyleDictionary(
-          getEffectiveNamedStyle(document.styles!, nameOrStyle)
+          getEffectiveNamedStyle(document.styles!, nameOrStyle),
+          false,
+          decorationVariables
         )
       )
     }
@@ -79,11 +86,14 @@ function getContentStyleDictionary(
     } else if (Array.isArray(node.style)) {
       node.style.forEach(applyBaseStyle)
     } else {
-      Object.assign(styles, getStyleDictionary(node.style))
+      Object.assign(
+        styles,
+        getStyleDictionary(node.style, false, decorationVariables)
+      )
     }
   }
 
-  Object.assign(styles, getStyleDictionary(node, true))
+  Object.assign(styles, getStyleDictionary(node, true, decorationVariables))
 
   if (inline) {
     Object.assign(styles, {

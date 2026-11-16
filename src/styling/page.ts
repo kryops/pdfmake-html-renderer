@@ -61,14 +61,17 @@ const pageSizes = {
   TABLOID: [792, 1224],
 } as const
 
+type PageSizeName = keyof typeof pageSizes
+
 export function getPageSize(document: TDocumentDefinitions): ContextPageSize {
   let width: number = pageSizes.A4[0]
   let height: number = pageSizes.A4[1]
 
   if (typeof document.pageSize === 'string') {
-    if (pageSizes[document.pageSize]) {
-      width = pageSizes[document.pageSize][0]
-      height = pageSizes[document.pageSize][0]
+    const size = pageSizes[document.pageSize.toUpperCase() as PageSizeName]
+    if (size) {
+      width = size[0]
+      height = size[1]
     }
   } else if (typeof document.pageSize === 'object' && document.pageSize) {
     if (document.pageSize.width) width = document.pageSize.width
@@ -87,7 +90,7 @@ export function getPageSize(document: TDocumentDefinitions): ContextPageSize {
   return {
     width,
     height,
-    orientation: document.pageOrientation ?? 'portrait',
+    orientation: width > height ? 'landscape' : 'portrait',
   }
 }
 
@@ -112,9 +115,9 @@ export function getPageStyleString(
         style.zoom = String(clientWidthInPt / width)
       }
     }
-
-    Object.assign(style, getStyleDictionary(document.defaultStyle))
   }
+
+  Object.assign(style, getStyleDictionary(document.defaultStyle))
 
   return getStyleString(style)
 }

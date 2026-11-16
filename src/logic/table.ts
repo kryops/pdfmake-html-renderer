@@ -10,7 +10,10 @@ export type ActualTableCell = Content & {
 }
 
 export function isActualTableCell(cell: TableCell): cell is ActualTableCell {
-  return cell !== '' && Boolean(Object.keys(cell).length)
+  // pdfmake treats null cells like empty cells
+  if (cell == null || cell === '') return false
+  if (typeof cell === 'object') return Object.keys(cell).length > 0
+  return true
 }
 
 /**

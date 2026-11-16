@@ -75,6 +75,8 @@
     letter-spacing: normal;
     text-decoration: none;
     overflow: hidden;
+    /* pdfmake breaks words that are wider than the line */
+    overflow-wrap: break-word;
   }
   .phr-pageShadow {
     box-shadow: 0 0 2em #333;

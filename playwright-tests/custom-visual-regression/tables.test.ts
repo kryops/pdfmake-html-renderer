@@ -1,4 +1,4 @@
-import type { TDocumentDefinitions } from 'pdfmake/interfaces'
+import type { Content, TDocumentDefinitions } from 'pdfmake/interfaces'
 import { test } from '@playwright/test'
 import { takeSnapshots } from '../image-snapshot'
 
@@ -35,6 +35,95 @@ const document: TDocumentDefinitions = {
   ],
 }
 
+// fillColor from named styles
+const namedStyleFill: TDocumentDefinitions = {
+  styles: {
+    header: { fillColor: '#ffcccc', bold: true },
+    translucent: { fillColor: '#0000ff', fillOpacity: 0.2 },
+    wrapper: { extends: 'header' },
+  },
+  content: [
+    {
+      table: {
+        body: [
+          [
+            { text: 'named style', style: 'header' },
+            {
+              text: 'direct property wins',
+              style: 'header',
+              fillColor: '#ccffcc',
+            },
+            { text: 'style array', style: ['translucent'] },
+            { text: 'extended', style: 'wrapper' },
+          ],
+          ['plain', 'plain', 'plain', 'plain'],
+        ],
+      },
+    },
+    { text: '' },
+    { table: { body: [['inherited from table style', 'x']] }, style: 'header' },
+    { text: '' },
+    {
+      table: {
+        body: [[{ text: 'cell beats layout', style: 'header' }, 'layout']],
+      },
+      layout: { fillColor: () => '#ccccff' },
+    },
+  ],
+}
+
+// Layout borders at the table edge for cells that span multiple columns / rows
+const spanBorders: TDocumentDefinitions = {
+  content: [
+    {
+      table: {
+        widths: [60, 60, 60],
+        body: [
+          ['a', { text: 'colSpan 2', colSpan: 2 }, {}],
+          [{ text: 'rowSpan 2', rowSpan: 2 }, 'b', 'c'],
+          ['', 'b', 'c'],
+        ],
+      },
+      layout: {
+        vLineWidth: (i, node) =>
+          i === 0 || i === node.table.widths!.length ? 4 : 0,
+        hLineWidth: (i, node) =>
+          i === 0 || i === node.table.body.length ? 4 : 0,
+        vLineColor: () => 'red',
+        hLineColor: () => 'red',
+      },
+    },
+  ],
+}
+
+// null cells and primitive values
+const cellValues: TDocumentDefinitions = {
+  content: [
+    {
+      table: {
+        body: [
+          ['a', null as any, { text: 'colSpan 2', colSpan: 2 }, null as any],
+          [1, 2.5, true as any, ''],
+        ],
+      },
+    },
+  ],
+}
+
+// One combined snapshot to keep the number of images low
+const combined: TDocumentDefinitions = {
+  styles: namedStyleFill.styles,
+  content: [
+    ...(document.content as Content[]),
+    ' ',
+    ...(namedStyleFill.content as Content[]),
+    ' ',
+    ...(spanBorders.content as Content[]),
+    ' ',
+    ...(cellValues.content as Content[]),
+  ],
+}
+
 test('custom/tables', async ({ page }) => {
-  await takeSnapshots(document, page)
+  await takeSnapshots(combined, page)
 })

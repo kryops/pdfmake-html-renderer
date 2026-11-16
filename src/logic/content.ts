@@ -51,7 +51,7 @@ export function getContentRenderer(node: Content, inLink: boolean) {
       return ContentPageReferenceRenderer
     } else if ('textReference' in node && node.textReference != null) {
       return ContentTextReferenceRenderer
-    } else if ('text' in node && node.text != null) {
+    } else if ('text' in node) {
       return ContentTextRenderer
     } else if ('toc' in node && node.toc && typeof node.toc === 'object') {
       return ContentTocRenderer
@@ -105,4 +105,21 @@ export function flattenNodes(node: Content): Content[] {
   }
 
   return nodes
+}
+
+/**
+ * Mirrors how pdfmake treats empty and primitive content:
+ * `null`, `undefined` and empty objects are empty text, booleans are stringified.
+ */
+export function normalizeNode(node: any): any {
+  if (node == null) return { text: '' }
+  if (typeof node === 'boolean') return String(node)
+  if (
+    typeof node === 'object' &&
+    !Array.isArray(node) &&
+    Object.keys(node).length === 0
+  ) {
+    return { text: '' }
+  }
+  return node
 }
