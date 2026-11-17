@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Fixed snaking columns being wider than the surrounding content when using `columnGap`
+- Fixed alignment of markers for ordered lists
 
 ## v0.4.4 - 2026-11-16
 

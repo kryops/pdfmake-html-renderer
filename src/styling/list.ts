@@ -129,6 +129,7 @@ export function getOrderedListStyleString(node: ContentOrderedList): string {
 
   const style: CssDictionary = {
     'padding-left': 0.25 + characters * 0.6 + 'em',
+    '--marker-width': 0.25 + characters * 0.6 + 'em',
     '--separator1': JSON.stringify(separator1),
     '--separator2': JSON.stringify(separator2 + ' '),
   }
@@ -148,8 +149,6 @@ export function getOrderedListStyleString(node: ContentOrderedList): string {
     ? (node.start ?? countNumberedItems(node)) + 1
     : (node.start ?? 1) - 1
   if (startPosition !== 0) style['counter-reset'] = `item ${startPosition}`
-
-  // TODO pdfmake left-aligns the list markers
 
   return getStyleString(style)
 }

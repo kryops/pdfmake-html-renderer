@@ -42,19 +42,28 @@
 
   li {
     counter-increment: item;
+    position: relative;
   }
 
   ol.phr-reversed > li {
     counter-increment: item -1;
   }
 
+  /* pdfmake left-aligns markers, while native markers are right-aligned */
   li::marker {
+    content: '';
+  }
+
+  li::before {
+    position: absolute;
+    left: calc(-1 * var(--marker-width, 1.5em));
+    white-space: nowrap;
     color: var(--marker-color);
     content: var(--separator1) counter(item, var(--list-type, decimal))
       var(--separator2);
   }
 
-  .phr-customCounter::marker {
+  .phr-customCounter::before {
     content: var(--separator1) counter(custom, var(--list-type, decimal))
       var(--separator2);
   }

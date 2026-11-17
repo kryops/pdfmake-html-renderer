@@ -27,7 +27,6 @@ Playground: https://kryops.github.io/pdfmake-html-renderer/
   - Widths behave slightly differently, especially when combining `*` and `auto` widths
   - Snaking columns do not support custom widths, and break at different places
 - **Relative positioning** ignores the `alignment` property
-- **List markers** in ordered lists are right-aligned, while `pdfmake` aligns them to the left
 - **QR Codes** look slightly different to the ones created by `pdfmake`, and may be larger for some values of `fit`
 - **Attachments** are not displayed
 - **Sections** support is limited:
