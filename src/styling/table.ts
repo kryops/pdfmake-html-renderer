@@ -1,4 +1,5 @@
 import type {
+  PatternFill,
   ContentTable,
   CustomTableLayout,
   Style,
@@ -8,6 +9,7 @@ import type { ActualTableCell } from '../logic/table'
 import type { CssDictionary } from './css-dictionary'
 import { getSize } from './size'
 import { getEffectiveNamedStyle } from './style'
+import { getPatternCssUrl } from './pattern'
 import { colorToRgb, getStyleString } from './utils'
 
 type ColumnWidth = number | string | null | undefined
@@ -334,6 +336,31 @@ export function getTableCellStyleString(
     }
     if ('fillOpacity' in node)
       style['--fill-opacity'] = String(node.fillOpacity)
+
+    // patterns are drawn above the fill color
+    const patternImages: string[] = []
+    const { overlayPattern, overlayOpacity } = node as {
+      overlayPattern?: PatternFill
+      overlayOpacity?: number | null
+    }
+    if (Array.isArray(overlayPattern)) {
+      const overlay = getPatternCssUrl(
+        overlayPattern,
+        document.patterns,
+        overlayOpacity
+      )
+      if (overlay) patternImages.push(overlay)
+    }
+    if ('fillColor' in node && Array.isArray(node.fillColor)) {
+      const fill = getPatternCssUrl(
+        node.fillColor as PatternFill,
+        document.patterns,
+        'fillOpacity' in node ? node.fillOpacity : undefined
+      )
+      if (fill) patternImages.push(fill)
+    }
+    if (patternImages.length)
+      style['background-image'] = patternImages.join(', ')
 
     if ('border' in node && node.border) {
       const [left, top, right, bottom] = node.border

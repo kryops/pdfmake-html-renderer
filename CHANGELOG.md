@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added support for tiling patterns in `canvas` fills and table cells (`fillColor`, `overlayPattern`)
 - Fixed snaking columns being wider than the surrounding content when using `columnGap`
 - Fixed alignment of markers for ordered lists
 

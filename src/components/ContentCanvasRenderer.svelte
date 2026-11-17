@@ -1,5 +1,7 @@
 <script lang="ts">
   import type { ContentCanvas } from 'pdfmake/interfaces'
+  import { getDocument } from '../context'
+  import { getPatternElement } from '../styling/pattern'
   import {
     getCanvasEllipseProperties,
     getCanvasLineProperties,
@@ -16,6 +18,8 @@
 
   // gradient IDs need to be unique within the whole document
   const uid = $props.id()
+
+  const document = $derived(getDocument())
 </script>
 
 <div class="phr-media">
@@ -34,6 +38,13 @@
             />
           {/each}
         </linearGradient>
+      {:else if 'color' in element && Array.isArray(element.color)}
+        {@html getPatternElement(
+          `${uid}-gradient${elementIndex}`,
+          element.color as [string, string],
+          document.patterns,
+          element.fillOpacity
+        )}
       {/if}
     {/each}
   </defs>

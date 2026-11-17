@@ -61,6 +61,9 @@ function getCanvasFilledElementProperties(
 
   if (element.linearGradient) {
     properties.fill = `url('#${gradientId}')`
+  } else if (Array.isArray(element.color)) {
+    // tiling pattern, see ContentCanvasRenderer
+    properties.fill = `url('#${gradientId}')`
   } else if (element.color) {
     const color = opacityColor(element.color, element.fillOpacity)
     if (color) properties.fill = color

@@ -22,7 +22,9 @@ Playground: https://kryops.github.io/pdfmake-html-renderer/
   - Manual page breaks specified through `pageBreak` are rendered as a horizontal line
   - `pageBreakBefore` is not implemented
   - For short content, we enforce the height of a single page (unless `mode: 'fluid'` is set)
-- **Tiling patterns** are not supported
+- **Tiling patterns** are supported for `canvas` fills, and for `fillColor` and `overlayPattern` of table cells
+  - Patterns are not supported for text (`color`, `background`) and table `layout` fills
+  - Only path operators are supported in pattern streams (no dashes, transformations or clipping), and the pattern origin is the shape instead of the page
 - **Columns** support is limited:
   - Widths behave slightly differently, especially when combining `*` and `auto` widths
   - Snaking columns do not support custom widths, and break at different places
