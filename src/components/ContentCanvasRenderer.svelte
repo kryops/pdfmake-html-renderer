@@ -30,9 +30,9 @@
         <linearGradient id="{uid}-gradient{elementIndex}">
           {#each element.linearGradient as stopColor, stopIndex}
             <stop
-              offset="{(stopIndex /
-                ((element.linearGradient?.length ?? 1) - 1)) *
-                100}%"
+              offset="{(element.linearGradient?.length ?? 0) > 1
+                ? (stopIndex / (element.linearGradient!.length - 1)) * 100
+                : 0}%"
               stop-color={stopColor}
               stop-opacity={element.fillOpacity}
             />

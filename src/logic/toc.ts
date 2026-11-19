@@ -28,6 +28,10 @@ export function getTocItemNodes(tocNode: ContentToc, content: Content) {
 }
 
 export function getTocTarget(node: Content, allNodes: Content[]) {
+  // pdfmake keeps explicit IDs, so that references to them keep working
+  if (typeof node === 'object' && node && 'id' in node && node.id) {
+    return node.id
+  }
   const index = allNodes.indexOf(node)
   if (index === -1) return undefined
   return `node${index + 1}`

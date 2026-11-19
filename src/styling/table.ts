@@ -164,7 +164,7 @@ export function getTableCellStyleString(
 
     // we treat *-sized columns like auto for now,
     // but set the table's width to 100% when at least one column is *-sized
-    if (columnWidth != null && columnWidth !== 'auto' && columnWidth !== '*') {
+    if (columnWidth !== 'auto' && !isStar(columnWidth)) {
       const width = getSize(columnWidth)
       style.width = width
       // overflow longer text

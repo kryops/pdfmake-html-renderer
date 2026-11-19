@@ -9,8 +9,18 @@ export function getStyleString(styles: CssDictionary) {
 
 export function colorToHex(color: string | undefined): string | undefined {
   if (color === 'transparent') return undefined
-  if (!color || color.startsWith('#')) return color
-  return cssColorNames[color as keyof typeof cssColorNames] ?? undefined
+  if (!color) return color
+  if (color.startsWith('#')) {
+    // pdfkit expands short hex colors
+    return color.length === 4
+      ? color.replace(/^#(.)(.)(.)$/, '#$1$1$2$2$3$3')
+      : color
+  }
+  // pdfkit looks up named colors case-insensitively
+  return (
+    cssColorNames[color.toLowerCase() as keyof typeof cssColorNames] ??
+    undefined
+  )
 }
 
 export function colorToRgb(

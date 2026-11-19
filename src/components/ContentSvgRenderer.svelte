@@ -14,7 +14,7 @@
     typeof node.svg === 'string'
       ? 'data:image/svg+xml,' +
           encodeURIComponent(
-            node.svg.indexOf('xmlns') === -1
+            !/<svg\b[^>]*\sxmlns\s*=/i.test(node.svg)
               ? node.svg.replace(
                   '<svg',
                   '<svg xmlns="http://www.w3.org/2000/svg"'

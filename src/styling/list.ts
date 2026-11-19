@@ -92,7 +92,10 @@ function getMaxCharacters(node: ContentOrderedList): number {
   if (!Array.isArray(node.ol)) return 1
 
   let largestNumber = (node.start ?? 1) + countNumberedItems(node)
-  const counters = node.ol.filter(it => it.counter).map(it => it.counter!)
+  // +1 to match the off-by-one of largestNumber, which the formulas below rely on
+  const counters = node.ol
+    .filter(it => typeof it?.counter === 'number')
+    .map(it => it.counter! + 1)
   if (counters.length) {
     largestNumber = Math.max(largestNumber, ...counters)
   }

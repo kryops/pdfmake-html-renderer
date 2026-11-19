@@ -62,7 +62,10 @@ function getContentStyleDictionary(
 
   const applyBaseStyle = (nameOrStyle: string | Style) => {
     if (typeof nameOrStyle === 'object') {
-      Object.assign(styles, omitNullish(nameOrStyle))
+      Object.assign(
+        styles,
+        getStyleDictionary(omitNullish(nameOrStyle), false, decorationVariables)
+      )
       return
     }
 

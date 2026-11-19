@@ -90,6 +90,11 @@ export function flattenNodes(node: Content): Content[] {
     }
   }
 
+  // sections are only allowed at the root level, but contain regular content
+  if ('section' in node && node.section) {
+    nodes.push(...flattenNodes(node.section))
+  }
+
   if (
     'table' in node &&
     node.table &&

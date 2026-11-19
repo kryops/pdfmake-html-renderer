@@ -6,7 +6,7 @@ import type {
 } from 'pdfmake/interfaces'
 import type { CssDictionary } from './css-dictionary'
 import { getMarginString } from './margin'
-import { getStyleDictionary } from './style'
+import { getEffectiveNamedStyle, getStyleDictionary } from './style'
 import { getStyleString } from './utils'
 
 export function getTocItemStyleString(
@@ -25,13 +25,15 @@ export function getTocItemStyleString(
 
   const applyBaseStyle = (nameOrStyle: string | Style) => {
     if (typeof nameOrStyle === 'object') {
-      Object.assign(style, nameOrStyle)
+      Object.assign(style, getStyleDictionary(nameOrStyle))
       return
     }
 
-    const baseStyle = document.styles?.[nameOrStyle]
-    if (baseStyle) {
-      Object.assign(style, getStyleDictionary(baseStyle))
+    if (document.styles?.[nameOrStyle]) {
+      Object.assign(
+        style,
+        getStyleDictionary(getEffectiveNamedStyle(document.styles, nameOrStyle))
+      )
     }
   }
 

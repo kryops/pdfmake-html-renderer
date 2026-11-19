@@ -74,9 +74,9 @@ export function patternStreamToSvg(
         d += `L${a} ${b} `
         break
       case 'c':
-        currentX = e
-        currentY = f
-        d += `C${a} ${b} ${c} ${operands[3]} ${operands[4]} ${operands[5]} `
+        currentX = f
+        currentY = g
+        d += `C${a} ${b} ${c} ${e} ${f} ${g} `
         break
       case 'v':
         d += `C${currentX} ${currentY} ${a} ${b} ${c} ${e} `
@@ -144,14 +144,19 @@ export function getPatternElement(
   const pattern = patterns?.[name]
   if (!pattern) return undefined
 
-  const [x1, y1] = pattern.boundingBox
-  const { xStep, yStep } = pattern
+  // coerce to numbers, as the values are embedded into markup
+  const [x1, y1] = pattern.boundingBox.map(Number)
+  const xStep = Number(pattern.xStep)
+  const yStep = Number(pattern.yStep)
+  const hexColor = colorToHex(color)
   const content = patternStreamToSvg(
-    pattern.pattern,
-    colorToHex(color) ?? '#000'
+    String(pattern.pattern ?? ''),
+    // only allow valid hex colors, as the value is embedded into markup
+    hexColor && /^#[0-9a-f]{3,8}$/i.test(hexColor) ? hexColor : '#000'
   )
 
-  const opacityAttribute = opacity != null ? ` opacity="${opacity}"` : ''
+  const opacityAttribute =
+    opacity != null ? ` opacity="${Number(opacity)}"` : ''
 
   return (
     `<pattern id="${id}" patternUnits="userSpaceOnUse" width="${xStep}pt" height="${yStep}pt" viewBox="${x1} ${y1} ${xStep} ${yStep}">` +
@@ -169,7 +174,8 @@ export function getPatternCssUrl(
   const pattern = patterns?.[fill[0]]
   if (!element || !pattern) return undefined
 
-  const { xStep, yStep } = pattern
+  const xStep = Number(pattern.xStep)
+  const yStep = Number(pattern.yStep)
   const svg =
     `<svg xmlns="http://www.w3.org/2000/svg" width="${xStep}pt" height="${yStep}pt">` +
     `<defs>${element}</defs><rect width="100%" height="100%" fill="url(#p)"/></svg>`

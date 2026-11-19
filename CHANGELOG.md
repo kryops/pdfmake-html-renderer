@@ -5,6 +5,16 @@
 - Added support for tiling patterns in `canvas` fills and table cells (`fillColor`, `overlayPattern`)
 - Fixed snaking columns being wider than the surrounding content when using `columnGap`
 - Fixed alignment of markers for ordered lists
+- Fixed short hex colors (e.g. `#ccc`) being ignored for `fillColor`, and made color names case-insensitive
+- Fixed style objects in `style` arrays (e.g. `style: ['header', { bold: true }]`) being ignored, also for `textStyle` of the table of contents
+- Fixed `extends` of named styles being ignored for `textStyle` of the table of contents
+- Fixed `id`, `tocItem`, `textReference` and `pageReference` not working for content inside a `section`
+- Fixed the `id` of table of contents items being replaced, which broke references to it
+- Fixed SVGs that declare only other namespaces (e.g. `xmlns:xlink`) not being rendered
+- Fixed the marker width of ordered lists not taking a custom `counter` into account
+- Fixed `canvas` gradients with a single color
+- Fixed watermark `opacity: 0` being ignored
+- Fixed `'star'` table column widths in cells
 
 ## v0.4.4 - 2026-11-16
 

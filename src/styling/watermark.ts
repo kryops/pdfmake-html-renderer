@@ -37,7 +37,8 @@ export function getWatermarkStyleString(
     if (node.bold) style['font-weight'] = 'bold'
     if (node.italics) style['font-style'] = 'italic'
     if (node.color) style['color'] = node.color
-    if (node.opacity) style['opacity'] = String(node.opacity)
+    if (typeof node.opacity === 'number')
+      style['opacity'] = String(node.opacity)
   }
 
   return getStyleString(style)
