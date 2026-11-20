@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.4.5 - 2026-11-20
 
 - Added support for tiling patterns in `canvas` fills and table cells (`fillColor`, `overlayPattern`)
 - Added support for `path` elements and the dash `phase` in `canvas`
