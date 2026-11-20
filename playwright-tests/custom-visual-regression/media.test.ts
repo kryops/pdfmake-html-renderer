@@ -98,13 +98,93 @@ const gradients: TDocumentDefinitions = {
   ],
 }
 
+// fit keeps the aspect ratio, so the image is narrower than the fit box
+// and is aligned according to its actual size
+const fit: TDocumentDefinitions = {
+  content: [
+    'fit: [100, 30] centered (30x30) and right aligned SVG (60x30)',
+    { image: IMG, fit: [100, 30], alignment: 'center' },
+    {
+      svg: '<svg width="20" height="10"><rect width="20" height="10" fill="#9c3"/></svg>',
+      fit: [100, 30],
+      alignment: 'right',
+    },
+  ],
+}
+
+const vectors: TDocumentDefinitions = {
+  content: [
+    'Path, dash phase, round caps on dashed rect, lineWidth: 0 (1pt), auto-closed polyline',
+    {
+      canvas: [
+        {
+          type: 'path',
+          d: 'M 0 20 C 20 0 40 40 60 20',
+          lineWidth: 2,
+          lineColor: 'green',
+        } as any,
+        {
+          type: 'line',
+          x1: 80,
+          y1: 5,
+          x2: 200,
+          y2: 5,
+          lineWidth: 3,
+          dash: { length: 10 },
+        },
+        {
+          type: 'line',
+          x1: 80,
+          y1: 15,
+          x2: 200,
+          y2: 15,
+          lineWidth: 3,
+          dash: { length: 10, phase: 5 } as any,
+        },
+        {
+          type: 'rect',
+          x: 220,
+          y: 0,
+          w: 60,
+          h: 30,
+          lineWidth: 4,
+          lineCap: 'round',
+          dash: { length: 4, space: 8 },
+        } as any,
+        {
+          type: 'line',
+          x1: 300,
+          y1: 15,
+          x2: 360,
+          y2: 15,
+          lineWidth: 0,
+        },
+        {
+          type: 'polyline',
+          lineWidth: 6,
+          points: [
+            { x: 380, y: 30 },
+            { x: 410, y: 0 },
+            { x: 440, y: 30 },
+            { x: 380, y: 30 },
+          ],
+        },
+      ],
+    },
+  ],
+}
+
 const combined: TDocumentDefinitions = {
   styles: alignment.styles,
   content: [
-    ...[alignment, naturalSize, sizeConstraints, gradients].flatMap(doc => [
-      ...(doc.content as Content[]),
-      ' ',
-    ]),
+    ...[
+      alignment,
+      naturalSize,
+      sizeConstraints,
+      gradients,
+      fit,
+      vectors,
+    ].flatMap(doc => [...(doc.content as Content[]), ' ']),
   ],
 }
 

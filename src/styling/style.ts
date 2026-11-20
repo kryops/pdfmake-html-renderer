@@ -38,6 +38,9 @@ export function getStyleDictionary(
     obj['font-style'] = style.italics ? 'italic' : 'normal'
   if (style.alignment != null) {
     obj['text-align'] = style.alignment
+    // used to align images within their `fit` box
+    obj['--alignment'] =
+      style.alignment === 'justify' ? 'left' : style.alignment
     obj.display = 'block'
   }
   if (style.color != null) obj.color = style.color

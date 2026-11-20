@@ -5,9 +5,12 @@
   import {
     getCanvasEllipseProperties,
     getCanvasLineProperties,
+    getCanvasPathProperties,
     getCanvasPolylineProperties,
     getCanvasProperties,
     getCanvasRectProperties,
+    isClosedPolyline,
+    type CanvasPath,
   } from '../styling/canvas'
 
   export interface Props {
@@ -56,7 +59,16 @@
     {:else if element.type === 'line'}
       <line {...getCanvasLineProperties(element)} />
     {:else if element.type === 'polyline'}
-      <polyline {...getCanvasPolylineProperties(element, `${uid}-gradient${index}`)} />
+      {#if isClosedPolyline(element)}
+        <polygon {...getCanvasPolylineProperties(element, `${uid}-gradient${index}`)} />
+      {:else}
+        <polyline {...getCanvasPolylineProperties(element, `${uid}-gradient${index}`)} />
+      {/if}
+    {:else if (element as unknown as CanvasPath).type === 'path'}
+      <!-- path data is unitless, so we scale it from px to pt -->
+      <g transform="scale({4 / 3})">
+        <path {...getCanvasPathProperties(element as unknown as CanvasPath, `${uid}-gradient${index}`)} />
+      </g>
     {/if}
   {/each}
 </svg>

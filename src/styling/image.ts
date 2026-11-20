@@ -68,10 +68,21 @@ export function getImageStyleString(
 
   if (node.fit && Array.isArray(node.fit)) {
     const [maxWidth, maxHeight] = node.fit
+    if (naturalSize?.width && naturalSize.height) {
+      // scale like pdfmake, so that alignment uses the actual image size
+      const factor = Math.min(
+        maxWidth / naturalSize.width,
+        maxHeight / naturalSize.height
+      )
+      style['width'] = naturalSize.width * factor + 'pt'
+      style['height'] = naturalSize.height * factor + 'pt'
+      return getStyleString(style)
+    }
     style['width'] = maxWidth + 'pt'
     style['max-height'] = maxHeight + 'pt'
     style['object-fit'] = 'contain'
-    style['object-position'] = 'left top'
+    // the box may be wider than the image, so we align it within the box
+    style['object-position'] = 'var(--alignment, left) top'
   } else if ('cover' in node && node.cover) {
     const { width, height, align, valign } = node.cover
     // pdfmake has clipping issues when width/height do not match cover.width/height

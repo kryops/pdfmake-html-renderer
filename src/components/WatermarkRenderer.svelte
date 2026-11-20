@@ -24,6 +24,13 @@
     text-align: center;
     color: #000;
     opacity: 0.6;
+    /* pdfmake only inherits the font from the defaultStyle */
+    font-weight: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-decoration: none;
+    text-indent: 0;
     white-space: nowrap;
     z-index: 2;
     /* click through */

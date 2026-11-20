@@ -3,18 +3,25 @@
 ## Unreleased
 
 - Added support for tiling patterns in `canvas` fills and table cells (`fillColor`, `overlayPattern`)
+- Added support for `path` elements and the dash `phase` in `canvas`
+- Fixed style objects in `style` arrays (e.g. `style: ['header', { bold: true }]`) being ignored, also for `textStyle` of the table of contents
+- Fixed short hex colors (e.g. `#ccc`) being ignored for `fillColor`, and made color names case-insensitive
+- Fixed `'star'` table column widths in cells
 - Fixed snaking columns being wider than the surrounding content when using `columnGap`
 - Fixed alignment of markers for ordered lists
-- Fixed short hex colors (e.g. `#ccc`) being ignored for `fillColor`, and made color names case-insensitive
-- Fixed style objects in `style` arrays (e.g. `style: ['header', { bold: true }]`) being ignored, also for `textStyle` of the table of contents
-- Fixed `extends` of named styles being ignored for `textStyle` of the table of contents
-- Fixed `id`, `tocItem`, `textReference` and `pageReference` not working for content inside a `section`
-- Fixed the `id` of table of contents items being replaced, which broke references to it
-- Fixed SVGs that declare only other namespaces (e.g. `xmlns:xlink`) not being rendered
 - Fixed the marker width of ordered lists not taking a custom `counter` into account
+- Fixed `extends` of named styles being ignored for `textStyle` of the table of contents
+- Fixed the `id` of table of contents items being replaced, which broke references to it
+- Fixed `id`, `tocItem`, `textReference` and `pageReference` not working for content inside a `section`
+- Fixed images and SVGs with `fit` being aligned according to the `fit` box instead of their actual size
+- Fixed SVGs that declare only other namespaces (e.g. `xmlns:xlink`) not being rendered
 - Fixed `canvas` gradients with a single color
+- Fixed `linearGradient` being applied to `canvas` polylines (pdfmake only supports it for rectangles and ellipses)
+- Fixed closed `canvas` polylines (`closePath` or same first and last point) not joining the lines at the starting point
+- Fixed `lineCap` being ignored for `canvas` rectangles and ellipses
+- Fixed `canvas` elements with `lineWidth: 0` not being drawn with a width of 1 like in pdfmake
 - Fixed watermark `opacity: 0` being ignored
-- Fixed `'star'` table column widths in cells
+- Fixed the watermark inheriting properties other than `font` from `defaultStyle` (e.g. `bold`, `italics`, `characterSpacing`)
 
 ## v0.4.4 - 2026-11-16
 

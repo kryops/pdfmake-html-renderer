@@ -3,11 +3,14 @@ import { test } from '@playwright/test'
 import { takeSnapshots } from '../image-snapshot'
 
 // Named page sizes (case-insensitive) use their own height,
-// and content uses the full width of landscape pages
+// and content uses the full width of landscape pages.
+// The watermark only inherits the font from the defaultStyle (not bold/italics)
 const namedSizeLandscape: TDocumentDefinitions = {
   pageSize: 'a5' as any,
   pageOrientation: 'landscape',
   pageMargins: 20,
+  defaultStyle: { bold: true, italics: true, characterSpacing: 1 },
+  watermark: { text: 'Draft', opacity: 0.2 },
   content: [
     { text: 'Full width block on A5 landscape', background: '#ffe9a8' },
     {
